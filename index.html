@@ -1,10 +1,183 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>EXCELLENT CLASS A’28</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXCELLENT CLASS A28 - Dashboard</title>
+    <!-- Font Google untuk Estetika -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Link ke File CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>EXCELLENT CLASS A’28</h1>
-  <p>Website kelas VII-A (Aetherienz)</p>
+
+    <!-- Latar Belakang Animasi -->
+    <div class="area">
+        <ul class="circles">
+            <li></li><li></li><li></li><li></li><li></li>
+            <li></li><li></li><li></li><li></li><li></li>
+        </ul>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="main-header">
+        <div class="logo">
+            <span class="text-white">EC</span><span class="text-accent">.A28</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#struktur" class="active">Struktur</a>
+            <a href="#jadwal">Jadwal</a>
+            <a href="#pengumuman">Pengumuman</a>
+        </nav>
+        <div class="search-box">
+            <input type="text" id="memberSearch" placeholder="Cari nama pengurus...">
+        </div>
+    </header>
+
+    <main class="content-container">
+
+        <!-- ================= JENDELA UTAMA: STRUKTUR KELAS ================= -->
+        <section id="struktur" class="app-section">
+            <div class="section-header">
+                <h1 class="visual-title">ORGANIZATIONAL <span class="text-accent">STRUCTURE</span></h1>
+                <p class="section-subtitle">Alur Komando dan Koordinasi Excellent Class A28</p>
+            </div>
+
+            <div class="org-chart-container">
+                <!-- Garis Alur Bagan (Visual Only) -->
+                <div class="chart-lines"></div>
+
+                <!-- Tingkat 1: Wali Kelas -->
+                <div class="level level-1">
+                    <div class="card wali-kelas" data-name="Nama Wali Kelas, S.Pd." data-role="Wali Kelas" data-dept="Pembimbing Utama">
+                        <div class="card-glow"></div>
+                        <div class="role-badge">Wali Kelas</div>
+                        <h2 class="member-name">Nama Wali Kelas, S.Pd.</h2>
+                        <p class="member-id">NIP. 198XXXXXXXXXXXX</p>
+                    </div>
+                </div>
+
+                <!-- Tingkat 2: Ketua & Wakil -->
+                <div class="level level-2 flex-row">
+                    <div class="card pimpinan" data-name="Nama Ketua Kelas" data-role="Ketua Kelas" data-dept="Inti Pengurus">
+                        <div class="role-badge bg-blue">KM</div>
+                        <h3 class="member-name">Nama Ketua Kelas</h3>
+                    </div>
+                    <div class="card pimpinan" data-name="Nama Wakil Ketua" data-role="Wakil Ketua" data-dept="Inti Pengurus">
+                        <div class="role-badge bg-blue">WK</div>
+                        <h3 class="member-name">Nama Wakil Ketua</h3>
+                    </div>
+                </div>
+
+                <!-- Tingkat 3: Sekretaris & Bendahara -->
+                <div class="level level-3 grid-4">
+                    <div class="card admin" data-name="Sekretaris 1" data-role="Sekretaris 1" data-dept="Administrasi">
+                        <span class="mini-role">Sekretaris 1</span>
+                        <p class="name-sm">Nama Sekretaris 1</p>
+                    </div>
+                    <div class="card admin" data-name="Sekretaris 2" data-role="Sekretaris 2" data-dept="Administrasi">
+                        <span class="mini-role">Sekretaris 2</span>
+                        <p class="name-sm">Nama Sekretaris 2</p>
+                    </div>
+                    <div class="card finance" data-name="Bendahara 1" data-role="Bendahara 1" data-dept="Keuangan">
+                        <span class="mini-role">Bendahara 1</span>
+                        <p class="name-sm">Nama Bendahara 1</p>
+                    </div>
+                    <div class="card finance" data-name="Bendahara 2" data-role="Bendahara 2" data-dept="Keuangan">
+                        <span class="mini-role">Bendahara 2</span>
+                        <p class="name-sm">Nama Bendahara 2</p>
+                    </div>
+                </div>
+
+                <!-- Tingkat 4: Seksi-Seksi (Divisi) -->
+                <div class="level level-4 grid-3">
+                    <div class="card seksi">
+                        <h4 class="seksi-title">🧹 Kebersihan</h4>
+                        <ul class="member-list" id="list-kebersihan">
+                            <li data-name="Anggota Kebersihan 1" data-role="Anggota" data-dept="Seksi Kebersihan">Anggota 1</li>
+                            <li data-name="Anggota Kebersihan 2" data-role="Anggota" data-dept="Seksi Kebersihan">Anggota 2</li>
+                        </ul>
+                    </div>
+                    <div class="card seksi">
+                        <h4 class="seksi-title">🛡️ Keamanan</h4>
+                        <ul class="member-list" id="list-keamanan">
+                            <li data-name="Anggota Keamanan 1" data-role="Anggota" data-dept="Seksi Keamanan">Anggota 1</li>
+                            <li data-name="Anggota Keamanan 2" data-role="Anggota" data-dept="Seksi Keamanan">Anggota 2</li>
+                        </ul>
+                    </div>
+                    <div class="card seksi">
+                        <h4 class="seksi-title">🙏 Kerohanian</h4>
+                        <ul class="member-list" id="list-kerohanian">
+                            <li data-name="Anggota Kerohanian 1" data-role="Anggota" data-dept="Seksi Kerohanian">Anggota 1</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FITUR TAMBAHAN 1: JADWAL PELAJARAN ================= -->
+        <section id="jadwal" class="app-section hidden">
+            <div class="section-header">
+                <h1 class="visual-title">CLASS <span class="text-accent">SCHEDULE</span></h1>
+            </div>
+            <div class="glass-panel timetable-container">
+                <div class="days-tabs">
+                    <button class="tab-btn active" data-day="senin">Senin</button>
+                    <button class="tab-btn" data-day="selasa">Selasa</button>
+                    <button class="tab-btn" data-day="rabu">Rabu</button>
+                </div>
+                <div class="timetable-content">
+                    <div id="senin" class="day-content active">
+                        <div class="subject-item"><span class="time">07:00</span> <span class="subj">Matematika</span></div>
+                        <div class="subject-item"><span class="time">08:30</span> <span class="subj">Bahasa Indonesia</span></div>
+                    </div>
+                    <div id="selasa" class="day-content hidden">
+                        <div class="subject-item"><span class="time">07:00</span> <span class="subj">Fisika</span></div>
+                    </div>
+                    <!-- Tambahkan hari lain -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FITUR TAMBAHAN 2: PENGUMUMAN ================= -->
+        <section id="pengumuman" class="app-section hidden">
+            <div class="section-header">
+                <h1 class="visual-title">CLASS <span class="text-accent">NEWS</span></h1>
+            </div>
+            <div class="glass-panel news-container">
+                <div class="news-item">
+                    <span class="news-date">07 Ags</span>
+                    <p class="news-text">Uang kas bulan Agustus harap segera dilunasi ke Bendahara.</p>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">05 Ags</span>
+                    <p class="news-text">Kerja bakti kelas hari Jumat sepulang sekolah.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Pop-up Detail Anggota -->
+    <div id="memberModal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body text-center">
+                <div class="big-avatar">A28</div>
+                <h2 id="modalName">Nama Lengkap</h2>
+                <p id="modalRole" class="role-text">Jabatan</p>
+                <hr class="modal-hr">
+                <p>Divisi: <span id="modalDept">Departemen</span></p>
+                <p class="text-muted">Kontak/Detail lain bisa ditambahkan di JS.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Excellent Class A28. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Link ke File JS -->
+    <script src="script.js"></script>
 </body>
 </html>
