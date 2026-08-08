@@ -15,7 +15,6 @@
 
 ## 🌟 Fitur Utama
 
-- **🌊 Desain Modern & Responsive**: Mengusung tema *Dark Mode Frosty Ocean* dengan efek *Glassmorphism*, aksen biru neon, dan animasi latar belakang yang halus.
 - **🗺️ Visual Bagan Organisasi**: Tampilan alur kepengurusan kelas yang terstruktur mulai dari Wali Kelas, Pimpinan, Tim Administrasi, hingga Seksi-Seksi.
 - **🔍 Live Search Member**: Pencarian instan nama pengurus atau anggota kelas langsung dengan efek sorotan (*highlight*).
 - **🗂️ Pop-up Detail Profil**: Klik pada kartu pengurus atau anggota untuk menampilkan jendela detail informasi peran dan tugasnya.
