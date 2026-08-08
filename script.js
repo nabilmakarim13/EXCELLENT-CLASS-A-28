@@ -1,117 +1,116 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. NAVIGASI HALAMAN (TABBING) ---
+    // --- 1. NAVIGASI TAB MENU ---
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('.app-section');
+
+    function switchSection(targetId) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        sections.forEach(s => s.classList.add('hidden'));
+
+        const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
+        const targetSection = document.getElementById(targetId);
+
+        if (activeLink) activeLink.classList.add('active');
+        if (targetSection) targetSection.classList.remove('hidden');
+    }
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Hapus class active dari nav dan sembunyikan semua section
-            navLinks.forEach(l => l.classList.remove('active'));
-            sections.forEach(s => s.classList.add('hidden'));
-
-            // Tambahkan active ke yang diklik dan tunjukkan section yang sesuai
-            this.classList.add('active');
             const targetId = this.getAttribute('href').substring(1);
-            document.getElementById(targetId).classList.remove('hidden');
+            switchSection(targetId);
         });
     });
 
-    // --- 2. FITUR PENCARIAN PENGURUS ---
+    // --- 2. FITUR PENCARIAN SUPER AKURAT (CARI DI SEMUA BAGIAN) ---
     const searchInput = document.getElementById('memberSearch');
-    const allCards = document.querySelectorAll('.card[data-name]');
-    const allListItems = document.querySelectorAll('.member-list li[data-name]');
 
     searchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase().trim();
+        const keyword = e.target.value.toLowerCase().trim();
 
-        // Reset highlights
-        allCards.forEach(c => c.classList.remove('search-highlight'));
-        allListItems.forEach(i => i.classList.remove('text-accent'));
+        // Clean up highlight sebelumnya
+        document.querySelectorAll('.search-highlight').forEach(el => el.classList.remove('search-highlight'));
 
-        if (searchTerm === "") return;
+        if (keyword === "") return;
 
-        let found = false;
+        let foundElement = null;
+        let foundSectionId = "";
 
-        // Cari di kartu utama
-        allCards.forEach(card => {
+        // A. Cari di Kartu Pengurus Utama
+        const cards = document.querySelectorAll('.card[data-name]');
+        cards.forEach(card => {
             const name = card.getAttribute('data-name').toLowerCase();
-            if (name.includes(searchTerm)) {
+            if (name.includes(keyword)) {
                 card.classList.add('search-highlight');
-                if (!found) { // Scroll ke item pertama yang ditemukan
-                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    found = true;
+                if (!foundElement) {
+                    foundElement = card;
+                    foundSectionId = card.closest('.app-section').id;
                 }
             }
         });
 
-        // Cari di list seksi
-        allListItems.forEach(item => {
-            const name = item.getAttribute('data-name').toLowerCase();
-            if (name.includes(searchTerm)) {
-                item.classList.add('text-accent');
-                if (!found) {
-                    item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    found = true;
+        // B. Cari di Anggota Seksi 7K
+        const listItems = document.querySelectorAll('.member-list li');
+        listItems.forEach(item => {
+            const name = item.textContent.toLowerCase();
+            const dataName = (item.getAttribute('data-name') || '').toLowerCase();
+            if (name.includes(keyword) || dataName.includes(keyword)) {
+                item.classList.add('search-highlight');
+                if (!foundElement) {
+                    foundElement = item;
+                    foundSectionId = item.closest('.app-section').id;
                 }
             }
         });
-    });
 
-    // --- 3. MODAL DETAIL ANGGOTA ---
-    const modal = document.getElementById('memberModal');
-    const closeBtn = document.querySelector('.close-modal');
-    const modalName = document.getElementById('modalName');
-    const modalRole = document.getElementById('modalRole');
-    const modalDept = document.getElementById('modalDept');
+        // C. Cari di Jadwal Piket
+        const piketItems = document.querySelectorAll('.subject-item');
+        piketItems.forEach(item => {
+            const name = item.textContent.toLowerCase();
+            if (name.includes(keyword)) {
+                item.classList.add('search-highlight');
+                if (!foundElement) {
+                    foundElement = item;
+                    foundSectionId = item.closest('.app-section').id;
+                    
+                    // Buka tab hari piketnya otomatis
+                    const dayContent = item.closest('.day-content');
+                    if (dayContent) {
+                        document.querySelectorAll('.day-content').forEach(d => d.classList.add('hidden'));
+                        dayContent.classList.remove('hidden');
+                        
+                        const dayId = dayContent.id;
+                        document.querySelectorAll('.tab-btn').forEach(b => {
+                            if (b.getAttribute('data-day') === dayId) b.classList.add('active');
+                            else b.classList.remove('active');
+                        });
+                    }
+                }
+            }
+        });
 
-    // Fungsi Buka Modal
-    function openModal(element) {
-        const name = element.getAttribute('data-name');
-        const role = element.getAttribute('data-role');
-        const dept = element.getAttribute('data-dept');
+        // D. Cari di Daftar Siswa Presensi
+        const newsItems = document.querySelectorAll('.news-item');
+        newsItems.forEach(item => {
+            const name = item.textContent.toLowerCase();
+            if (name.includes(keyword)) {
+                item.classList.add('search-highlight');
+                if (!foundElement) {
+                    foundElement = item;
+                    foundSectionId = item.closest('.app-section').id;
+                }
+            }
+        });
 
-        if (name) {
-            modalName.textContent = name;
-            modalRole.textContent = role;
-            modalDept.textContent = dept;
-            modal.classList.remove('hidden');
-            // Tambahkan sedikit delay untuk animasi css
-            setTimeout(() => modal.style.opacity = '1', 10); 
+        // Jika ketemu, otomatis ganti tab dan scroll ke lokasi nama itu!
+        if (foundElement && foundSectionId) {
+            switchSection(foundSectionId);
+            foundElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-    }
-
-    // Fungsi Tutup Modal
-    function closeModal() {
-        modal.style.opacity = '0';
-        setTimeout(() => modal.classList.add('hidden'), 300); // Sesuai durasi transisi CSS
-    }
-
-    // Event Listener untuk elemen yang bisa diklik
-    allCards.forEach(card => {
-        card.addEventListener('click', () => openModal(card));
     });
 
-    allListItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.stopPropagation(); // Cegah bubbling
-            openModal(item);
-        });
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-    // Tutup dengan tombol Esc
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
-    });
-
-
-    // --- 4. INTERAKSI JADWAL PELAJARAN (TABS) ---
+    // --- 3. JADWAL PIKET TABS ---
     const tabBtns = document.querySelectorAll('.tab-btn');
     const dayContents = document.querySelectorAll('.day-content');
 
@@ -119,18 +118,56 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', function() {
             const day = this.getAttribute('data-day');
 
-            // Reset tabs dan konten
             tabBtns.forEach(b => b.classList.remove('active'));
-            dayContents.forEach(c => {
-                c.classList.add('hidden');
-                c.classList.remove('active');
-            });
+            dayContents.forEach(c => c.classList.add('hidden'));
 
-            // Aktifkan tab dan konten yang dipilih
             this.classList.add('active');
             const targetContent = document.getElementById(day);
-            targetContent.classList.remove('hidden');
-            setTimeout(() => targetContent.classList.add('active'), 10);
+            if (targetContent) targetContent.classList.remove('hidden');
         });
     });
+
+    // --- 4. MODAL DETAIL POP-UP ---
+    const modal = document.getElementById('memberModal');
+    const closeBtn = document.querySelector('.close-modal');
+    const modalName = document.getElementById('modalName');
+    const modalRole = document.getElementById('modalRole');
+    const modalDept = document.getElementById('modalDept');
+
+    function openModal(name, role, dept) {
+        modalName.textContent = name;
+        modalRole.textContent = role || 'Anggota Kelas';
+        modalDept.textContent = dept || 'Aetherienz (VII-A)';
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.style.opacity = '1', 10);
+    }
+
+    function closeModal() {
+        modal.style.opacity = '0';
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+
+    document.querySelectorAll('.card[data-name]').forEach(card => {
+        card.addEventListener('click', () => {
+            openModal(
+                card.getAttribute('data-name'),
+                card.getAttribute('data-role'),
+                card.getAttribute('data-dept')
+            );
+        });
+    });
+
+    document.querySelectorAll('.member-list li').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openModal(
+                item.getAttribute('data-name') || item.textContent,
+                item.getAttribute('data-role') || 'Anggota Seksi',
+                'Aetherienz (VII-A)'
+            );
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 });
