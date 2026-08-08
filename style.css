@@ -309,3 +309,63 @@ body {
 @media (max-width: 480px) {
     .flex-row, .grid-4, .grid-3 { grid-template-columns: 1fr; flex-direction: column; gap: 12px; }
 }
+/* ================= TAMPILAN TABEL JADWAL PELAJARAN ================= */
+.schedule-table-wrapper {
+    overflow-x: auto;
+    margin-top: 15px;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.92rem;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.schedule-table th {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    padding: 14px 16px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.schedule-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.schedule-table tr:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.time-badge {
+    display: inline-block;
+    background: rgba(106, 17, 203, 0.1);
+    color: #6a11cb;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+.teacher-name {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.break-row {
+    background: rgba(161, 196, 253, 0.25) !important;
+    font-weight: 700 !important;
+    color: #1e3a8a !important;
+}
