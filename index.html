@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8A Aetherienz A'28 - Class Dashboard</title>
-    <!-- Font Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Link ke File CSS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-    <!-- Latar Belakang Animasi Gelembung -->
+
+
     <div class="area">
         <ul class="circles">
             <li></li><li></li><li></li><li></li><li></li>
         </ul>
     </div>
 
-    <!-- Header / Navigasi Utama -->
+    <!-- Header / Navigasi -->
     <header class="main-header">
         <div class="logo">
             <span class="text-white">Aetherienz. </span><span class="text-accent">A'28</span>
@@ -37,7 +28,7 @@
 
     <main class="content-container">
 
-        <!-- ================= 1. STRUKTUR ORGANISASI KELAS ================= -->
+        <!-- 1. STRUKTUR ORGANISASI -->
         <section id="struktur" class="app-section">
             <div class="section-header">
                 <h1 class="visual-title">STRUKTUR <span class="text-accent">ORGANISASI</span></h1>
@@ -45,17 +36,14 @@
             </div>
 
             <div class="org-chart-container">
-                <!-- Wali Kelas -->
                 <div class="level level-1">
                     <div class="card wali-kelas" data-name="Tazqiyatul Fithriya, S.Pd." data-role="Wali Kelas" data-dept="Pembimbing Utama">
-                        <div class="card-glow"></div>
                         <div class="role-badge">Wali Kelas</div>
                         <h2 class="member-name">Tazqiyatul Fithriya, S.Pd.</h2>
                         <p class="member-id">Wali Kelas 8A</p>
                     </div>
                 </div>
 
-                <!-- Pimpinan Utama (Ketua & Wakil) -->
                 <div class="level level-2 flex-row">
                     <div class="card pimpinan" data-name="Asna Zayyana Dzatil Izzah" data-role="Ketua Kelas" data-dept="Pengurus Inti">
                         <div class="role-badge">Ketua Kelas</div>
@@ -67,7 +55,6 @@
                     </div>
                 </div>
 
-                <!-- Sekretaris & Bendahara -->
                 <div class="level level-3 grid-4">
                     <div class="card admin" data-name="Althaf Qaishar Mazza" data-role="Sekretaris 1" data-dept="Administrasi">
                         <span class="mini-role">Sekretaris 1</span>
@@ -89,91 +76,26 @@
             </div>
         </section>
 
-        <!-- ================= 2. SEKSI SEKSI 7K (Hidden) ================= -->
+        <!-- 2. SEKSI SEKSI 7K -->
         <section id="seksi-7k" class="app-section hidden">
             <div class="section-header">
                 <h1 class="visual-title">DIVISI <span class="text-accent">SEKSI 7K</span></h1>
                 <p class="section-subtitle">Daftar Pengurus Seksi Kelas 8A (T.A. 2026/2027 Semester Ganjil)</p>
             </div>
-
             <div class="org-chart-container">
                 <div class="level level-4 grid-3">
-                    <div class="card seksi">
-                        <h4 class="seksi-title">🛡️ Keamanan</h4>
-                        <ul class="member-list">
-                            <li data-name="Moch. Bahauddin Fadlan Aidyl Fithro" data-role="Seksi Keamanan">16. Moch. Bahauddin Fadlan</li>
-                            <li data-name="Dzakiyya Talita Sakhi" data-role="Seksi Keamanan">7. Dzakiyya Talita Sakhi</li>
-                            <li data-name="Farzana Azhar Arkananta" data-role="Seksi Keamanan">9. Farzana Azhar Arkananta</li>
-                            <li data-name="Naurah Miza Anindya" data-role="Seksi Keamanan">26. Naurah Miza Anindya</li>
-                        </ul>
-                    </div>
-
-                    <div class="card seksi">
-                        <h4 class="seksi-title">🧹 Kebersihan</h4>
-                        <ul class="member-list">
-                            <li data-name="Mezzaluna Azkadina Adni" data-role="Seksi Kebersihan">14. Mezzaluna Azkadina Adni</li>
-                            <li data-name="Muhammad Daffa Theo Putra" data-role="Seksi Kebersihan">21. M. Daffa Theo Putra</li>
-                            <li data-name="Althaf Qaishar Mazza" data-role="Seksi Kebersihan">3. Althaf Qaishar Mazza</li>
-                            <li data-name="Savira Azra Zahra" data-role="Seksi Kebersihan">29. Savira Azra Zahra</li>
-                            <li data-name="Zavira Setyoningsih" data-role="Seksi Kebersihan">32. Zavira Setyoningsih</li>
-                        </ul>
-                    </div>
-
-                    <div class="card seksi">
-                        <h4 class="seksi-title">🤝 Ketertiban</h4>
-                        <ul class="member-list">
-                            <li data-name="Muchamad Mifzal Fadly Alfaeyza" data-role="Seksi Ketertiban">Mifzal Fadly Alfaeyza</li>
-                            <li data-name="Muhammad Ihya'ul Kafa" data-role="Seksi Ketertiban">Muhammad Ihya'ul Kafa</li>
-                            <li data-name="Muhammad Irfan Syandana" data-role="Seksi Ketertiban">M. Irfan Syandana</li>
-                            <li data-name="Aisha Rida Sakhi" data-role="Seksi Ketertiban">Aisha Rida Sakhi</li>
-                        </ul>
-                    </div>
-
-                    <div class="card seksi">
-                        <h4 class="seksi-title">🏥 Kesehatan</h4>
-                        <ul class="member-list">
-                            <li data-name="Izzat Arya Putra" data-role="Seksi Kesehatan">11. Izzat Arya Putra</li>
-                            <li data-name="Alfaril Haidar Abdullah" data-role="Seksi Kesehatan">2. Alfaril Haidar Abdullah</li>
-                            <li data-name="Nazzala Isna Putri Ramadhani" data-role="Seksi Kesehatan">27. Nazzala Isna Putri R.</li>
-                            <li data-name="Hanaya Syaquila Abrory" data-role="Seksi Kesehatan">10. Hanaya Syaquila Abrory</li>
-                            <li data-name="Kaureen Ammara Hanifa" data-role="Seksi Kesehatan">12. Kaureen Ammara Hanifa</li>
-                        </ul>
-                    </div>
-
-                    <div class="card seksi">
-                        <h4 class="seksi-title">✨ Keindahan</h4>
-                        <ul class="member-list">
-                            <li data-name="Arya Agis Sakha" data-role="Seksi Keindahan">4. Arya Agis Sakha</li>
-                            <li data-name="Mohammad Kafaby Abqary" data-role="Seksi Keindahan">18. M. Kafaby Abqary</li>
-                            <li data-name="Raditya Putra Valenzio" data-role="Seksi Keindahan">28. Raditya Putra Valenzio</li>
-                            <li data-name="Canka Willy Lokananta" data-role="Seksi Keindahan">6. Canka Willy Lokananta</li>
-                        </ul>
-                    </div>
-
-                    <div class="card seksi">
-                        <h4 class="seksi-title">🙏 Keagamaan</h4>
-                        <ul class="member-list">
-                            <li data-name="Asna Zayyana Dzatil Izzah" data-role="Seksi Keagamaan">5. Asna Zayyana Dzatil Izzah</li>
-                            <li data-name="Zavira Qaina Al Zalifa" data-role="Seksi Keagamaan">31. Zavira Qaina Al Zalifa</li>
-                            <li data-name="Tanaya Fadia Althafina" data-role="Seksi Keagamaan">30. Tanaya Fadia Althafina</li>
-                            <li data-name="Michayla Queensha Ahmad" data-role="Seksi Keagamaan">15. Michayla Queensha Ahmad</li>
-                        </ul>
-                    </div>
-
-                    <div class="card seksi">
-                        <h4 class="seksi-title">👨‍👩‍👧‍👦 Kekeluargaan</h4>
-                        <ul class="member-list">
-                            <li data-name="Dzakiyya Talita Sakhi" data-role="Seksi Kekeluargaan">7. Dzakiyya Talita Sakhi</li>
-                            <li data-name="Nabil Rizki Makarim" data-role="Seksi Kekeluargaan">25. Nabil Rizki Makarim</li>
-                            <li data-name="Muhammad Farhan Fattah El-Izmy" data-role="Seksi Kekeluargaan">22. M. Farhan Fattah El-Izmy</li>
-                            <li data-name="Muhammad Ariq Fajri" data-role="Seksi Kekeluargaan">20. Muhammad Ariq Fajri</li>
-                        </ul>
-                    </div>
+                    <div class="card seksi"><h4 class="seksi-title">🛡️ Keamanan</h4><ul class="member-list"><li data-name="Moch. Bahauddin Fadlan Aidyl Fithro" data-role="Seksi Keamanan">16. Moch. Bahauddin Fadlan</li><li data-name="Dzakiyya Talita Sakhi" data-role="Seksi Keamanan">7. Dzakiyya Talita Sakhi</li><li data-name="Farzana Azhar Arkananta" data-role="Seksi Keamanan">9. Farzana Azhar Arkananta</li><li data-name="Naurah Miza Anindya" data-role="Seksi Keamanan">26. Naurah Miza Anindya</li></ul></div>
+                    <div class="card seksi"><h4 class="seksi-title">🧹 Kebersihan</h4><ul class="member-list"><li data-name="Mezzaluna Azkadina Adni" data-role="Seksi Kebersihan">14. Mezzaluna Azkadina Adni</li><li data-name="Muhammad Daffa Theo Putra" data-role="Seksi Kebersihan">21. M. Daffa Theo Putra</li><li data-name="Althaf Qaishar Mazza" data-role="Seksi Kebersihan">3. Althaf Qaishar Mazza</li><li data-name="Savira Azra Zahra" data-role="Seksi Kebersihan">29. Savira Azra Zahra</li><li data-name="Zavira Setyoningsih" data-role="Seksi Kebersihan">32. Zavira Setyoningsih</li></ul></div>
+                    <div class="card seksi"><h4 class="seksi-title">🤝 Ketertiban</h4><ul class="member-list"><li data-name="Muchamad Mifzal Fadly Alfaeyza" data-role="Seksi Ketertiban">Mifzal Fadly Alfaeyza</li><li data-name="Muhammad Ihya'ul Kafa" data-role="Seksi Ketertiban">Muhammad Ihya'ul Kafa</li><li data-name="Muhammad Irfan Syandana" data-role="Seksi Ketertiban">M. Irfan Syandana</li><li data-name="Aisha Rida Sakhi" data-role="Seksi Ketertiban">Aisha Rida Sakhi</li></ul></div>
+                    <div class="card seksi"><h4 class="seksi-title">🏥 Kesehatan</h4><ul class="member-list"><li data-name="Izzat Arya Putra" data-role="Seksi Kesehatan">11. Izzat Arya Putra</li><li data-name="Alfaril Haidar Abdullah" data-role="Seksi Kesehatan">2. Alfaril Haidar Abdullah</li><li data-name="Nazzala Isna Putri Ramadhani" data-role="Seksi Kesehatan">27. Nazzala Isna Putri R.</li><li data-name="Hanaya Syaquila Abrory" data-role="Seksi Kesehatan">10. Hanaya Syaquila Abrory</li><li data-name="Kaureen Ammara Hanifa" data-role="Seksi Kesehatan">12. Kaureen Ammara Hanifa</li></ul></div>
+                    <div class="card seksi"><h4 class="seksi-title">✨ Keindahan</h4><ul class="member-list"><li data-name="Arya Agis Sakha" data-role="Seksi Keindahan">4. Arya Agis Sakha</li><li data-name="Mohammad Kafaby Abqary" data-role="Seksi Keindahan">18. M. Kafaby Abqary</li><li data-name="Raditya Putra Valenzio" data-role="Seksi Keindahan">28. Raditya Putra Valenzio</li><li data-name="Canka Willy Lokananta" data-role="Seksi Keindahan">6. Canka Willy Lokananta</li></ul></div>
+                    <div class="card seksi"><h4 class="seksi-title">🙏 Keagamaan</h4><ul class="member-list"><li data-name="Asna Zayyana Dzatil Izzah" data-role="Seksi Keagamaan">5. Asna Zayyana Dzatil Izzah</li><li data-name="Zavira Qaina Al Zalifa" data-role="Seksi Keagamaan">31. Zavira Qaina Al Zalifa</li><li data-name="Tanaya Fadia Althafina" data-role="Seksi Keagamaan">30. Tanaya Fadia Althafina</li><li data-name="Michayla Queensha Ahmad" data-role="Seksi Keagamaan">15. Michayla Queensha Ahmad</li></ul></div>
+                    <div class="card seksi"><h4 class="seksi-title">👨‍👩‍👧‍👦 Kekeluargaan</h4><ul class="member-list"><li data-name="Dzakiyya Talita Sakhi" data-role="Seksi Kekeluargaan">7. Dzakiyya Talita Sakhi</li><li data-name="Nabil Rizki Makarim" data-role="Seksi Kekeluargaan">25. Nabil Rizki Makarim</li><li data-name="Muhammad Farhan Fattah El-Izmy" data-role="Seksi Kekeluargaan">22. M. Farhan Fattah El-Izmy</li><li data-name="Muhammad Ariq Fajri" data-role="Seksi Kekeluargaan">20. Muhammad Ariq Fajri</li></ul></div>
                 </div>
             </div>
         </section>
 
-        <!-- ================= 3. JADWAL PIKET KELAS (Hidden) ================= -->
+       <!-- 3. JADWAL PIKET -->
         <section id="piket" class="app-section hidden">
             <div class="section-header">
                 <h1 class="visual-title">JADWAL <span class="text-accent">PIKET KELAS</span></h1>
@@ -190,60 +112,58 @@
                 </div>
                 <div class="timetable-content">
                     <div id="senin" class="day-content active">
-                        <div class="subject-item">• Izzat</div>
-                        <div class="subject-item">• Althaf</div>
-                        <div class="subject-item">• Nabil</div>
-                        <div class="subject-item">• Daffa</div>
-                        <div class="subject-item">• Farhan</div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Izzat</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Althaf</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Nabil</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Daffa</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Farhan</p></div>
                     </div>
                     <div id="selasa" class="day-content hidden">
-                        <div class="subject-item">• Ariq</div>
-                        <div class="subject-item">• Radit</div>
-                        <div class="subject-item">• Agis</div>
-                        <div class="subject-item">• Dzakiyya</div>
-                        <div class="subject-item">• Canka</div>
-                        <div class="subject-item">• Mahira</div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Ariq</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Radit</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Agis</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Dzakiyya</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Canka</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Mahira</p></div>
                     </div>
                     <div id="rabu" class="day-content hidden">
-                        <div class="subject-item">• Zavira</div>
-                        <div class="subject-item">• Kaureen</div>
-                        <div class="subject-item">• Haidar</div>
-                        <div class="subject-item">• Kafaby</div>
-                        <div class="subject-item">• Savira</div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Zavira</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Kaureen</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Haidar</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Kafaby</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Savira</p></div>
                     </div>
                     <div id="kamis" class="day-content hidden">
-                        <div class="subject-item">• Nizza</div>
-                        <div class="subject-item">• Hanaya</div>
-                        <div class="subject-item">• Luna</div>
-                        <div class="subject-item">• Naurah</div>
-                        <div class="subject-item">• Baha</div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Nizza</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Hanaya</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Luna</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Naurah</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Baha</p></div>
                     </div>
                     <div id="jumat" class="day-content hidden">
-                        <div class="subject-item">• Irfan</div>
-                        <div class="subject-item">• Fadly</div>
-                        <div class="subject-item">• Azam</div>
-                        <div class="subject-item">• Faiz</div>
-                        <div class="subject-item">• Kafa</div>
-                        <div class="subject-item">• Arzan</div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Irfan</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Fadly</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Azam</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Faiz</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Kafa</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Arzan</p></div>
                     </div>
                     <div id="sabtu" class="day-content hidden">
-                        <div class="subject-item">• Adni</div>
-                        <div class="subject-item">• Asna</div>
-                        <div class="subject-item">• Aisha</div>
-                        <div class="subject-item">• Michayla</div>
-                        <div class="subject-item">• Tanaya</div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Adni</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Asna</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Aisha</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Michayla</p></div>
+                        <div class="piket-card"><span class="piket-icon">🧹</span><p class="piket-name">Tanaya</p></div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- ================= 4. JADWAL PELAJARAN (Hidden) ================= -->
+        <!-- 4. JADWAL PELAJARAN -->
         <section id="jadwal" class="app-section hidden">
             <div class="section-header">
                 <h1 class="visual-title">JADWAL <span class="text-accent">PELAJARAN (8A)</span></h1>
                 <p class="section-subtitle">Semester Gasal T.A. 2026/2027 — MTsN 2 Kota Kediri</p>
             </div>
-
             <div class="glass-panel timetable-container">
                 <div class="days-tabs">
                     <button class="tab-btn active" data-day="senin-mapel">Senin</button>
@@ -253,365 +173,22 @@
                     <button class="tab-btn" data-day="jumat-mapel">Jumat</button>
                     <button class="tab-btn" data-day="sabtu-mapel">Sabtu</button>
                 </div>
-
-                <div class="timetable-content">
-                    
-                    <!-- SENIN -->
-                    <div id="senin-mapel" class="day-content active">
-                        <div class="schedule-table-wrapper">
-                            <table class="schedule-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%;">Waktu</th>
-                                        <th style="width: 45%;">Mata Pelajaran</th>
-                                        <th style="width: 30%;">Pengajar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">06:45 - 07:40</span></td>
-                                        <td>Pembiasaan Pagi / Upacara <small style="color:#1e3a8a">(Jam 1)</small></td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">07:40 - 09:00</span></td>
-                                        <td>PJOK <small style="color:#718096">(Jam 2-3)</small></td>
-                                        <td><span class="teacher-name">B. Listia</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">09:00 - 09:40</span></td>
-                                        <td>BJA / B. Jawa <small style="color:#718096">(Jam 4)</small></td>
-                                        <td><span class="teacher-name">B. Kunti</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">09:40 - 10:05</span></td>
-                                        <td>ISTIRAHAT PERTAMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">10:05 - 11:25</span></td>
-                                        <td>AA / Akidah Akhlak <small style="color:#718096">(Jam 5-6)</small></td>
-                                        <td><span class="teacher-name">B. Fajri</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">11:25 - 12:30</span></td>
-                                        <td>ISHOMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">12:30 - 13:50</span></td>
-                                        <td>PP / Pancasila <small style="color:#718096">(Jam 7-8)</small></td>
-                                        <td><span class="teacher-name">B. Atik</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- SELASA -->
-                    <div id="selasa-mapel" class="day-content hidden">
-                        <div class="schedule-table-wrapper">
-                            <table class="schedule-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%;">Waktu</th>
-                                        <th style="width: 45%;">Mata Pelajaran</th>
-                                        <th style="width: 30%;">Pengajar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">06:45 - 07:00</span></td>
-                                        <td>Pembiasaan Pagi</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">07:00 - 08:20</span></td>
-                                        <td>QH / Al-Qur'an Hadis <small style="color:#718096">(Jam 1-2)</small></td>
-                                        <td><span class="teacher-name">B. Nikmafatin</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">08:20 - 09:40</span></td>
-                                        <td>BIN / Bahasa Indonesia <small style="color:#718096">(Jam 3-4)</small></td>
-                                        <td><span class="teacher-name">B. Tazqiya</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">09:40 - 10:05</span></td>
-                                        <td>ISTIRAHAT PERTAMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">10:05 - 11:25</span></td>
-                                        <td>FKH / Fiqih <small style="color:#718096">(Jam 5-6)</small></td>
-                                        <td><span class="teacher-name">B. Uswah</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">11:25 - 12:30</span></td>
-                                        <td>ISHOMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">12:30 - 13:50</span></td>
-                                        <td>SKI <small style="color:#718096">(Jam 7-8)</small></td>
-                                        <td><span class="teacher-name">P. Irul</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- RABU -->
-                    <div id="rabu-mapel" class="day-content hidden">
-                        <div class="schedule-table-wrapper">
-                            <table class="schedule-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%;">Waktu</th>
-                                        <th style="width: 45%;">Mata Pelajaran</th>
-                                        <th style="width: 30%;">Pengajar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">06:45 - 07:00</span></td>
-                                        <td>Pembiasaan Pagi</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">07:00 - 07:40</span></td>
-                                        <td>Riset <small style="color:#718096">(Jam 1)</small></td>
-                                        <td><span class="teacher-name">B. Enik</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">07:40 - 09:00</span></td>
-                                        <td>BIN / Bahasa Indonesia <small style="color:#718096">(Jam 2-3)</small></td>
-                                        <td><span class="teacher-name">B. Tazqiya</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">09:00 - 09:40</span></td>
-                                        <td>BING / Bahasa Inggris <small style="color:#718096">(Jam 4)</small></td>
-                                        <td><span class="teacher-name">B. Silvana</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">09:40 - 10:05</span></td>
-                                        <td>ISTIRAHAT PERTAMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">10:05 - 11:25</span></td>
-                                        <td>IPS <small style="color:#718096">(Jam 5-6)</small></td>
-                                        <td><span class="teacher-name">B. Anik</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">11:25 - 12:30</span></td>
-                                        <td>ISHOMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">12:30 - 13:50</span></td>
-                                        <td>MAT / Matematika <small style="color:#718096">(Jam 7-8)</small></td>
-                                        <td><span class="teacher-name">B. Luluk</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- KAMIS -->
-                    <div id="kamis-mapel" class="day-content hidden">
-                        <div class="schedule-table-wrapper">
-                            <table class="schedule-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%;">Waktu</th>
-                                        <th style="width: 45%;">Mata Pelajaran</th>
-                                        <th style="width: 30%;">Pengajar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">06:45 - 07:00</span></td>
-                                        <td>Pembiasaan Pagi</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">07:00 - 08:20</span></td>
-                                        <td>IPA <small style="color:#718096">(Jam 1-2)</small></td>
-                                        <td><span class="teacher-name">B. Dewi Zul</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">08:20 - 09:00</span></td>
-                                        <td>BIN / Bahasa Indonesia <small style="color:#718096">(Jam 3)</small></td>
-                                        <td><span class="teacher-name">B. Tazqiya</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">09:00 - 09:40</span></td>
-                                        <td>IPS <small style="color:#718096">(Jam 4)</small></td>
-                                        <td><span class="teacher-name">B. Anik</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">09:40 - 10:05</span></td>
-                                        <td>ISTIRAHAT PERTAMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">10:05 - 11:25</span></td>
-                                        <td>BAR / Bahasa Arab <small style="color:#718096">(Jam 5-6)</small></td>
-                                        <td><span class="teacher-name">B. Ririn</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">11:25 - 12:30</span></td>
-                                        <td>ISHOMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">12:30 - 13:50</span></td>
-                                        <td>BING / Bahasa Inggris <small style="color:#718096">(Jam 7-8)</small></td>
-                                        <td><span class="teacher-name">B. Silvana</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- JUMAT -->
-                    <div id="jumat-mapel" class="day-content hidden">
-                        <div class="schedule-table-wrapper">
-                            <table class="schedule-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%;">Waktu</th>
-                                        <th style="width: 45%;">Mata Pelajaran</th>
-                                        <th style="width: 30%;">Pengajar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">06:45 - 07:40</span></td>
-                                        <td>Pembiasaan Pagi / Jumat Bersih <small style="color:#1e3a8a">(Jam 1)</small></td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">07:40 - 09:00</span></td>
-                                        <td>IPA <small style="color:#718096">(Jam 2-3)</small></td>
-                                        <td><span class="teacher-name">B. Dewi Zul</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">09:00 - 09:40</span></td>
-                                        <td>BK <small style="color:#718096">(Jam 4)</small></td>
-                                        <td><span class="teacher-name">B. Maria</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">09:40 - 10:05</span></td>
-                                        <td>ISTIRAHAT PERTAMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">10:05 - 11:25</span></td>
-                                        <td>INF / Informatika <small style="color:#718096">(Jam 5-6)</small></td>
-                                        <td><span class="teacher-name">P. Rozi</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- SABTU -->
-                    <div id="sabtu-mapel" class="day-content hidden">
-                        <div class="schedule-table-wrapper">
-                            <table class="schedule-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%;">Waktu</th>
-                                        <th style="width: 45%;">Mata Pelajaran</th>
-                                        <th style="width: 30%;">Pengajar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">06:45 - 07:00</span></td>
-                                        <td>Pembiasaan Pagi</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">07:00 - 08:20</span></td>
-                                        <td>MAT / Matematika <small style="color:#718096">(Jam 1-2)</small></td>
-                                        <td><span class="teacher-name">B. Luluk</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">08:20 - 09:00</span></td>
-                                        <td>BAR / Bahasa Arab <small style="color:#718096">(Jam 3)</small></td>
-                                        <td><span class="teacher-name">B. Ririn</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">09:00 - 09:40</span></td>
-                                        <td>SBD / Seni Budaya <small style="color:#718096">(Jam 4)</small></td>
-                                        <td><span class="teacher-name">B. Mujinem</span></td>
-                                    </tr>
-                                    <tr class="break-row">
-                                        <td><span class="time-badge">09:40 - 10:05</span></td>
-                                        <td>ISTIRAHAT PERTAMA</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="time-badge">10:05 - 10:45</span></td>
-                                        <td>SBD / Seni Budaya <small style="color:#718096">(Jam 5)</small></td>
-                                        <td><span class="teacher-name">B. Mujinem</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="timetable-content" id="mapelContent"></div>
             </div>
         </section>
 
-        <!-- ================= 5. DAFTAR SISWA KELAS (Hidden) ================= -->
+        <!-- 5. DAFTAR SISWA -->
         <section id="siswa" class="app-section hidden">
             <div class="section-header">
-                <h1 class="visual-title">DAFTAR <span class="text-accent">SISWA (32)</span></h1>
-                <p class="section-subtitle">Presensi Anggota Kelas 8A (Aetherienz)</p>
+                <h1 class="visual-title">DAFTAR <span class="text-accent">SISWA </span></h1>
+                <p class="section-subtitle">Presensi Kelas 8A — 32 Siswa : 18 Laki-Laki (♂) & 14 Perempuan (♀)</p>
             </div>
-            <div class="glass-panel news-container">
-                <div class="news-item"><span class="news-date">01</span><p class="news-text">AISHA RIDA SAKHI (P)</p></div>
-                <div class="news-item"><span class="news-date">02</span><p class="news-text">ALFARIL HAIDAR ABDULLAH (L)</p></div>
-                <div class="news-item"><span class="news-date">03</span><p class="news-text">ALTHAF QAISHAR MAZZA (L)</p></div>
-                <div class="news-item"><span class="news-date">04</span><p class="news-text">ARYA AGIS SAKHA (L)</p></div>
-                <div class="news-item"><span class="news-date">05</span><p class="news-text">ASNA ZAYYANA DZATIL IZZAH (P)</p></div>
-                <div class="news-item"><span class="news-date">06</span><p class="news-text">CANKA WILLY LOKANANTA (L)</p></div>
-                <div class="news-item"><span class="news-date">07</span><p class="news-text">DZAKIYYA TALITA SAKHI (P)</p></div>
-                <div class="news-item"><span class="news-date">08</span><p class="news-text">FAIZ WAFIY RIZQULLAH (L)</p></div>
-                <div class="news-item"><span class="news-date">09</span><p class="news-text">FARZANA AZHAR ARKANANTA (L)</p></div>
-                <div class="news-item"><span class="news-date">10</span><p class="news-text">HANAYA SYAQUILA ABRORY (P)</p></div>
-                <div class="news-item"><span class="news-date">11</span><p class="news-text">IZZAT ARYA PUTRA (L)</p></div>
-                <div class="news-item"><span class="news-date">12</span><p class="news-text">KAUREEN AMMARA HANIFA (P)</p></div>
-                <div class="news-item"><span class="news-date">13</span><p class="news-text">MAHIRA HASNA KAMILA (P)</p></div>
-                <div class="news-item"><span class="news-date">14</span><p class="news-text">MEZZALUNA AZKADINA ADNI (P)</p></div>
-                <div class="news-item"><span class="news-date">15</span><p class="news-text">MICHAYLA QUEENSHA AHMAD (P)</p></div>
-                <div class="news-item"><span class="news-date">16</span><p class="news-text">MOCH. BAHAUDDIN FADLAN AIDYL FITHRO (L)</p></div>
-                <div class="news-item"><span class="news-date">17</span><p class="news-text">MOHAMMAD ARIYAH NUR AZAM (L)</p></div>
-                <div class="news-item"><span class="news-date">18</span><p class="news-text">MOHAMMAD KAFABY ABQARY (L)</p></div>
-                <div class="news-item"><span class="news-date">19</span><p class="news-text">MUCHAMAD MIFZAL FADLY ALFAEYZA (L)</p></div>
-                <div class="news-item"><span class="news-date">20</span><p class="news-text">MUHAMMAD ARIQ FAJRI (L)</p></div>
-                <div class="news-item"><span class="news-date">21</span><p class="news-text">MUHAMMAD DAFFA THEO PUTRA (L)</p></div>
-                <div class="news-item"><span class="news-date">22</span><p class="news-text">MUHAMMAD FARHAN FATTAH EL-IZMY (L)</p></div>
-                <div class="news-item"><span class="news-date">23</span><p class="news-text">MUHAMMAD IHYA'UL KAFA (L)</p></div>
-                <div class="news-item"><span class="news-date">24</span><p class="news-text">MUHAMMAD IRFAN SYANDANA (L)</p></div>
-                <div class="news-item"><span class="news-date">25</span><p class="news-text">NABIL RIZKI MAKARIM (L)</p></div>
-                <div class="news-item"><span class="news-date">26</span><p class="news-text">NAURAH MIZA ANINDYA (P)</p></div>
-                <div class="news-item"><span class="news-date">27</span><p class="news-text">NAZZALA ISNA PUTRI RAMADHANI (P)</p></div>
-                <div class="news-item"><span class="news-date">28</span><p class="news-text">RADITYA PUTRA VALENZIO (L)</p></div>
-                <div class="news-item"><span class="news-date">29</span><p class="news-text">SAVIRA AZRA ZAHRA (P)</p></div>
-                <div class="news-item"><span class="news-date">30</span><p class="news-text">TANAYA FADIA ALTHAFINA (P)</p></div>
-                <div class="news-item"><span class="news-date">31</span><p class="news-text">ZAVIRA QAINA AL ZALIFA (P)</p></div>
-                <div class="news-item"><span class="news-date">32</span><p class="news-text">ZAVIRA SETYONINGSIH (P)</p></div>
-            </div>
+            <div class="glass-panel news-container" id="siswaContainer"></div>
         </section>
 
     </main>
 
-    <!-- Modal Pop-up Detail Anggota -->
+    <!-- Modal Pop-up -->
     <div id="memberModal" class="modal hidden">
         <div class="modal-content glass-card">
             <span class="close-modal">&times;</span>
@@ -620,7 +197,7 @@
                 <h2 id="modalName">Nama Lengkap</h2>
                 <p id="modalRole" class="role-text">Jabatan</p>
                 <hr class="modal-hr">
-                <p>Divisi / Bagian: <span id="modalDept">Pengurus Aetherienz</span></p>
+                <p>Keterangan: <span id="modalDept">Kelas 8A — Aetherienz</span></p>
             </div>
         </div>
     </div>
@@ -629,7 +206,4 @@
         <p>&copy; 2026 Aetherienz. A'28 — Class 8A (T.A. 2026/2027 Semester Ganjil). All Rights Reserved.</p>
     </footer>
 
-    <!-- Link ke File JS -->
     <script src="script.js"></script>
-</body>
-</html>
