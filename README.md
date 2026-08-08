@@ -3,10 +3,7 @@
   # 🎓 EXCELLENT CLASS A28
   **Official Class Dashboard & Organizational Structure Website**
 
-  ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-  ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-  ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-  ![Theme](https://img.shields.io/badge/Theme-Frosty%20Ocean-00f2fe?style=for-the-badge)
+
 
   <p align="center">
     Website resmi kelas <b>EXCELLENT CLASS A28</b> yang menampilkan struktur organisasi pengurus kelas, jadwal pelajaran, serta pengumuman internal secara interaktif dengan desain modern bertema <i>Frosty Ocean Elegance</i>.
