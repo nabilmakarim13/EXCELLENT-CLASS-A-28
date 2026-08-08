@@ -24,9 +24,10 @@
             <span class="text-white">Aetherienz. </span><span class="text-accent">A'28</span>
         </div>
         <nav class="nav-links">
-            <a href="#struktur" class="active">Struktur</a>
+            <a href="#struktur">Struktur</a>
             <a href="#seksi-7k">Seksi 7K</a>
             <a href="#piket">Jadwal Piket</a>
+            <a href="#jadwal">Jadwal Pelajaran</a>
             <a href="#siswa">Daftar Siswa</a>
         </nav>
         <div class="search-box">
@@ -268,7 +269,96 @@
         </section>
 
     </main>
+    
+    <!-- ================= JADWAL PELAJARAN KELAS 8A ================= -->
+        <section id="jadwal" class="app-section hidden">
+            <div class="section-header">
+                <h1 class="visual-title">JADWAL <span class="text-accent">PELAJARAN (8A)</span></h1>
+                <p class="section-subtitle">Semester Gasal TA 2026/2027 - MTsN 2 Kota Kediri</p>
+            </div>
 
+            <div class="glass-panel timetable-container">
+                <!-- Navigasi Hari -->
+                <div class="days-tabs">
+                    <button class="tab-btn active" data-day="senin-mapel">Senin</button>
+                    <button class="tab-btn" data-day="selasa-mapel">Selasa</button>
+                    <button class="tab-btn" data-day="rabu-mapel">Rabu</button>
+                    <button class="tab-btn" data-day="kamis-mapel">Kamis</button>
+                    <button class="tab-btn" data-day="jumat-mapel">Jumat</button>
+                    <button class="tab-btn" data-day="sabtu-mapel">Sabtu</button>
+                </div>
+
+                <!-- Konten Jadwal -->
+                <div class="timetable-content">
+                    
+                    <!-- SENIN -->
+                    <div id="senin-mapel" class="day-content active">
+                        <div class="subject-item"><span class="time">06:45 - 07:00</span> <span class="subj">Pembiasaan Pagi</span></div>
+                        <div class="subject-item"><span class="time">07:00 - 09:00</span> <span class="subj">PJOK — B. Listia (Jam 1-3)</span></div>
+                        <div class="subject-item"><span class="time">09:00 - 09:40</span> <span class="subj">BJA (Bahasa Jawa) — B. Kunti (Jam 4)</span></div>
+                        <div class="subject-item"><span class="time">09:40 - 10:05</span> <span class="subj">Istirahat Pertama</span></div>
+                        <div class="subject-item"><span class="time">10:05 - 11:25</span> <span class="subj">AA (Akidah Akhlak) — B. Fajri (Jam 5-6)</span></div>
+                        <div class="subject-item"><span class="time">11:25 - 12:30</span> <span class="subj">ISHOMA</span></div>
+                        <div class="subject-item"><span class="time">12:30 - 13:50</span> <span class="subj">PP (Pancasila) — B. Atik (Jam 7-8)</span></div>
+                    </div>
+
+                    <!-- SELASA -->
+                    <div id="selasa-mapel" class="day-content hidden">
+                        <div class="subject-item"><span class="time">06:45 - 07:00</span> <span class="subj">Pembiasaan Pagi</span></div>
+                        <div class="subject-item"><span class="time">07:00 - 08:20</span> <span class="subj">QH (Al-Qur'an Hadis) — B. Nikmafatin (Jam 1-2)</span></div>
+                        <div class="subject-item"><span class="time">08:20 - 09:40</span> <span class="subj">BIN (Bahasa Indonesia) — B. Tazqiya (Jam 3-4)</span></div>
+                        <div class="subject-item"><span class="time">09:40 - 10:05</span> <span class="subj">Istirahat Pertama</span></div>
+                        <div class="subject-item"><span class="time">10:05 - 11:25</span> <span class="subj">FKH (Fiqih) — B. Uswah (Jam 5-6)</span></div>
+                        <div class="subject-item"><span class="time">11:25 - 12:30</span> <span class="subj">ISHOMA</span></div>
+                        <div class="subject-item"><span class="time">12:30 - 13:50</span> <span class="subj">SKI (Sejarah Kebudayaan Islam) — P. Irul (Jam 7-8)</span></div>
+                    </div>
+
+                    <!-- RABU -->
+                    <div id="rabu-mapel" class="day-content hidden">
+                        <div class="subject-item"><span class="time">06:45 - 07:00</span> <span class="subj">Pembiasaan Pagi</span></div>
+                        <div class="subject-item"><span class="time">07:00 - 07:40</span> <span class="subj">RISET — B. Enik (Jam 1)</span></div>
+                        <div class="subject-item"><span class="time">07:40 - 09:00</span> <span class="subj">BIN (Bahasa Indonesia) — B. Tazqiya (Jam 2-3)</span></div>
+                        <div class="subject-item"><span class="time">09:00 - 09:40</span> <span class="subj">BING (Bahasa Inggris) — B. Silvana (Jam 4)</span></div>
+                        <div class="subject-item"><span class="time">09:40 - 10:05</span> <span class="subj">Istirahat Pertama</span></div>
+                        <div class="subject-item"><span class="time">10:05 - 11:25</span> <span class="subj">IPS — B. Anik (Jam 5-6)</span></div>
+                        <div class="subject-item"><span class="time">11:25 - 12:30</span> <span class="subj">ISHOMA</span></div>
+                        <div class="subject-item"><span class="time">12:30 - 13:50</span> <span class="subj">MAT (Matematika) — B. Luluk (Jam 7-8)</span></div>
+                    </div>
+
+                    <!-- KAMIS -->
+                    <div id="kamis-mapel" class="day-content hidden">
+                        <div class="subject-item"><span class="time">06:45 - 07:00</span> <span class="subj">Pembiasaan Pagi</span></div>
+                        <div class="subject-item"><span class="time">07:00 - 08:20</span> <span class="subj">IPA — B. Dewi Zul (Jam 1-2)</span></div>
+                        <div class="subject-item"><span class="time">08:20 - 09:00</span> <span class="subj">BIN (Bahasa Indonesia) — B. Tazqiya (Jam 3)</span></div>
+                        <div class="subject-item"><span class="time">09:00 - 09:40</span> <span class="subj">IPS — B. Anik (Jam 4)</span></div>
+                        <div class="subject-item"><span class="time">09:40 - 10:05</span> <span class="subj">Istirahat Pertama</span></div>
+                        <div class="subject-item"><span class="time">10:05 - 11:25</span> <span class="subj">BAR (Bahasa Arab) — B. Ririn (Jam 5-6)</span></div>
+                        <div class="subject-item"><span class="time">11:25 - 12:30</span> <span class="subj">ISHOMA</span></div>
+                        <div class="subject-item"><span class="time">12:30 - 13:50</span> <span class="subj">BING (Bahasa Inggris) — B. Silvana (Jam 7-8)</span></div>
+                    </div>
+
+                    <!-- JUMAT -->
+                    <div id="jumat-mapel" class="day-content hidden">
+                        <div class="subject-item"><span class="time">06:45 - 07:00</span> <span class="subj">Pembiasaan Pagi</span></div>
+                        <div class="subject-item"><span class="time">07:00 - 09:00</span> <span class="subj">IPA — B. Dewi Zul (Jam 1-3)</span></div>
+                        <div class="subject-item"><span class="time">09:00 - 09:40</span> <span class="subj">BK — B. Maria (Jam 4)</span></div>
+                        <div class="subject-item"><span class="time">09:40 - 10:05</span> <span class="subj">Istirahat Pertama</span></div>
+                        <div class="subject-item"><span class="time">10:05 - 11:25</span> <span class="subj">INF (Informatika) — P. Rozi (Jam 5-6)</span></div>
+                    </div>
+
+                    <!-- SABTU -->
+                    <div id="sabtu-mapel" class="day-content hidden">
+                        <div class="subject-item"><span class="time">06:45 - 07:00</span> <span class="subj">Pembiasaan Pagi</span></div>
+                        <div class="subject-item"><span class="time">07:00 - 08:20</span> <span class="subj">MAT (Matematika) — B. Luluk (Jam 1-2)</span></div>
+                        <div class="subject-item"><span class="time">08:20 - 09:00</span> <span class="subj">BAR (Bahasa Arab) — B. Ririn (Jam 3)</span></div>
+                        <div class="subject-item"><span class="time">09:00 - 09:40</span> <span class="subj">SBD (Seni Budaya) — B. Mujinem (Jam 4)</span></div>
+                        <div class="subject-item"><span class="time">09:40 - 10:05</span> <span class="subj">Istirahat Pertama</span></div>
+                        <div class="subject-item"><span class="time">10:05 - 10:45</span> <span class="subj">SBD (Seni Budaya) — B. Mujinem (Jam 5)</span></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     <!-- Modal Pop-up Detail Anggota -->
     <div id="memberModal" class="modal hidden">
         <div class="modal-content glass-card">
