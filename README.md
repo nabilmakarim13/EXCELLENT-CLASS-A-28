@@ -23,15 +23,8 @@
 - **🔍 Live Search Member**: Pencarian instan nama pengurus atau anggota kelas langsung dengan efek sorotan (*highlight*).
 - **🗂️ Pop-up Detail Profil**: Klik pada kartu pengurus atau anggota untuk menampilkan jendela detail informasi peran dan tugasnya.
 - **📅 Interactive Schedule Tab**: Halaman jadwal pelajaran harian yang bisa diklik berdasarkan hari.
-- **📢 Class News Feed**: Banner pengumuman internal kelas untuk memperbarui informasi penting.
+
 
 ---
 
-## 📁 Struktur Direktori File
 
-```text
-EXCELLENT-CLASS-A28/
-├── 📄 index.html    # Struktur elemen & konten utama website
-├── 🎨 style.css     # Styling, tema Frosty Ocean, & efek Glassmorphism
-├── ⚡ script.js    # Logika pencarian, modal pop-up, & navigasi tab
-└── 📝 README.md     # Dokumentasi proyek
