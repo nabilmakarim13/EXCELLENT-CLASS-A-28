@@ -1,7 +1,14 @@
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <!-- TAG WAJIB AGAR TAMPILAN DI HP OTOMATIS BESAR & RAPI (GAK PAKE ZOOM OUT DESKTOP) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>8A Aetherienz A'28 - Class Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
-
+</head>
+<body>
 
     <div class="area">
         <ul class="circles">
@@ -32,7 +39,7 @@
         <section id="struktur" class="app-section">
             <div class="section-header">
                 <h1 class="visual-title">STRUKTUR <span class="text-accent">ORGANISASI</span></h1>
-                <p class="section-subtitle">Pengurus Kelas 8A — Aetherienz (T.A. 2026/2027 Semester Ganjil)</p>
+                <p class="section-subtitle">Pengurus Kelas 8A (T.A. 2026/2027 Semester Ganjil)</p>
             </div>
 
             <div class="org-chart-container">
@@ -95,7 +102,7 @@
             </div>
         </section>
 
-       <!-- 3. JADWAL PIKET -->
+        <!-- 3. JADWAL PIKET -->
         <section id="piket" class="app-section hidden">
             <div class="section-header">
                 <h1 class="visual-title">JADWAL <span class="text-accent">PIKET KELAS</span></h1>
@@ -158,6 +165,7 @@
                 </div>
             </div>
         </section>
+
         <!-- 4. JADWAL PELAJARAN -->
         <section id="jadwal" class="app-section hidden">
             <div class="section-header">
@@ -180,8 +188,8 @@
         <!-- 5. DAFTAR SISWA -->
         <section id="siswa" class="app-section hidden">
             <div class="section-header">
-                <h1 class="visual-title">DAFTAR <span class="text-accent">SISWA </span></h1>
-                <p class="section-subtitle">Presensi Kelas 8A — 32 Siswa : 18 Laki-Laki (♂) & 14 Perempuan (♀)</p>
+                <h1 class="visual-title">DAFTAR <span class="text-accent">SISWA (32)</span></h1>
+                <p class="section-subtitle">Presensi Kelas 8A — 18 Laki-Laki (♂) & 14 Perempuan (♀)</p>
             </div>
             <div class="glass-panel news-container" id="siswaContainer"></div>
         </section>
@@ -197,7 +205,7 @@
                 <h2 id="modalName">Nama Lengkap</h2>
                 <p id="modalRole" class="role-text">Jabatan</p>
                 <hr class="modal-hr">
-                <p>Keterangan: <span id="modalDept">Kelas 8A — Aetherienz</span></p>
+                <p>Keterangan: <span id="modalDept">Kelas 8A</span></p>
             </div>
         </div>
     </div>
@@ -207,3 +215,5 @@
     </footer>
 
     <script src="script.js"></script>
+</body>
+</html>
