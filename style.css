@@ -312,7 +312,7 @@ body {
 .member-list li:hover { color: var(--accent-color); font-weight: 700; }
 
 /* ==========================================================================
-   6. JADWAL PIKET (GRID KARTU SIMETRIS) & JADWAL PELAJARAN
+   6. JADWAL PIKET & MAPEL
    ========================================================================== */
 .glass-panel {
     background: var(--card-bg);
@@ -347,7 +347,6 @@ body {
     color: #ffffff;
 }
 
-/* JADWAL PIKET GRID */
 .timetable-content .day-content {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -397,13 +396,12 @@ body {
     margin: 0;
 }
 
-/* TABEL JADWAL MAPEL */
 .schedule-table-wrapper {
     width: 100%;
     margin-top: 15px;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 16px;
-    overflow: hidden;
+    overflow-x: auto;
     border: 1px solid var(--card-border);
 }
 
@@ -456,7 +454,7 @@ body {
 }
 
 /* ==========================================================================
-   7. DAFTAR SISWA (WARNA GENDER) & BADGE SYMBOL
+   7. DAFTAR SISWA (WARNA GENDER)
    ========================================================================== */
 .news-container {
     display: grid !important;
@@ -512,9 +510,6 @@ body {
 .news-item.female .news-text {
     color: #6b21a8 !important;
 }
-.news-item.female:hover {
-    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25) !important;
-}
 
 /* SISWA LAKI-LAKI (BIRU) */
 .news-item.male {
@@ -528,9 +523,6 @@ body {
 }
 .news-item.male .news-text {
     color: #1e3a8a !important;
-}
-.news-item.male:hover {
-    box-shadow: 0 8px 25px rgba(37, 117, 252, 0.25) !important;
 }
 
 .gender-badge {
@@ -553,7 +545,7 @@ body {
 }
 
 /* ==========================================================================
-   8. POP-UP MODAL
+   8. POP-UP MODAL & FOOTER
    ========================================================================== */
 .modal {
     position: fixed;
@@ -591,8 +583,6 @@ body {
     cursor: pointer;
 }
 
-.close-modal:hover { color: #1e293b; }
-
 .big-avatar {
     width: 70px;
     height: 70px;
@@ -623,31 +613,31 @@ body {
 }
 
 /* ==========================================================================
-   9. CSS RESPONSIVE KHUSUS LAYAR HP (MOBILE FRIENDLY)
+   9. CSS RESPONSIVE KHUSUS MOBILE / HP (STRICT & FULLY OPTIMIZED)
    ========================================================================== */
 @media screen and (max-width: 768px) {
     
     .main-header {
-        flex-direction: column;
-        gap: 12px;
-        padding: 12px 15px;
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 12px 15px !important;
     }
 
     .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 6px;
-        width: 100%;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        width: 100% !important;
     }
 
     .nav-links a {
-        font-size: 0.78rem;
-        padding: 6px 12px;
+        font-size: 0.78rem !important;
+        padding: 6px 12px !important;
     }
 
     .search-box {
-        width: 100%;
+        width: 100% !important;
     }
 
     .search-box input {
@@ -655,75 +645,67 @@ body {
     }
 
     .search-results-dropdown {
-        width: 100%;
-        right: 0;
-        left: 0;
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
     }
 
     .visual-title {
-        font-size: 1.6rem;
+        font-size: 1.5rem !important;
     }
 
     .section-subtitle {
-        font-size: 0.82rem;
+        font-size: 0.8rem !important;
     }
 
+    /* Struktur Organisasi 1 Kolom Rapi */
     .grid-4, .grid-3 {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
     }
 
     .card.wali-kelas, .card.pimpinan {
-        max-width: 100%;
+        max-width: 100% !important;
     }
 
     .card {
-        padding: 14px 10px;
+        padding: 16px 14px !important;
     }
 
     .member-name {
-        font-size: 1rem;
+        font-size: 1.05rem !important;
     }
 
     .days-tabs {
-        gap: 5px;
+        gap: 6px !important;
     }
 
     .tab-btn {
-        padding: 6px 12px;
-        font-size: 0.78rem;
+        padding: 6px 12px !important;
+        font-size: 0.78rem !important;
     }
 
+    /* Piket 1 Kolom di HP */
     .timetable-content .day-content {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-
-    .schedule-table th, .schedule-table td {
-        padding: 8px 10px;
-        font-size: 0.78rem;
-    }
-
-    .news-container {
         grid-template-columns: 1fr !important;
         gap: 10px !important;
     }
 
+    /* Daftar Siswa 1 Kolom Kebawah */
+    .news-container {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
     .news-item {
-        padding: 10px 14px !important;
+        padding: 12px 16px !important;
     }
 
     .news-text {
-        font-size: 0.8rem !important;
+        font-size: 0.85rem !important;
     }
 
-    .gender-badge {
-        font-size: 0.9rem !important;
-        padding: 1px 6px !important;
-    }
-
-    .modal-content {
-        width: 92%;
-        padding: 20px;
+    .schedule-table {
+        min-width: 480px !important;
     }
 }
