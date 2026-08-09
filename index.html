@@ -18,8 +18,7 @@
     <!-- Header / Navigasi -->
     <header class="main-header">
         <div class="logo-group">
-            <!-- Logo MTsN di Kiri Atas Web -->
-            <img src="./logo-mts.png" alt="Logo MTsN 2 Kota Kediri" class="header-logo">
+            <img src="./logo-mts.png" alt="Logo MTsN 2 Kota Kediri" class="header-logo clickable-logo" data-name="Logo MTsN 2 Kota Kediri" data-role="Madrasah Tsanawiyah Negeri 2 Kota Kediri">
             <div class="logo-text">
                 <span class="text-white">Aetherienz. </span><span class="text-accent">A'28</span>
             </div>
@@ -35,8 +34,7 @@
             <div class="search-box">
                 <input type="text" id="memberSearch" placeholder="Cari nama...">
             </div>
-            <!-- Logo Kelas di Kanan Atas Web -->
-            <img src="./logo-kelas.png" alt="Logo Class Aetherienz" class="header-logo logo-circle">
+            <img src="./logo-kelas.png" alt="Logo Class Aetherienz" class="header-logo logo-circle clickable-logo" data-name="Logo Kelas Aetherienz" data-role="Logo Resmi Angkatan 2028 Kelas 8A">
         </div>
     </header>
 
@@ -269,12 +267,15 @@
 
     </main>
 
-    <!-- Modal Pop-up -->
+    <!-- Modal Pop-up (Dukungan Gambar Logo Membesar) -->
     <div id="memberModal" class="modal hidden">
         <div class="modal-content glass-card">
             <span class="close-modal">&times;</span>
             <div class="modal-body text-center">
-                <div class="big-avatar">A'28</div>
+                <div id="modalAvatarContainer">
+                    <div id="modalAvatarText" class="big-avatar">A'28</div>
+                    <img id="modalAvatarImg" src="" alt="Logo Membesar" class="modal-logo-img hidden">
+                </div>
                 <h2 id="modalName">Nama Lengkap</h2>
                 <p id="modalRole" class="role-text">Jabatan</p>
                 <hr class="modal-hr">
