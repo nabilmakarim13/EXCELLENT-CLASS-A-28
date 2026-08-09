@@ -1,415 +1,651 @@
-document.addEventListener('DOMContentLoaded', () => {
+/* ==========================================================================
+   1. VARIABLE & RESET DASAR
+   ========================================================================== */
+:root {
+    --bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(255, 255, 255, 0.95);
+    --text-main: #2d3748;
+    --text-muted: #64748b;
+    --accent-color: #6a11cb;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
 
-    // 1. DATA SISWA (32 SISWA KELAS 8A - AKURAT 100%)
-    const daftarSiswa = [
-        { no: "01", name: "AISHA RIDA SAKHI", gender: "P", role: "Seksi Ketertiban" },
-        { no: "02", name: "ALFARIL HAIDAR ABDULLAH", gender: "L", role: "Seksi Kesehatan" },
-        { no: "03", name: "ALTHAF QAISHAR MAZZA", gender: "L", role: "Sekretaris 1 & Seksi Kebersihan" },
-        { no: "04", name: "ARYA AGIS SAKHA", gender: "L", role: "Sekretaris 2 & Seksi Keindahan" },
-        { no: "05", name: "ASNA ZAYYANA DZATIL IZZAH", gender: "P", role: "Ketua Kelas & Seksi Keagamaan" },
-        { no: "06", name: "CANKA WILLY LOKANANTA", gender: "L", role: "Seksi Keindahan" },
-        { no: "07", name: "DZAKIYYA TALITA SAKHI", gender: "P", role: "Wakil Ketua & Seksi Keamanan" },
-        { no: "08", name: "FAIZ WAFIY RIZQULLAH", gender: "L", role: "Bendahara 2 & Seksi Ketertiban" },
-        { no: "09", name: "FARZANA AZHAR ARKANANTA", gender: "L", role: "Seksi Keamanan" },
-        { no: "10", name: "HANAYA SYAQUILA ABRORY", gender: "P", role: "Bendahara 1 & Seksi Kesehatan" },
-        { no: "11", name: "IZZAT ARYA PUTRA", gender: "L", role: "Seksi Kesehatan" },
-        { no: "12", name: "KAUREEN AMMARA HANIFA", gender: "P", role: "Seksi Kesehatan" },
-        { no: "13", name: "MAHIRA HASNA KAMILA", gender: "P", role: "Seksi Keagamaan" },
-        { no: "14", name: "MEZZALUNA AZKADINA ADNI", gender: "P", role: "Seksi Kebersihan" },
-        { no: "15", name: "MICHAYLA QUEENSHA AHMAD", gender: "P", role: "Seksi Keagamaan" },
-        { no: "16", name: "MOCH. BAHAUDDIN FADLAN AIDYL FITHRO", gender: "L", role: "Seksi Keamanan" },
-        { no: "17", name: "MOHAMMAD ARIYAH NUR AZAM", gender: "L", role: "Seksi Kekeluargaan" },
-        { no: "18", name: "MOHAMMAD KAFABY ABQARY", gender: "L", role: "Seksi Keindahan" },
-        { no: "19", name: "MUCHAMAD MIFZAL FADLY ALFAEYZA", gender: "L", role: "Seksi Ketertiban" },
-        { no: "20", name: "MUHAMMAD ARIQ FAJRI", gender: "L", role: "Seksi Kekeluargaan" },
-        { no: "21", name: "MUHAMMAD DAFFA THEO PUTRA", gender: "L", role: "Seksi Kebersihan" },
-        { no: "22", name: "MUHAMMAD FARHAN FATTAH EL-IZMY", gender: "L", role: "Seksi Kekeluargaan" },
-        { no: "23", name: "MUHAMMAD IHYA'UL KAFA", gender: "L", role: "Seksi Ketertiban" },
-        { no: "24", name: "MUHAMMAD IRFAN SYANDANA", gender: "L", role: "Seksi Ketertiban" },
-        { no: "25", name: "NABIL RIZKI MAKARIM", gender: "L", role: "Seksi Kekeluargaan" },
-        { no: "26", name: "NAURAH MIZA ANINDYA", gender: "P", role: "Seksi Keamanan" },
-        { no: "27", name: "NAZZALA ISNA PUTRI RAMADHANI", gender: "P", role: "Seksi Kesehatan" },
-        { no: "28", name: "RADITYA PUTRA VALENZIO", gender: "L", role: "Seksi Keindahan" },
-        { no: "29", name: "SAVIRA AZRA ZAHRA", gender: "P", role: "Seksi Kebersihan" },
-        { no: "30", name: "TANAYA FADIA ALTHAFINA", gender: "P", role: "Seksi Keagamaan" },
-        { no: "31", name: "ZAVIRA QAINA AL ZALIFA", gender: "P", role: "Seksi Keagamaan" },
-        { no: "32", name: "ZAVIRA SETYONINGSIH", gender: "P", role: "Seksi Kebersihan" }
-    ];
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
-    // 2. DATA JADWAL PELAJARAN
-    const jadwalMapel = {
-        "senin-mapel": [
-            { time: "06:45 - 07:40", name: "Pembiasaan Pagi / Upacara (Jam 1)", teacher: "-", break: true },
-            { time: "07:40 - 09:00", name: "PJOK (Jam 2-3)", teacher: "B. Listia", break: false },
-            { time: "09:00 - 09:40", name: "BJA / B. Jawa (Jam 4)", teacher: "B. Kunti", break: false },
-            { time: "09:40 - 10:05", name: "ISTIRAHAT PERTAMA", teacher: "-", break: true },
-            { time: "10:05 - 11:25", name: "AA / Akidah Akhlak (Jam 5-6)", teacher: "B. Fajri", break: false },
-            { time: "11:25 - 12:30", name: "ISHOMA", teacher: "-", break: true },
-            { time: "12:30 - 13:50", name: "PP / Pancasila (Jam 7-8)", teacher: "B. Atik", break: false }
-        ],
-        "selasa-mapel": [
-            { time: "06:45 - 07:00", name: "Pembiasaan Pagi", teacher: "-", break: true },
-            { time: "07:00 - 08:20", name: "QH / Al-Qur'an Hadis (Jam 1-2)", teacher: "B. Nikmafatin", break: false },
-            { time: "08:20 - 09:40", name: "BIN / Bahasa Indonesia (Jam 3-4)", teacher: "B. Tazqiya", break: false },
-            { time: "09:40 - 10:05", name: "ISTIRAHAT PERTAMA", teacher: "-", break: true },
-            { time: "10:05 - 11:25", name: "FKH / Fiqih (Jam 5-6)", teacher: "B. Uswah", break: false },
-            { time: "11:25 - 12:30", name: "ISHOMA", teacher: "-", break: true },
-            { time: "12:30 - 13:50", name: "SKI (Jam 7-8)", teacher: "P. Irul", break: false }
-        ],
-        "rabu-mapel": [
-            { time: "06:45 - 07:00", name: "Pembiasaan Pagi", teacher: "-", break: true },
-            { time: "07:00 - 07:40", name: "Riset (Jam 1)", teacher: "B. Enik", break: false },
-            { time: "07:40 - 09:00", name: "BIN / Bahasa Indonesia (Jam 2-3)", teacher: "B. Tazqiya", break: false },
-            { time: "09:00 - 09:40", name: "BING / Bahasa Inggris (Jam 4)", teacher: "B. Silvana", break: false },
-            { time: "09:40 - 10:05", name: "ISTIRAHAT PERTAMA", teacher: "-", break: true },
-            { time: "10:05 - 11:25", name: "IPS (Jam 5-6)", teacher: "B. Anik", break: false },
-            { time: "11:25 - 12:30", name: "ISHOMA", teacher: "-", break: true },
-            { time: "12:30 - 13:50", name: "MAT / Matematika (Jam 7-8)", teacher: "B. Luluk", break: false }
-        ],
-        "kamis-mapel": [
-            { time: "06:45 - 07:00", name: "Pembiasaan Pagi", teacher: "-", break: true },
-            { time: "07:00 - 08:20", name: "IPA (Jam 1-2)", teacher: "B. Dewi Zul", break: false },
-            { time: "08:20 - 09:00", name: "BIN / Bahasa Indonesia (Jam 3)", teacher: "B. Tazqiya", break: false },
-            { time: "09:00 - 09:40", name: "IPS (Jam 4)", teacher: "B. Anik", break: false },
-            { time: "09:40 - 10:05", name: "ISTIRAHAT PERTAMA", teacher: "-", break: true },
-            { time: "10:05 - 11:25", name: "BAR / Bahasa Arab (Jam 5-6)", teacher: "B. Ririn", break: false },
-            { time: "11:25 - 12:30", name: "ISHOMA", teacher: "-", break: true },
-            { time: "12:30 - 13:50", name: "BING / Bahasa Inggris (Jam 7-8)", teacher: "B. Silvana", break: false }
-        ],
-        "jumat-mapel": [
-            { time: "06:45 - 07:40", name: "Pembiasaan Pagi / Jumat Bersih (Jam 1)", teacher: "-", break: true },
-            { time: "07:40 - 09:00", name: "IPA (Jam 2-3)", teacher: "B. Dewi Zul", break: false },
-            { time: "09:00 - 09:40", name: "BK (Jam 4)", teacher: "B. Maria", break: false },
-            { time: "09:40 - 10:05", name: "ISTIRAHAT PERTAMA", teacher: "-", break: true },
-            { time: "10:05 - 11:25", name: "INF / Informatika (Jam 5-6)", teacher: "P. Rozi", break: false }
-        ],
-        "sabtu-mapel": [
-            { time: "06:45 - 07:00", name: "Pembiasaan Pagi", teacher: "-", break: true },
-            { time: "07:00 - 08:20", name: "MAT / Matematika (Jam 1-2)", teacher: "B. Luluk", break: false },
-            { time: "08:20 - 09:00", name: "BAR / Bahasa Arab (Jam 3)", teacher: "B. Ririn", break: false },
-            { time: "09:00 - 09:40", name: "SBD / Seni Budaya (Jam 4)", teacher: "B. Mujinem", break: false },
-            { time: "09:40 - 10:05", name: "ISTIRAHAT PERTAMA", teacher: "-", break: true },
-            { time: "10:05 - 10:45", name: "SBD / Seni Budaya (Jam 5)", teacher: "B. Mujinem", break: false }
-        ]
-    };
+body {
+    font-family: var(--font-body);
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 60px;
+}
 
-    // 3. RENDER DAFTAR SISWA
-    const siswaContainer = document.getElementById('siswaContainer');
-    if (siswaContainer) {
-        siswaContainer.innerHTML = daftarSiswa.map(s => {
-            const genderClass = s.gender === 'P' ? 'female' : 'male';
-            const genderIcon = s.gender === 'P' ? '♀' : '♂';
-            return `
-                <div class="news-item ${genderClass}" data-name="${s.name}" data-role="${s.role}" data-gender="${s.gender}">
-                    <span class="news-date">${s.no}</span>
-                    <p class="news-text" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                        <span>${s.name}</span>
-                        <span class="gender-badge">${genderIcon}</span>
-                    </p>
-                </div>
-            `;
-        }).join('');
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   2. LATAR BELAKANG ANIMASI GELEMBUNG
+   ========================================================================== */
+.area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+
+@keyframes animate {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 50%; }
+    100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+}
+
+/* ==========================================================================
+   3. HEADER
+   ========================================================================== */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 5%;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.text-white { color: #1e293b; }
+.text-accent { color: var(--accent-color); }
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    width: 180px;
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    width: 210px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(106, 17, 203, 0.2);
+}
+
+.search-results-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    padding: 8px 0;
+}
+
+.search-results-dropdown.active {
+    display: block;
+}
+
+.search-result-item {
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: rgba(106, 17, 203, 0.08);
+}
+
+.search-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #1e293b;
+}
+
+.search-category {
+    font-size: 0.75rem;
+    color: #6a11cb;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   4. KONTEN UTAMA & STRUKTUR ORGANISASI
+   ========================================================================== */
+.content-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.visual-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    color: #1e293b;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.org-chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px !important;
+    align-items: center;
+    width: 100%;
+}
+
+.level { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+}
+
+.flex-row { 
+    gap: 22px !important; 
+    flex-wrap: wrap; 
+}
+
+.grid-4 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 18px !important; 
+    width: 100%; 
+}
+
+.grid-3 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 18px !important; 
+    width: 100%; 
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02) !important;
+    box-shadow: 0 12px 25px rgba(106, 17, 203, 0.2) !important;
+}
+
+.card.wali-kelas {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 230, 255, 0.95) 100%);
+    border: 2px solid #a855f7;
+    width: 100%;
+    max-width: 460px;
+}
+
+.card.pimpinan { 
+    width: 100%; 
+    max-width: 300px; 
+}
+
+.role-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.role-badge.bg-blue {
+    background: linear-gradient(135deg, #2575fc 0%, #00c6ff 100%);
+}
+
+.mini-role {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+}
+
+.member-name { font-family: var(--font-heading); font-size: 1.1rem; margin-top: 4px; color: #1e293b; }
+.name-sm { font-weight: 600; font-size: 0.92rem; margin-top: 4px; }
+.member-id { font-size: 0.82rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
+
+/* SEKSI 7K LIST */
+.card.seksi { text-align: left; padding: 18px 20px; }
+.seksi-title { font-family: var(--font-heading); margin-bottom: 12px; color: #1e293b; font-size: 1rem; }
+.member-list { list-style: none; }
+.member-list li {
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.member-list li:last-child { border-bottom: none; }
+.member-list li:hover { color: var(--accent-color); font-weight: 700; }
+
+/* ==========================================================================
+   5. JADWAL PIKET & JADWAL PELAJARAN
+   ========================================================================== */
+.glass-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.days-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 8px 18px;
+    border-radius: 15px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+}
+
+#piket .timetable-content .day-content:not(.hidden) {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) !important;
+    gap: 12px !important;
+}
+
+#piket .timetable-content .day-content.hidden {
+    display: none !important;
+}
+
+.piket-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.piket-card:hover { transform: scale(1.03); border-color: #a855f7; }
+
+.piket-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.piket-name { font-weight: 600; font-size: 0.9rem; color: #1e293b; margin: 0; }
+
+.schedule-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.schedule-card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 14px 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    gap: 15px;
+}
+
+.schedule-card-item.break-card {
+    background: linear-gradient(135deg, rgba(224, 195, 252, 0.35) 0%, rgba(142, 197, 252, 0.35) 100%);
+    border: 1px dashed #2575fc;
+}
+
+.time-badge {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+.subject-info {
+    flex-grow: 1;
+}
+
+.subject-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.teacher-badge {
+    background: rgba(106, 17, 203, 0.1);
+    color: #6a11cb;
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   6. DAFTAR SISWA (WARNA GENDER)
+   ========================================================================== */
+.news-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+    gap: 14px !important;
+    padding: 10px 0 !important;
+}
+
+.news-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 16px !important;
+    border-radius: 16px !important;
+    cursor: pointer !important;
+    transition: transform 0.3s ease !important;
+}
+
+.news-item:hover { transform: scale(1.03) !important; }
+
+.news-date {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 12px !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    flex-shrink: 0 !important;
+}
+
+.news-text { font-weight: 600 !important; font-size: 0.88rem !important; margin: 0 !important; }
+
+.news-item.female { background: linear-gradient(135deg, #f3e8ff 0%, #ffffff 100%) !important; border: 1.5px solid #d8b4fe !important; }
+.news-item.female .news-date { background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%) !important; color: #ffffff !important; }
+.news-item.female .news-text { color: #6b21a8 !important; }
+
+.news-item.male { background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%) !important; border: 1.5px solid #93c5fd !important; }
+.news-item.male .news-date { background: linear-gradient(135deg, #2575fc 0%, #0284c7 100%) !important; color: #ffffff !important; }
+.news-item.male .news-text { color: #1e3a8a !important; }
+
+.gender-badge {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    margin-left: 6px !important;
+}
+
+/* ==========================================================================
+   7. POP-UP MODAL
+   ========================================================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 24px;
+    padding: 28px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.big-avatar {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
+.modal-hr { border: none; border-top: 1px dashed #e2e8f0; margin: 15px 0; }
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
+    display: none;
+    z-index: 99;
+}
+
+.main-footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE HP (CLEAN MOBILE HEADER)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .main-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 12px 15px !important;
+        gap: 10px !important;
     }
 
-    // 4. RENDER JADWAL MAPEL SEBAGAI KARTU MODERN
-    const mapelContent = document.getElementById('mapelContent');
-    if (mapelContent) {
-        mapelContent.innerHTML = Object.keys(jadwalMapel).map((dayKey, index) => {
-            const cardsHtml = jadwalMapel[dayKey].map(item => `
-                <div class="schedule-card-item ${item.break ? 'break-card' : ''}">
-                    <span class="time-badge">${item.time}</span>
-                    <div class="subject-info">
-                        <div class="subject-title">${item.name}</div>
-                    </div>
-                    ${item.teacher !== '-' ? `<span class="teacher-badge">${item.teacher}</span>` : ''}
-                </div>
-            `).join('');
-
-            return `
-                <div id="${dayKey}" class="day-content ${index === 0 ? 'active' : 'hidden'}">
-                    <div class="schedule-cards-container">
-                        ${cardsHtml}
-                    </div>
-                </div>
-            `;
-        }).join('');
+    .logo-text {
+        font-size: 1.25rem !important;
     }
 
-    // 5. NAVIGASI TAB MENU
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const sections = document.querySelectorAll('.app-section');
-
-    function switchSection(targetId) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        sections.forEach(s => s.classList.add('hidden'));
-
-        const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
-        const targetSection = document.getElementById(targetId);
-
-        if (activeLink) activeLink.classList.add('active');
-        if (targetSection) targetSection.classList.remove('hidden');
+    .nav-links {
+        width: 100% !important;
+        justify-content: center !important;
+        overflow-x: auto;
+        padding-bottom: 2px;
     }
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            switchSection(this.getAttribute('href').substring(1));
-        });
-    });
-
-    // 6. FITUR PENCARIAN DROPDOWN
-    const searchInput = document.getElementById('memberSearch');
-    const searchBox = document.querySelector('.search-box');
-
-    if (searchInput && searchBox) {
-        const dropdown = document.createElement('div');
-        dropdown.className = 'search-results-dropdown';
-        searchBox.appendChild(dropdown);
-
-        const dataPiket = [
-            { nama: "Izzat, Althaf, Nabil, Daffa, Farhan", hari: "Senin" },
-            { nama: "Ariq, Radit, Agis, Dzakiyya, Canka, Mahira", hari: "Selasa" },
-            { nama: "Zavira, Kaureen, Haidar, Kafaby, Savira", hari: "Rabu" },
-            { nama: "Nizza, Hanaya, Luna, Naurah, Baha", hari: "Kamis" },
-            { nama: "Irfan, Fadly, Azam, Faiz, Kafa, Arzan", hari: "Jumat" },
-            { nama: "Adni, Asna, Aisha, Michayla, Tanaya", hari: "Sabtu" }
-        ];
-
-        searchInput.addEventListener('input', function(e) {
-            const keyword = e.target.value.toLowerCase().trim();
-            dropdown.innerHTML = '';
-
-            if (keyword === "") {
-                dropdown.classList.remove('active');
-                return;
-            }
-
-            let hasil = [];
-
-            daftarSiswa.forEach(s => {
-                if (s.name.toLowerCase().includes(keyword)) {
-                    hasil.push({ 
-                        title: s.name, 
-                        category: `👤 Daftar Siswa (Absen ${s.no})`, 
-                        sectionId: 'siswa' 
-                    });
-
-                    if (s.role.includes("Ketua") || s.role.includes("Sekretaris") || s.role.includes("Bendahara")) {
-                        hasil.push({ 
-                            title: s.name, 
-                            category: `🏛️ Struktur Organisasi (${s.role.split('&')[0].trim()})`, 
-                            sectionId: 'struktur' 
-                        });
-                    }
-
-                    if (s.role.toLowerCase().includes("seksi")) {
-                        hasil.push({ 
-                            title: s.name, 
-                            category: `🤝 Seksi 7K (${s.role})`, 
-                            sectionId: 'seksi-7k' 
-                        });
-                    }
-                }
-            });
-
-            dataPiket.forEach(p => {
-                if (p.nama.toLowerCase().includes(keyword)) {
-                    hasil.push({ 
-                        title: `Piket Hari ${p.hari}`, 
-                        category: `🧹 Jadwal Piket Kebersihan`, 
-                        sectionId: 'piket' 
-                    });
-                }
-            });
-
-            if ("tazqiyatul fithriya".includes(keyword) || "ibu tazqiyatul".includes(keyword) || "wali kelas".includes(keyword)) {
-                hasil.push({
-                    title: "Ibu Tazqiyatul Fithriya, S.Pd.",
-                    category: "🏛️ Struktur Organisasi (Wali Kelas)",
-                    sectionId: "struktur"
-                });
-            }
-
-            if (hasil.length > 0) {
-                dropdown.classList.add('active');
-                hasil.forEach(item => {
-                    const el = document.createElement('div');
-                    el.className = 'search-result-item';
-                    el.innerHTML = `
-                        <span class="search-title">${item.title}</span>
-                        <span class="search-category">${item.category}</span>
-                    `;
-                    el.addEventListener('click', () => {
-                        switchSection(item.sectionId);
-                        const targetSec = document.getElementById(item.sectionId);
-                        if (targetSec) targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        dropdown.classList.remove('active');
-                        searchInput.value = '';
-                    });
-                    dropdown.appendChild(el);
-                });
-            } else {
-                dropdown.classList.add('active');
-                dropdown.innerHTML = `<div class="search-result-item"><span class="search-title">Tidak ditemukan...</span></div>`;
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!searchBox.contains(e.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
+    .nav-links a {
+        font-size: 0.78rem !important;
+        padding: 6px 12px !important;
+        white-space: nowrap;
     }
 
-    // 7. TAB PIKET & MAPEL
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const day = this.getAttribute('data-day');
-            const parent = this.closest('.timetable-container');
-            
-            parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            parent.querySelectorAll('.day-content').forEach(c => {
-                c.classList.add('hidden');
-            });
-
-            this.classList.add('active');
-            const target = document.getElementById(day);
-            if (target) {
-                target.classList.remove('hidden');
-            }
-        });
-    });
-
-    // 8. FORMATTER TEKS SUARA (TALKBACK)
-    function formatTeksSuara(text) {
-        if (!text) return "";
-        
-        let formatted = text.toLowerCase().replace(/(?:^|\s|-)\S/g, function(a) { 
-            return a.toUpperCase(); 
-        });
-
-        formatted = formatted
-            .replace(/Althaf/gi, "Altaf")
-            .replace(/S.Pd./gi, "Sarjana Pendidikan")
-            .replace(/Pjok/gi, "P-J-O-K")
-            .replace(/Mtsn/gi, "M-T-S-N")
-            .replace(/T\.A\./gi, "Tahun Ajaran");
-
-        return formatted;
+    .search-box, .search-box input {
+        width: 100% !important;
     }
 
-    // 9. FUNGSI TALKBACK SUARA
-    function speakText(text) {
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            
-            const teksSuara = formatTeksSuara(text);
-            const utterance = new SpeechSynthesisUtterance(teksSuara);
-            
-            const isEnglish = /\b(class|dashboard|structure|section|member|timetable|all|rights|reserved)\b/i.test(text);
-            
-            utterance.lang = isEnglish ? 'en-US' : 'id-ID';
-            utterance.rate = 0.9;
-            utterance.pitch = 1;
-            
-            window.speechSynthesis.speak(utterance);
-        }
+    .schedule-card-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
     }
 
-    // 10. MODAL POP-UP
-    const modal = document.getElementById('memberModal');
-    const closeBtn = document.querySelector('.close-modal');
-    const modalName = document.getElementById('modalName');
-    const modalRole = document.getElementById('modalRole');
-    const modalDept = document.getElementById('modalDept');
-    const modalAvatarText = document.getElementById('modalAvatarText');
-
-    function openModal(name, role, dept) {
-        modalName.textContent = name;
-        modalRole.innerHTML = role ? `<strong>${role}</strong>` : 'Anggota Kelas';
-        modalDept.textContent = dept || 'Kelas 8A';
-
-        modal.classList.remove('hidden');
-        setTimeout(() => modal.style.opacity = '1', 10);
-
-        const ucapan = `${name}, ${role || 'Anggota Kelas'}, ${dept}`;
-        speakText(ucapan);
+    .teacher-badge {
+        align-self: flex-start !important;
     }
 
-    function closeModal() {
-        modal.style.opacity = '0';
-        setTimeout(() => modal.classList.add('hidden'), 300);
-        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    }
-
-    // A. KLIK NAMA DI STRUKTUR ORGANISASI (WALI KELAS, KETUA, SEKRETARIS, BENDAHARA)
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', (e) => {
-            // Cek jika kartu punya data nama
-            const name = card.getAttribute('data-name');
-            if (name) {
-                const role = card.getAttribute('data-role');
-                const dept = card.getAttribute('data-dept') || 'Pengurus Inti Kelas 8A';
-                openModal(name, role, dept);
-            }
-        });
-    });
-
-    // B. KLIK NAMA DI DIVISI SEKSI 7K (KEAMANAN, KEBERSIHAN, DLL)
-    document.querySelectorAll('.member-list li').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.stopPropagation(); // Mencegah bentrok dengan klik kartu luar
-            const name = item.getAttribute('data-name') || item.textContent.replace(/^[0-9]+\.\s*/, '');
-            const role = item.getAttribute('data-role') || 'Pengurus Seksi';
-            openModal(name, role, `Pengurus ${role} Kelas 8A`);
-        });
-    });
-
-    // C. KLIK NAMA DI DAFTAR SISWA (PRESENSI 32 SISWA)
-    document.addEventListener('click', (e) => {
-        const newsItem = e.target.closest('.news-item[data-name]');
-        if (newsItem) {
-            const name = newsItem.getAttribute('data-name');
-            const role = newsItem.getAttribute('data-role') || 'Anggota Kelas';
-            const gender = newsItem.getAttribute('data-gender') === 'L' ? 'Siswa Laki-Laki' : 'Siswa Perempuan';
-            openModal(name, role, `${gender} Kelas 8A`);
-        }
-    });
-
-    // KLIK TEKS HEADER AETHERIENZ A'28
-    const headerTitle = document.querySelector('.logo-text');
-    if (headerTitle) {
-        headerTitle.addEventListener('click', () => {
-            openModal("Aetherienz A'28", "Kelas 8A", "MTsN 2 Kota Kediri");
-        });
-    }
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-    // 11. TOMBOL BACK TO TOP LOGIC
-    const backToTopBtn = document.getElementById('backToTop');
-    if (backToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.style.display = 'block';
-            } else {
-                backToTopBtn.style.display = 'none';
-            }
-        });
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // 12. OTOMATIS TAB HARI INI
-    const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-    const today = days[new Date().getDay()];
-
-    if (today !== 'minggu') {
-        const activePiketBtn = document.querySelector(`.tab-btn[data-day="${today}"]`);
-        const activeMapelBtn = document.querySelector(`.tab-btn[data-day="${today}-mapel"]`);
-        if (activePiketBtn) activePiketBtn.click();
-        if (activeMapelBtn) activeMapelBtn.click();
-    }
-});
+    .visual-title { font-size: 1.6rem !important; }
+}
