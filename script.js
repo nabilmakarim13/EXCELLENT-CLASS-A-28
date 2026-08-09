@@ -225,9 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            if ("tazqiyatul fithriya".includes(keyword) || "wali kelas".includes(keyword)) {
+            if ("tazqiyatul fithriya".includes(keyword) || "ibu tazqiyatul".includes(keyword) || "wali kelas".includes(keyword)) {
                 hasil.push({
-                    title: "Tazqiyatul Fithriya, S.Pd.",
+                    title: "Ibu Tazqiyatul Fithriya, S.Pd.",
                     category: "🏛️ Struktur Organisasi (Wali Kelas)",
                     sectionId: "struktur"
                 });
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 8. FORMATTER TEKS SUARA
+    // 8. FORMATTER TEKS SUARA (PEMBAIKAN SINTAKS T\.A\.)
     function formatTeksSuara(text) {
         if (!text) return "";
         
