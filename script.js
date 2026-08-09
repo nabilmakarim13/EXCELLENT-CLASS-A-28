@@ -111,31 +111,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
-    // 4. RENDER JADWAL MAPEL (FORCE FULL WIDTH INLINE STYLING)
+    // 4. RENDER JADWAL MAPEL SEBAGAI KARTU MODERN (DESKTOP & MOBILE FRIENDLY)
     const mapelContent = document.getElementById('mapelContent');
     if (mapelContent) {
         mapelContent.innerHTML = Object.keys(jadwalMapel).map((dayKey, index) => {
-            const rows = jadwalMapel[dayKey].map(item => `
-                <tr class="${item.break ? 'break-row' : ''}">
-                    <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06);"><span class="time-badge">${item.time}</span></td>
-                    <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 600;">${item.name}</td>
-                    <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06);">${item.teacher !== '-' ? `<span class="teacher-name">${item.teacher}</span>` : '-'}</td>
-                </tr>
+            const cardsHtml = jadwalMapel[dayKey].map(item => `
+                <div class="schedule-card-item ${item.break ? 'break-card' : ''}">
+                    <span class="time-badge">${item.time}</span>
+                    <div class="subject-info">
+                        <div class="subject-title">${item.name}</div>
+                    </div>
+                    ${item.teacher !== '-' ? `<span class="teacher-badge">${item.teacher}</span>` : ''}
+                </div>
             `).join('');
 
             return `
-                <div id="${dayKey}" class="day-content ${index === 0 ? 'active' : 'hidden'}" style="display: block !important; width: 100% !important;">
-                    <div style="width: 100% !important; overflow-x: auto; background: rgba(255,255,255,0.85); border-radius: 16px; border: 1px solid var(--card-border);">
-                        <table style="width: 100% !important; border-collapse: collapse; text-align: left;">
-                            <thead>
-                                <tr style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white;">
-                                    <th style="padding: 14px 16px; text-align: left; width: 25%;">Waktu</th>
-                                    <th style="padding: 14px 16px; text-align: left; width: 50%;">Mata Pelajaran</th>
-                                    <th style="padding: 14px 16px; text-align: left; width: 25%;">Pengajar</th>
-                                </tr>
-                            </thead>
-                            <tbody>${rows}</tbody>
-                        </table>
+                <div id="${dayKey}" class="day-content ${index === 0 ? 'active' : 'hidden'}">
+                    <div class="schedule-cards-container">
+                        ${cardsHtml}
                     </div>
                 </div>
             `;
@@ -164,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 6. FITUR PENCARIAN GOOGLE-STYLE DROPDOWN
+    // 6. FITUR PENCARIAN DROPDOWN
     const searchInput = document.getElementById('memberSearch');
     const searchBox = document.querySelector('.search-box');
 
@@ -283,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 8. FORMATTER TEKS SUARA
+    // 8. FORMATTER TEKS SUARA (TALKBACK)
     function formatTeksSuara(text) {
         if (!text) return "";
         
@@ -301,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return formatted;
     }
 
-    // 9. FUNGSI TALKBACK MULTI-BAHASA
+    // 9. FUNGSI TALKBACK SUARA
     function speakText(text) {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
@@ -319,21 +312,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. MODAL POP-UP
+    // 10. MODAL POP-UP (MENDUKUNG LOGO MEMBESAR & BICARA)
     const modal = document.getElementById('memberModal');
     const closeBtn = document.querySelector('.close-modal');
     const modalName = document.getElementById('modalName');
     const modalRole = document.getElementById('modalRole');
     const modalDept = document.getElementById('modalDept');
+    const modalAvatarText = document.getElementById('modalAvatarText');
+    const modalAvatarImg = document.getElementById('modalAvatarImg');
 
-    function openModal(name, role, dept) {
+    function openModal(name, role, dept, imgSrc = null) {
         modalName.textContent = name;
-        modalRole.innerHTML = `<span style="font-size:0.82rem; color:#64748b; font-weight:500;">Menjabat sebagai:</span><br><strong>${role || 'Anggota Kelas'}</strong>`;
+        modalRole.innerHTML = role ? `<strong>${role}</strong>` : 'Anggota Kelas';
         modalDept.textContent = dept || 'Kelas 8A';
+
+        if (imgSrc) {
+            modalAvatarText.classList.add('hidden');
+            modalAvatarImg.src = imgSrc;
+            modalAvatarImg.classList.remove('hidden');
+        } else {
+            modalAvatarImg.classList.add('hidden');
+            modalAvatarText.classList.remove('hidden');
+        }
+
         modal.classList.remove('hidden');
         setTimeout(() => modal.style.opacity = '1', 10);
 
-        const ucapan = `${name}. ${role ? 'Menjabat sebagai ' + role : ''}. ${dept}`;
+        const ucapan = `Ini adalah ${name}. ${role}. ${dept}`;
         speakText(ucapan);
     }
 
@@ -343,12 +348,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     }
 
+    // KLIK KARTU PENGURUS INTI
     document.querySelectorAll('.card[data-name]').forEach(card => {
         card.addEventListener('click', () => {
-            openModal(card.getAttribute('data-name'), card.getAttribute('data-role'), 'Pengurus Inti Kelas 8A');
+            openModal(card.getAttribute('data-name'), card.getAttribute('data-role'), card.getAttribute('data-dept') || 'Pengurus Inti Kelas 8A');
         });
     });
 
+    // KLIK LOGO DI HEADER (UNTUK MEMBESAR KAN DAN BICARA)
+    document.querySelectorAll('.clickable-logo').forEach(logo => {
+        logo.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const name = logo.getAttribute('data-name');
+            const role = logo.getAttribute('data-role');
+            openModal(name, role, 'MTsN 2 Kota Kediri', logo.src);
+        });
+    });
+
+    // KLIK SEKSI 7K
     document.querySelectorAll('.member-list li').forEach(item => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -357,6 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // KLIK SISWA
     document.addEventListener('click', (e) => {
         const newsItem = e.target.closest('.news-item[data-name]');
         if (newsItem) {
