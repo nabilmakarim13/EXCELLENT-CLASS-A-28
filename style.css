@@ -79,7 +79,7 @@ body {
 }
 
 /* ==========================================================================
-   3. HEADER RESPONSIF & KANAN-KIRI LOGO
+   3. HEADER, POSISI LOGO KIRI & KANAN
    ========================================================================== */
 .main-header {
     display: flex;
@@ -366,7 +366,7 @@ body {
 .member-list li:hover { color: var(--accent-color); font-weight: 700; }
 
 /* ==========================================================================
-   5. JADWAL PIKET & JADWAL PELAJARAN (MODERN MOBILE & DESKTOP CARD VIEW)
+   5. JADWAL PIKET & JADWAL PELAJARAN (DESKTOP & MOBILE CARD VIEW)
    ========================================================================== */
 .glass-panel {
     background: var(--card-bg);
@@ -440,7 +440,7 @@ body {
 
 .piket-name { font-weight: 600; font-size: 0.9rem; color: #1e293b; margin: 0; }
 
-/* FIX JADWAL PELAJARAN MODERN CARD (TIDAK MELER/MENUMPUK DI LAPTOP MAUPUN HP) */
+/* JADWAL PELAJARAN MODERN CARD */
 .schedule-cards-container {
     display: flex;
     flex-direction: column;
@@ -603,7 +603,6 @@ body {
     margin: 0 auto 15px;
 }
 
-/* GAMBAR LOGO DILAPISI FRAME CANTIK SAAT MEMBESAR */
 .modal-logo-img {
     width: 120px;
     height: 120px;
