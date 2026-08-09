@@ -146,7 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
         const targetSection = document.getElementById(targetId);
 
-        if (activeLink) activeLink.classList.add('active');
+        if (activeLink) {
+            activeLink.classList.add('active');
+            activeLink.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
         if (targetSection) targetSection.classList.remove('hidden');
     }
 
