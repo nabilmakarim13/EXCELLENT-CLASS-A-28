@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. DATA SISWA (32 SISWA KELAS 8A)
+    // 1. DATA SISWA (32 SISWA KELAS 8A - AKURAT 100%)
     const daftarSiswa = [
         { no: "01", name: "AISHA RIDA SAKHI", gender: "P", role: "Seksi Ketertiban" },
         { no: "02", name: "ALFARIL HAIDAR ABDULLAH", gender: "L", role: "Seksi Kesehatan" },
@@ -8,17 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
         { no: "04", name: "ARYA AGIS SAKHA", gender: "L", role: "Sekretaris 2 & Seksi Keindahan" },
         { no: "05", name: "ASNA ZAYYANA DZATIL IZZAH", gender: "P", role: "Ketua Kelas & Seksi Keagamaan" },
         { no: "06", name: "CANKA WILLY LOKANANTA", gender: "L", role: "Seksi Keindahan" },
-        { no: "07", name: "DZAKIYYA TALITA SAKHI", gender: "P", role: "Wakil Ketua, Keamanan & Kekeluargaan" },
-        { no: "08", name: "FAIZ WAFIY RIZQULLAH", gender: "L", role: "Bendahara 2" },
+        { no: "07", name: "DZAKIYYA TALITA SAKHI", gender: "P", role: "Wakil Ketua & Seksi Keamanan" },
+        { no: "08", name: "FAIZ WAFIY RIZQULLAH", gender: "L", role: "Bendahara 2 & Seksi Ketertiban" },
         { no: "09", name: "FARZANA AZHAR ARKANANTA", gender: "L", role: "Seksi Keamanan" },
         { no: "10", name: "HANAYA SYAQUILA ABRORY", gender: "P", role: "Bendahara 1 & Seksi Kesehatan" },
         { no: "11", name: "IZZAT ARYA PUTRA", gender: "L", role: "Seksi Kesehatan" },
         { no: "12", name: "KAUREEN AMMARA HANIFA", gender: "P", role: "Seksi Kesehatan" },
-        { no: "13", name: "MAHIRA HASNA KAMILA", gender: "P", role: "Anggota Kelas 8A" },
+        { no: "13", name: "MAHIRA HASNA KAMILA", gender: "P", role: "Seksi Keagamaan" },
         { no: "14", name: "MEZZALUNA AZKADINA ADNI", gender: "P", role: "Seksi Kebersihan" },
         { no: "15", name: "MICHAYLA QUEENSHA AHMAD", gender: "P", role: "Seksi Keagamaan" },
         { no: "16", name: "MOCH. BAHAUDDIN FADLAN AIDYL FITHRO", gender: "L", role: "Seksi Keamanan" },
-        { no: "17", name: "MOHAMMAD ARIYAH NUR AZAM", gender: "L", role: "Anggota Kelas 8A" },
+        { no: "17", name: "MOHAMMAD ARIYAH NUR AZAM", gender: "L", role: "Seksi Kekeluargaan" },
         { no: "18", name: "MOHAMMAD KAFABY ABQARY", gender: "L", role: "Seksi Keindahan" },
         { no: "19", name: "MUCHAMAD MIFZAL FADLY ALFAEYZA", gender: "L", role: "Seksi Ketertiban" },
         { no: "20", name: "MUHAMMAD ARIQ FAJRI", gender: "L", role: "Seksi Kekeluargaan" },
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 6. FITUR PENCARIAN GOOGLE-STYLE DROPDOWN (LENGKAP 4 KATEGORI)
+    // 6. FITUR PENCARIAN GOOGLE-STYLE DROPDOWN
     const searchInput = document.getElementById('memberSearch');
     const searchBox = document.querySelector('.search-box');
 
@@ -189,17 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let hasil = [];
 
-            // A. Search di Daftar Siswa
             daftarSiswa.forEach(s => {
                 if (s.name.toLowerCase().includes(keyword)) {
-                    // 1. Kategori Daftar Siswa
                     hasil.push({ 
                         title: s.name, 
                         category: `👤 Daftar Siswa (Absen ${s.no})`, 
                         sectionId: 'siswa' 
                     });
 
-                    // 2. Kategori Struktur Organisasi Utama (Wali Kelas / Ketua / Wakil / Sekretaris / Bendahara)
                     if (s.role.includes("Ketua") || s.role.includes("Sekretaris") || s.role.includes("Bendahara")) {
                         hasil.push({ 
                             title: s.name, 
@@ -208,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     }
 
-                    // 3. Kategori Seksi 7K
                     if (s.role.toLowerCase().includes("seksi")) {
                         hasil.push({ 
                             title: s.name, 
@@ -219,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // B. Search di Jadwal Piket
             dataPiket.forEach(p => {
                 if (p.nama.toLowerCase().includes(keyword)) {
                     hasil.push({ 
@@ -230,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // C. Search Khusus Wali Kelas
             if ("tazqiyatul fithriya".includes(keyword) || "wali kelas".includes(keyword)) {
                 hasil.push({
                     title: "Tazqiyatul Fithriya, S.Pd.",
@@ -239,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Tampilkan Dropdown Hasil
             if (hasil.length > 0) {
                 dropdown.classList.add('active');
                 hasil.forEach(item => {
@@ -286,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 8. FORMATTER KHUSUS TEKS SUARA
+    // 8. FORMATTER TEKS SUARA
     function formatTeksSuara(text) {
         if (!text) return "";
         
@@ -299,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/S.Pd./gi, "Sarjana Pendidikan")
             .replace(/Pjok/gi, "P-J-O-K")
             .replace(/Mtsn/gi, "M-T-S-N")
-            .replace(/T.A./gi, "Tahun Ajaran");
+            .replace(/T\.A\./gi, "Tahun Ajaran");
 
         return formatted;
     }
@@ -372,4 +365,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    // 11. TOMBOL BACK TO TOP LOGIC
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 12. OTOMATIS TAB HARI INI
+    const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+    const today = days[new Date().getDay()];
+
+    if (today !== 'minggu') {
+        const activePiketBtn = document.querySelector(`.tab-btn[data-day="${today}"]`);
+        const activeMapelBtn = document.querySelector(`.tab-btn[data-day="${today}-mapel"]`);
+        if (activePiketBtn) activePiketBtn.click();
+        if (activeMapelBtn) activeMapelBtn.click();
+    }
 });
