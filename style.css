@@ -79,13 +79,13 @@ body {
 }
 
 /* ==========================================================================
-   3. HEADER, LOGO DI PERBESAR & NAVIGASI
+   3. HEADER, POSISI LOGO KIRI & KANAN
    ========================================================================== */
 .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 5%;
+    padding: 12px 3%;
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--card-border);
@@ -100,9 +100,14 @@ body {
     gap: 12px;
 }
 
-/* Ukuran Logo Diperbesar Menjadi 65px agar Terlihat Jelas */
+.right-header-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .header-logo {
-    height: 65px !important;
+    height: 60px !important;
     width: auto !important;
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
@@ -111,8 +116,8 @@ body {
 
 .header-logo.logo-circle {
     border-radius: 50%;
-    width: 65px !important;
-    height: 65px !important;
+    width: 60px !important;
+    height: 60px !important;
     object-fit: cover;
     border: 2px solid rgba(255, 255, 255, 0.95);
 }
@@ -125,7 +130,7 @@ body {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.4rem;
-    margin-left: 4px;
+    margin-left: 2px;
 }
 
 .text-white { color: #1e293b; }
@@ -133,7 +138,7 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
 .nav-links a {
@@ -165,12 +170,12 @@ body {
     outline: none;
     font-family: var(--font-body);
     font-size: 0.85rem;
-    width: 200px;
+    width: 180px;
     transition: all 0.3s ease;
 }
 
 .search-box input:focus {
-    width: 230px;
+    width: 210px;
     background: #ffffff;
     box-shadow: 0 0 10px rgba(106, 17, 203, 0.2);
 }
@@ -360,44 +365,121 @@ body {
 .member-list li:last-child { border-bottom: none; }
 .member-list li:hover { color: var(--accent-color); font-weight: 700; }
 
-/* FIX CONTAINER & TABEL JADWAL PELAJARAN */
+/* ==========================================================================
+   5. JADWAL PIKET & TABEL JADWAL PELAJARAN
+   ========================================================================== */
+.glass-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.days-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 8px 20px;
+    border-radius: 15px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+}
+
 .timetable-content .day-content {
-    display: block !important; /* Supaya tabel tidak kepotong masuk kolom grid */
+    display: block !important;
     width: 100% !important;
     padding: 10px 0;
 }
 
-/* KHUSUS TABEL PIKET BARU PAKAI GRID */
 #piket .timetable-content .day-content {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
     gap: 14px !important;
 }
 
-.schedule-table-wrapper {
-    width: 100% !important;
-    background: rgba(255, 255, 255, 0.85);
+.piket-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
     border-radius: 16px;
-    overflow-x: auto;
-    border: 1px solid var(--card-border);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
-.schedule-table {
-    width: 100% !important;
-    min-width: 500px;
-    border-collapse: collapse;
-    text-align: left;
-    table-layout: fixed !important; /* Membagi proporsi kolom secara otomatis & rapi */
+.piket-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(106, 17, 203, 0.18);
+    border-color: #a855f7;
 }
 
-.schedule-table th, .schedule-table td {
-    padding: 12px 16px !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    font-size: 0.88rem;
+.piket-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(106, 17, 203, 0.25);
+}
+
+.piket-name {
     font-weight: 600;
-    vertical-align: middle;
-    word-wrap: break-word;
+    font-size: 0.9rem;
+    color: #1e293b;
+    margin: 0;
+}
+
+.time-badge {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    color: #4a154b;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.teacher-name {
+    background: rgba(106, 17, 203, 0.08);
+    color: #6a11cb;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.break-row td {
+    background: rgba(161, 196, 253, 0.25) !important;
+    color: #1e3a8a !important;
+    font-weight: 700 !important;
 }
 
 /* ==========================================================================
@@ -579,6 +661,11 @@ body {
         padding: 12px 15px !important;
     }
 
+    .right-header-group {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
     .nav-links {
         display: flex !important;
         flex-wrap: wrap !important;
@@ -629,5 +716,4 @@ body {
 
     .news-item { padding: 12px 16px !important; }
     .news-text { font-size: 0.85rem !important; }
-    .schedule-table { min-width: 480px !important; }
 }
