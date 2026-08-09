@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
-    // 4. RENDER JADWAL MAPEL SEBAGAI KARTU MODERN (DESKTOP & MOBILE FRIENDLY)
+    // 4. RENDER JADWAL MAPEL SEBAGAI KARTU MODERN
     const mapelContent = document.getElementById('mapelContent');
     if (mapelContent) {
         mapelContent.innerHTML = Object.keys(jadwalMapel).map((dayKey, index) => {
@@ -268,11 +268,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const parent = this.closest('.timetable-container');
             
             parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            parent.querySelectorAll('.day-content').forEach(c => c.classList.add('hidden'));
+            parent.querySelectorAll('.day-content').forEach(c => {
+                c.classList.add('hidden');
+            });
 
             this.classList.add('active');
             const target = document.getElementById(day);
-            if (target) target.classList.remove('hidden');
+            if (target) {
+                target.classList.remove('hidden');
+            }
         });
     });
 
@@ -312,33 +316,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. MODAL POP-UP (MENDUKUNG LOGO MEMBESAR & BICARA)
+    // 10. MODAL POP-UP
     const modal = document.getElementById('memberModal');
     const closeBtn = document.querySelector('.close-modal');
     const modalName = document.getElementById('modalName');
     const modalRole = document.getElementById('modalRole');
     const modalDept = document.getElementById('modalDept');
     const modalAvatarText = document.getElementById('modalAvatarText');
-    const modalAvatarImg = document.getElementById('modalAvatarImg');
 
-    function openModal(name, role, dept, imgSrc = null) {
+    function openModal(name, role, dept) {
         modalName.textContent = name;
         modalRole.innerHTML = role ? `<strong>${role}</strong>` : 'Anggota Kelas';
         modalDept.textContent = dept || 'Kelas 8A';
 
-        if (imgSrc) {
-            modalAvatarText.classList.add('hidden');
-            modalAvatarImg.src = imgSrc;
-            modalAvatarImg.classList.remove('hidden');
-        } else {
-            modalAvatarImg.classList.add('hidden');
-            modalAvatarText.classList.remove('hidden');
-        }
-
         modal.classList.remove('hidden');
         setTimeout(() => modal.style.opacity = '1', 10);
 
-        const ucapan = `Ini adalah ${name}. ${role}. ${dept}`;
+        const ucapan = `${name}, ${role || 'Anggota Kelas'}, ${dept}`;
         speakText(ucapan);
     }
 
@@ -348,33 +342,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     }
 
-    // KLIK KARTU PENGURUS INTI
-    document.querySelectorAll('.card[data-name]').forEach(card => {
-        card.addEventListener('click', () => {
-            openModal(card.getAttribute('data-name'), card.getAttribute('data-role'), card.getAttribute('data-dept') || 'Pengurus Inti Kelas 8A');
+    // A. KLIK NAMA DI STRUKTUR ORGANISASI (WALI KELAS, KETUA, SEKRETARIS, BENDAHARA)
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Cek jika kartu punya data nama
+            const name = card.getAttribute('data-name');
+            if (name) {
+                const role = card.getAttribute('data-role');
+                const dept = card.getAttribute('data-dept') || 'Pengurus Inti Kelas 8A';
+                openModal(name, role, dept);
+            }
         });
     });
 
-    // KLIK LOGO DI HEADER (UNTUK MEMBESAR KAN DAN BICARA)
-    document.querySelectorAll('.clickable-logo').forEach(logo => {
-        logo.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const name = logo.getAttribute('data-name');
-            const role = logo.getAttribute('data-role');
-            openModal(name, role, 'MTsN 2 Kota Kediri', logo.src);
-        });
-    });
-
-    // KLIK SEKSI 7K
+    // B. KLIK NAMA DI DIVISI SEKSI 7K (KEAMANAN, KEBERSIHAN, DLL)
     document.querySelectorAll('.member-list li').forEach(item => {
         item.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // Mencegah bentrok dengan klik kartu luar
+            const name = item.getAttribute('data-name') || item.textContent.replace(/^[0-9]+\.\s*/, '');
             const role = item.getAttribute('data-role') || 'Pengurus Seksi';
-            openModal(item.getAttribute('data-name') || item.textContent.replace(/^[0-9]+\.\s*/, ''), role, `Pengurus ${role} Kelas 8A`);
+            openModal(name, role, `Pengurus ${role} Kelas 8A`);
         });
     });
 
-    // KLIK SISWA
+    // C. KLIK NAMA DI DAFTAR SISWA (PRESENSI 32 SISWA)
     document.addEventListener('click', (e) => {
         const newsItem = e.target.closest('.news-item[data-name]');
         if (newsItem) {
@@ -384,6 +375,14 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal(name, role, `${gender} Kelas 8A`);
         }
     });
+
+    // KLIK TEKS HEADER AETHERIENZ A'28
+    const headerTitle = document.querySelector('.logo-text');
+    if (headerTitle) {
+        headerTitle.addEventListener('click', () => {
+            openModal("Aetherienz A'28", "Kelas 8A", "MTsN 2 Kota Kediri");
+        });
+    }
 
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
