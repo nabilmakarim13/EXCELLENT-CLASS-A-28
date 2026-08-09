@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="schedule-table-wrapper">
                         <table class="schedule-table">
                             <thead>
-                                <tr><th style="width: 25%;">Waktu</th><th style="width: 45%;">Mata Pelajaran</th><th style="width: 30%;">Pengajar</th></tr>
+                                <tr><th>Waktu</th><th>Mata Pelajaran</th><th>Pengajar</th></tr>
                             </thead>
                             <tbody>${rows}</tbody>
                         </table>
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 8. FORMATTER TEKS SUARA (PEMBAIKAN SINTAKS T\.A\.)
+    // 8. FORMATTER TEKS SUARA
     function formatTeksSuara(text) {
         if (!text) return "";
         
