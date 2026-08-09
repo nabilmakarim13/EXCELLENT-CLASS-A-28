@@ -316,15 +316,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. MODAL POP-UP
+    // 10. MODAL POP-UP (NAMA DI BISA DIKLIK 100%)
     const modal = document.getElementById('memberModal');
     const closeBtn = document.querySelector('.close-modal');
     const modalName = document.getElementById('modalName');
     const modalRole = document.getElementById('modalRole');
     const modalDept = document.getElementById('modalDept');
-    const modalAvatarText = document.getElementById('modalAvatarText');
 
     function openModal(name, role, dept) {
+        if (!modal) return;
         modalName.textContent = name;
         modalRole.innerHTML = role ? `<strong>${role}</strong>` : 'Anggota Kelas';
         modalDept.textContent = dept || 'Kelas 8A';
@@ -337,15 +337,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function closeModal() {
+        if (!modal) return;
         modal.style.opacity = '0';
         setTimeout(() => modal.classList.add('hidden'), 300);
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     }
 
-    // A. KLIK NAMA DI STRUKTUR ORGANISASI (WALI KELAS, KETUA, SEKRETARIS, BENDAHARA)
+    // A. KLIK KARTU STRUKTUR ORGANISASI
     document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', (e) => {
-            // Cek jika kartu punya data nama
+        card.addEventListener('click', () => {
             const name = card.getAttribute('data-name');
             if (name) {
                 const role = card.getAttribute('data-role');
@@ -355,17 +355,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // B. KLIK NAMA DI DIVISI SEKSI 7K (KEAMANAN, KEBERSIHAN, DLL)
+    // B. KLIK SEKSI 7K
     document.querySelectorAll('.member-list li').forEach(item => {
         item.addEventListener('click', (e) => {
-            e.stopPropagation(); // Mencegah bentrok dengan klik kartu luar
+            e.stopPropagation();
             const name = item.getAttribute('data-name') || item.textContent.replace(/^[0-9]+\.\s*/, '');
             const role = item.getAttribute('data-role') || 'Pengurus Seksi';
             openModal(name, role, `Pengurus ${role} Kelas 8A`);
         });
     });
 
-    // C. KLIK NAMA DI DAFTAR SISWA (PRESENSI 32 SISWA)
+    // C. KLIK DAFTAR SISWA
     document.addEventListener('click', (e) => {
         const newsItem = e.target.closest('.news-item[data-name]');
         if (newsItem) {
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // KLIK TEKS HEADER AETHERIENZ A'28
+    // D. KLIK TEKS HEADER AETHERIENZ A'28
     const headerTitle = document.querySelector('.logo-text');
     if (headerTitle) {
         headerTitle.addEventListener('click', () => {
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-    // 11. TOMBOL BACK TO TOP LOGIC
+    // 11. TOMBOL BACK TO TOP
     const backToTopBtn = document.getElementById('backToTop');
     if (backToTopBtn) {
         window.addEventListener('scroll', () => {
