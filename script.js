@@ -111,24 +111,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
-    // 4. RENDER JADWAL MAPEL
+    // 4. RENDER JADWAL MAPEL (FORCE FULL WIDTH INLINE STYLING)
     const mapelContent = document.getElementById('mapelContent');
     if (mapelContent) {
         mapelContent.innerHTML = Object.keys(jadwalMapel).map((dayKey, index) => {
             const rows = jadwalMapel[dayKey].map(item => `
                 <tr class="${item.break ? 'break-row' : ''}">
-                    <td><span class="time-badge">${item.time}</span></td>
-                    <td>${item.name}</td>
-                    <td>${item.teacher !== '-' ? `<span class="teacher-name">${item.teacher}</span>` : '-'}</td>
+                    <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06);"><span class="time-badge">${item.time}</span></td>
+                    <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 600;">${item.name}</td>
+                    <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06);">${item.teacher !== '-' ? `<span class="teacher-name">${item.teacher}</span>` : '-'}</td>
                 </tr>
             `).join('');
 
             return `
-                <div id="${dayKey}" class="day-content ${index === 0 ? 'active' : 'hidden'}">
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
+                <div id="${dayKey}" class="day-content ${index === 0 ? 'active' : 'hidden'}" style="display: block !important; width: 100% !important;">
+                    <div style="width: 100% !important; overflow-x: auto; background: rgba(255,255,255,0.85); border-radius: 16px; border: 1px solid var(--card-border);">
+                        <table style="width: 100% !important; border-collapse: collapse; text-align: left;">
                             <thead>
-                                <tr><th>Waktu</th><th>Mata Pelajaran</th><th>Pengajar</th></tr>
+                                <tr style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white;">
+                                    <th style="padding: 14px 16px; text-align: left; width: 25%;">Waktu</th>
+                                    <th style="padding: 14px 16px; text-align: left; width: 50%;">Mata Pelajaran</th>
+                                    <th style="padding: 14px 16px; text-align: left; width: 25%;">Pengajar</th>
+                                </tr>
                             </thead>
                             <tbody>${rows}</tbody>
                         </table>
