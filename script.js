@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { time: "12:30 - 13:50", name: "BING / Bahasa Inggris (Jam 7-8)", teacher: "B. Silvana", break: false }
         ],
         "jumat-mapel": [
-            { time: "06:45 - 07:40", name: "Pembiasaan Pagi / Jumat Bersih (Jam 1)", teacher: "-", break: true },
+            { time: "06:45 - 07:40", name: "Pembiasaan Pagi", teacher: "-", break: true },
             { time: "07:40 - 09:00", name: "IPA (Jam 2-3)", teacher: "B. Dewi Zul", break: false },
             { time: "09:00 - 09:40", name: "BK (Jam 4)", teacher: "B. Maria", break: false },
             { time: "09:40 - 10:05", name: "ISTIRAHAT PERTAMA", teacher: "-", break: true },
