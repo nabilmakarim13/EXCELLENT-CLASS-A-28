@@ -30,6 +30,7 @@
             <a href="#siswa">Daftar Siswa</a>
         </nav>
         <div class="right-header-group">
+            <button id="themeToggle" class="theme-toggle-btn">🌙</button>
             <div class="search-box">
                 <input type="text" id="memberSearch" placeholder="Cari nama...">
             </div>
@@ -37,6 +38,21 @@
     </header>
 
     <main class="content-container">
+
+        <!-- WIDGET JAM DIGITAL & KALENDER HARI INI -->
+        <div class="glass-panel clock-calendar-widget">
+            <div class="calendar-info">
+                <span class="day-badge" id="currentDay">Hari</span>
+                <div class="date-details">
+                    <h3 id="currentDate">1 Januari 2026</h3>
+                    <p id="academicYear">Semester Ganjil — MTsN 2 Kota Kediri</p>
+                </div>
+            </div>
+            <div class="clock-display">
+                <span id="digitalClock">00:00:00</span>
+                <small>WIB</small>
+            </div>
+        </div>
 
         <!-- 1. STRUKTUR ORGANISASI -->
         <section id="struktur" class="app-section">
