@@ -461,4 +461,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(updateClockAndCalendar, 1000);
     updateClockAndCalendar();
+
+    // 15. FITUR MINI AUDIO PLAYER
+    const bgMusic = document.getElementById('bgMusic');
+    const playMusicBtn = document.getElementById('playMusicBtn');
+    const musicStatus = document.getElementById('musicStatus');
+
+    if (bgMusic && playMusicBtn) {
+        playMusicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                playMusicBtn.textContent = '❚❚';
+                playMusicBtn.classList.add('playing');
+                if (musicStatus) musicStatus.textContent = 'Memutar...';
+            } else {
+                bgMusic.pause();
+                playMusicBtn.textContent = '▶';
+                playMusicBtn.classList.remove('playing');
+                if (musicStatus) musicStatus.textContent = 'Dijeda';
+            }
+        });
+    }
 });
