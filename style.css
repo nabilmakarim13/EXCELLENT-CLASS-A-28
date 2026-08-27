@@ -136,44 +136,83 @@ body {
     color: #ffffff;
 }
 
+/* ==========================================================================
+   4. FITUR PENCARIAN (SEARCH DROPDOWN FIX)
+   ========================================================================== */
 .right-header-group {
     display: flex;
     align-items: center;
+    position: relative;
     width: 100%;
 }
 
-.search-box, .search-box input {
+.search-box {
+    position: relative;
     width: 100%;
 }
 
 .search-box input {
+    width: 100%;
     padding: 8px 14px;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.9);
+    background: #ffffff !important;
+    color: #1e293b !important;
     outline: none;
     font-size: 0.82rem;
 }
 
 .search-results-dropdown {
     position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.98);
+    top: calc(100% + 8px);
+    right: 0;
+    width: 260px;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    max-height: 250px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    max-height: 280px;
     overflow-y: auto;
-    z-index: 1000;
+    z-index: 9999 !important;
     display: none;
 }
 
-.search-results-dropdown.active { display: block; }
-.search-result-item { padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.search-results-dropdown.active {
+    display: block !important;
+}
+
+.search-result-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: #f8fafc;
+}
+
+.search-title {
+    display: block;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #0f172a !important;
+}
+
+.search-category {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b !important;
+    margin-top: 2px;
+}
 
 /* ==========================================================================
-   4. CONTENT & WIDGET JAM & KALENDER
+   5. CONTENT & WIDGET JAM DIGITAL & KALENDER
    ========================================================================== */
 .content-container {
     width: 100%;
@@ -251,21 +290,12 @@ body {
     border: 1px solid rgba(106, 17, 203, 0.2);
 }
 
-body.dark-mode .clock-display {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
 #digitalClock {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.5rem;
     color: var(--accent-color);
     letter-spacing: 1px;
-}
-
-body.dark-mode #digitalClock {
-    color: #a855f7;
 }
 
 .clock-display small {
@@ -275,7 +305,7 @@ body.dark-mode #digitalClock {
 }
 
 /* ==========================================================================
-   5. LAYOUT KARTU & GRID
+   6. LAYOUT KARTU & GRID ORGANISASI / SISWA
    ========================================================================== */
 .org-chart-container {
     display: flex;
@@ -467,6 +497,7 @@ body.dark-mode #digitalClock {
 .news-item.male { background: rgba(224, 242, 254, 0.85) !important; border: 1px solid #93c5fd !important; }
 .news-item.male .news-date { background: #2575fc !important; color: white !important; }
 
+/* MODAL & BACK TO TOP */
 .modal {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -512,7 +543,7 @@ body.dark-mode #digitalClock {
 .main-footer { text-align: center; margin-top: 30px; font-size: 0.8rem; color: var(--text-muted); }
 
 /* ==========================================================================
-   6. TAMPILAN KHUSUS LAPTOP / DESKTOP
+   7. TAMPILAN KHUSUS LAPTOP / DESKTOP
    ========================================================================== */
 @media screen and (min-width: 769px) {
     .main-header {
@@ -522,6 +553,10 @@ body.dark-mode #digitalClock {
 
     .nav-links {
         overflow-x: visible;
+    }
+
+    .right-header-group {
+        width: auto;
     }
 
     .search-box, .search-box input {
@@ -578,7 +613,7 @@ body.dark-mode #digitalClock {
 }
 
 /* ==========================================================================
-   7. DARK MODE THEME SETTINGS
+   8. DARK MODE THEME SETTINGS
    ========================================================================== */
 body.dark-mode {
     --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
@@ -594,6 +629,32 @@ body.dark-mode .main-header {
 
 body.dark-mode .text-white { 
     color: #f8fafc; 
+}
+
+body.dark-mode .search-results-dropdown {
+    background: #1e293b !important;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .search-result-item:hover {
+    background: #334155;
+}
+
+body.dark-mode .search-title {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .search-category {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .clock-display {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode #digitalClock {
+    color: #a855f7;
 }
 
 body.dark-mode .news-item.female { background: rgba(88, 28, 135, 0.4) !important; border-color: #7e22ce !important; }
