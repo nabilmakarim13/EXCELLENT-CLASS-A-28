@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. DATA SISWA (32 SISWA KELAS 8A - AKURAT 100%)
+    // 1. DATA SISWA (32 SISWA KELAS 8A)
     const daftarSiswa = [
         { no: "01", name: "AISHA RIDA SAKHI", gender: "P", role: "Seksi Ketertiban" },
         { no: "02", name: "ALFARIL HAIDAR ABDULLAH", gender: "L", role: "Seksi Kesehatan" },
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
-    // 4. RENDER JADWAL MAPEL SEBAGAI KARTU MODERN
+    // 4. RENDER JADWAL MAPEL
     const mapelContent = document.getElementById('mapelContent');
     if (mapelContent) {
         mapelContent.innerHTML = Object.keys(jadwalMapel).map((dayKey, index) => {
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. MODAL POP-UP (NAMA DI BISA DIKLIK 100%)
+    // 10. MODAL POP-UP
     const modal = document.getElementById('memberModal');
     const closeBtn = document.querySelector('.close-modal');
     const modalName = document.getElementById('modalName');
@@ -346,7 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     }
 
-    // A. KLIK KARTU STRUKTUR ORGANISASI
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
             const name = card.getAttribute('data-name');
@@ -358,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // B. KLIK SEKSI 7K
     document.querySelectorAll('.member-list li').forEach(item => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -368,7 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // C. KLIK DAFTAR SISWA
     document.addEventListener('click', (e) => {
         const newsItem = e.target.closest('.news-item[data-name]');
         if (newsItem) {
@@ -379,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // D. KLIK TEKS HEADER AETHERIENZ A'28
     const headerTitle = document.querySelector('.logo-text');
     if (headerTitle) {
         headerTitle.addEventListener('click', () => {
@@ -415,4 +411,54 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activePiketBtn) activePiketBtn.click();
         if (activeMapelBtn) activeMapelBtn.click();
     }
+
+    // 13. FITUR DARK MODE TOGGLE
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggleBtn.textContent = '☀️';
+        }
+    }
+
+    // 14. FITUR JAM DIGITAL REAL-TIME & KALENDER OTOMATIS
+    function updateClockAndCalendar() {
+        const now = new Date();
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const clockEl = document.getElementById('digitalClock');
+        if (clockEl) {
+            clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        const namaHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const namaBulan = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        const hari = namaHari[now.getDay()];
+        const tgl = now.getDate();
+        const bulan = namaBulan[now.getMonth()];
+        const tahun = now.getFullYear();
+
+        const dayEl = document.getElementById('currentDay');
+        const dateEl = document.getElementById('currentDate');
+
+        if (dayEl) dayEl.textContent = hari;
+        if (dateEl) dateEl.textContent = `${tgl} ${bulan} ${tahun}`;
+    }
+
+    setInterval(updateClockAndCalendar, 1000);
+    updateClockAndCalendar();
 });
