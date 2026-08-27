@@ -31,6 +31,7 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     padding-bottom: 50px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .hidden {
@@ -81,7 +82,7 @@ body {
 }
 
 /* ==========================================================================
-   3. DEFAULT UNTUK TAMPILAN HP (MOBILE-FIRST 1 KOLOM KE BAWAH)
+   3. HEADER & NAVIGASI
    ========================================================================== */
 .main-header {
     display: flex;
@@ -128,12 +129,17 @@ body {
     white-space: nowrap;
     transition: all 0.3s ease;
     flex-shrink: 0;
-   }
 }
 
 .nav-links a:hover, .nav-links a.active {
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     color: #ffffff;
+}
+
+.right-header-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .search-box, .search-box input {
@@ -166,6 +172,9 @@ body {
 .search-results-dropdown.active { display: block; }
 .search-result-item { padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.05); }
 
+/* ==========================================================================
+   4. CONTENT & WIDGET JAM & KALENDER
+   ========================================================================== */
 .content-container {
     width: 100%;
     padding: 0 12px;
@@ -180,7 +189,7 @@ body {
 .visual-title {
     font-family: var(--font-heading);
     font-size: 1.5rem;
-    color: #1e293b;
+    color: var(--text-main);
 }
 
 .section-subtitle {
@@ -189,7 +198,85 @@ body {
     margin-top: 4px;
 }
 
-/* HP: SEMUA STRUKTUR ORGANISASI KELUAR 1 KOLOM TEGAS KE BAWAH */
+.clock-calendar-widget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 16px 20px;
+}
+
+.calendar-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.day-badge {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 10px 16px;
+    border-radius: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.date-details h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--text-main);
+}
+
+.date-details p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.clock-display {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    background: rgba(106, 17, 203, 0.1);
+    padding: 8px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(106, 17, 203, 0.2);
+}
+
+body.dark-mode .clock-display {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+#digitalClock {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+}
+
+body.dark-mode #digitalClock {
+    color: #a855f7;
+}
+
+.clock-display small {
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. LAYOUT KARTU & GRID
+   ========================================================================== */
 .org-chart-container {
     display: flex;
     flex-direction: column;
@@ -213,6 +300,7 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     width: 100%;
     box-sizing: border-box;
+    color: var(--text-main);
 }
 
 .card.wali-kelas {
@@ -235,19 +323,19 @@ body {
 .name-sm { font-weight: 600; font-size: 0.9rem; }
 .member-id { font-size: 0.8rem; color: var(--text-muted); }
 
-/* SEKSI 7K LIST */
 .card.seksi { text-align: left; }
-.seksi-title { font-family: var(--font-heading); margin-bottom: 8px; font-size: 0.95rem; }
+.seksi-title { font-family: var(--font-heading); margin-bottom: 8px; font-size: 0.95rem; color: var(--text-main); }
 .member-list { list-style: none; }
 .member-list li {
     padding: 6px 0;
     border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
     font-size: 0.85rem;
+    color: var(--text-main);
 }
 
-/* JADWAL PIKET & MAPEL */
 .glass-panel {
     background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 18px;
     padding: 14px;
     width: 100%;
@@ -269,6 +357,7 @@ body {
     font-weight: 600;
     font-size: 0.8rem;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .tab-btn.active {
@@ -288,7 +377,8 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 14px;
     width: 100%;
 }
@@ -304,9 +394,8 @@ body {
     border-radius: 8px;
 }
 
-.piket-name { font-weight: 600; font-size: 0.88rem; }
+.piket-name { font-weight: 600; font-size: 0.88rem; color: var(--text-main); }
 
-/* JADWAL MAPEL */
 .schedule-cards-container {
     display: flex;
     flex-direction: column;
@@ -318,7 +407,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     padding: 12px 14px;
     border-radius: 14px;
     gap: 6px;
@@ -334,7 +424,7 @@ body {
     font-size: 0.78rem;
 }
 
-.subject-title { font-weight: 700; font-size: 0.92rem; }
+.subject-title { font-weight: 700; font-size: 0.92rem; color: var(--text-main); }
 .teacher-badge {
     background: rgba(106, 17, 203, 0.1);
     color: #6a11cb;
@@ -344,7 +434,6 @@ body {
     font-weight: 700;
 }
 
-/* DAFTAR SISWA */
 .news-container {
     display: flex !important;
     flex-direction: column !important;
@@ -359,6 +448,7 @@ body {
     padding: 10px 14px !important;
     border-radius: 14px !important;
     width: 100%;
+    color: var(--text-main);
 }
 
 .news-date {
@@ -372,12 +462,11 @@ body {
     font-size: 0.85rem !important;
 }
 
-.news-item.female { background: #f3e8ff !important; border: 1px solid #d8b4fe !important; }
+.news-item.female { background: rgba(243, 232, 255, 0.85) !important; border: 1px solid #d8b4fe !important; }
 .news-item.female .news-date { background: #a855f7 !important; color: white !important; }
-.news-item.male { background: #e0f2fe !important; border: 1px solid #93c5fd !important; }
+.news-item.male { background: rgba(224, 242, 254, 0.85) !important; border: 1px solid #93c5fd !important; }
 .news-item.male .news-date { background: #2575fc !important; color: white !important; }
 
-/* MODAL */
 .modal {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -393,6 +482,7 @@ body {
     border-radius: 20px;
     padding: 20px;
     position: relative;
+    color: #1e293b;
 }
 
 .close-modal {
@@ -416,13 +506,13 @@ body {
     width: 40px; height: 40px; border-radius: 50%;
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     color: white; border: none; font-weight: bold; display: none;
+    cursor: pointer;
 }
 
 .main-footer { text-align: center; margin-top: 30px; font-size: 0.8rem; color: var(--text-muted); }
 
-
 /* ==========================================================================
-   4. TAMPILAN KHUSUS LAPTOP / DESKTOP (MEKAR KELUAR MENSAMPING / GRID)
+   6. TAMPILAN KHUSUS LAPTOP / DESKTOP
    ========================================================================== */
 @media screen and (min-width: 769px) {
     .main-header {
@@ -447,7 +537,6 @@ body {
         font-size: 2.2rem;
     }
 
-    /* MENYAMPING KEMBALI DI LAPTOP */
     .flex-row {
         flex-direction: row;
         justify-content: center;
@@ -486,4 +575,42 @@ body {
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
         gap: 12px !important;
     }
+}
+
+/* ==========================================================================
+   7. DARK MODE THEME SETTINGS
+   ========================================================================== */
+body.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --card-bg: rgba(30, 41, 59, 0.85);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+body.dark-mode .main-header {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+body.dark-mode .text-white { 
+    color: #f8fafc; 
+}
+
+body.dark-mode .news-item.female { background: rgba(88, 28, 135, 0.4) !important; border-color: #7e22ce !important; }
+body.dark-mode .news-item.male { background: rgba(30, 58, 138, 0.4) !important; border-color: #1d4ed8 !important; }
+
+.theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 6px;
+}
+
+body.dark-mode .theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fde047;
 }
