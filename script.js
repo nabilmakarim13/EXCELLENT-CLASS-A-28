@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ==========================================
     // 1. DATA SISWA (32 SISWA KELAS 8A)
+    // ==========================================
     const daftarSiswa = [
         { no: "01", name: "AISHA RIDA SAKHI", gender: "P", role: "Seksi Ketertiban" },
         { no: "02", name: "ALFARIL HAIDAR ABDULLAH", gender: "L", role: "Seksi Kesehatan" },
@@ -36,7 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
         { no: "32", name: "ZAVIRA SETYONINGSIH", gender: "P", role: "Seksi Kebersihan" }
     ];
 
+    // POPULATE DROPDOWN SELECT NAMA
+    const selectNameEl = document.getElementById('playerSelectName');
+    if (selectNameEl) {
+        daftarSiswa.forEach(s => {
+            const opt = document.createElement('option');
+            opt.value = `${s.no}|${s.name}`;
+            opt.textContent = `${s.no}. ${s.name}`;
+            selectNameEl.appendChild(opt);
+        });
+    }
+
+    // ==========================================
     // 2. DATA JADWAL PELAJARAN
+    // ==========================================
     const jadwalMapel = {
         "senin-mapel": [
             { time: "06:45 - 07:40", name: "Pembiasaan Pagi / Upacara (Jam 1)", teacher: "-", break: true },
@@ -93,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    // 3. RENDER DAFTAR SISWA
+    // RENDER DAFTAR SISWA
     const siswaContainer = document.getElementById('siswaContainer');
     if (siswaContainer) {
         siswaContainer.innerHTML = daftarSiswa.map(s => {
@@ -111,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
-    // 4. RENDER JADWAL MAPEL
+    // RENDER JADWAL MAPEL
     const mapelContent = document.getElementById('mapelContent');
     if (mapelContent) {
         mapelContent.innerHTML = Object.keys(jadwalMapel).map((dayKey, index) => {
@@ -135,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
-    // 5. NAVIGASI TAB MENU
+    // NAVIGASI TAB MENU
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('.app-section');
 
@@ -160,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 6. FITUR PENCARIAN DROPDOWN
+    // PENCARIAN DROPDOWN
     const searchInput = document.getElementById('memberSearch');
     const searchBox = document.querySelector('.search-box');
 
@@ -168,15 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropdown = document.createElement('div');
         dropdown.className = 'search-results-dropdown';
         searchBox.appendChild(dropdown);
-
-        const dataPiket = [
-            { nama: "Izzat, Althaf, Nabil, Daffa, Farhan", hari: "Senin" },
-            { nama: "Ariq, Radit, Agis, Dzakiyya, Canka, Mahira", hari: "Selasa" },
-            { nama: "Zavira, Kaureen, Haidar, Kafaby, Savira", hari: "Rabu" },
-            { nama: "Nazzala, Hanaya, Qaina, Naurah, Baha", hari: "Kamis" },
-            { nama: "Irfan, Fadly, Azam, Faiz, Kafa, Arzan", hari: "Jumat" },
-            { nama: "Adni, Asna, Aisha, Michayla, Tanaya", hari: "Sabtu" }
-        ];
 
         searchInput.addEventListener('input', function(e) {
             const keyword = e.target.value.toLowerCase().trim();
@@ -188,64 +194,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             let hasil = [];
-
             daftarSiswa.forEach(s => {
                 if (s.name.toLowerCase().includes(keyword)) {
-                    hasil.push({ 
-                        title: s.name, 
-                        category: `👤 Daftar Siswa (Absen ${s.no})`, 
-                        sectionId: 'siswa' 
-                    });
-
-                    if (s.role.includes("Ketua") || s.role.includes("Sekretaris") || s.role.includes("Bendahara")) {
-                        hasil.push({ 
-                            title: s.name, 
-                            category: `🏛️ Struktur Organisasi (${s.role.split('&')[0].trim()})`, 
-                            sectionId: 'struktur' 
-                        });
-                    }
-
-                    if (s.role.toLowerCase().includes("seksi")) {
-                        hasil.push({ 
-                            title: s.name, 
-                            category: `🤝 Seksi 7K (${s.role})`, 
-                            sectionId: 'seksi-7k' 
-                        });
-                    }
+                    hasil.push({ title: s.name, category: `👤 Daftar Siswa (Absen ${s.no})`, sectionId: 'siswa' });
                 }
             });
-
-            dataPiket.forEach(p => {
-                if (p.nama.toLowerCase().includes(keyword)) {
-                    hasil.push({ 
-                        title: `Piket Hari ${p.hari}`, 
-                        category: `🧹 Jadwal Piket Kebersihan`, 
-                        sectionId: 'piket' 
-                    });
-                }
-            });
-
-            if ("tazqiyatul fithriya".includes(keyword) || "ibu tazqiyatul".includes(keyword) || "wali kelas".includes(keyword)) {
-                hasil.push({
-                    title: "Ibu Tazqiyatul Fithriya, S.Pd.",
-                    category: "🏛️ Struktur Organisasi (Wali Kelas)",
-                    sectionId: "struktur"
-                });
-            }
 
             if (hasil.length > 0) {
                 dropdown.classList.add('active');
                 hasil.forEach(item => {
                     const el = document.createElement('div');
                     el.className = 'search-result-item';
-                    el.innerHTML = `
-                        <span class="search-title">${item.title}</span>
-                        <span class="search-category">${item.category}</span>
-                    `;
+                    el.innerHTML = `<span class="search-title">${item.title}</span><span class="search-category">${item.category}</span>`;
                     el.addEventListener('click', () => {
                         switchSection(item.sectionId);
-                        const targetSec = document.getElementById(item.sectionId);
-                        if (targetSec) targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         dropdown.classList.remove('active');
                         searchInput.value = '';
                     });
@@ -258,85 +220,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.addEventListener('click', function(e) {
-            if (!searchBox.contains(e.target)) {
-                dropdown.classList.remove('active');
-            }
+            if (!searchBox.contains(e.target)) dropdown.classList.remove('active');
         });
     }
 
-    // 7. TAB PIKET & MAPEL
+    // TAB PIKET & MAPEL
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const day = this.getAttribute('data-day');
             const parent = this.closest('.timetable-container');
-            
             parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            parent.querySelectorAll('.day-content').forEach(c => {
-                c.classList.add('hidden');
-            });
-
+            parent.querySelectorAll('.day-content').forEach(c => c.classList.add('hidden'));
             this.classList.add('active');
             const target = document.getElementById(day);
-            if (target) {
-                target.classList.remove('hidden');
-            }
+            if (target) target.classList.remove('hidden');
         });
     });
 
-    // 8. FORMATTER TEKS SUARA (TALKBACK)
+    // TALKBACK & MODAL
     function formatTeksSuara(text) {
         if (!text) return "";
-        
-        let formatted = text.toLowerCase().replace(/(?:^|\s|-)\S/g, function(a) { 
-            return a.toUpperCase(); 
-        });
-
-        formatted = formatted
-            .replace(/Althaf/gi, "Altaf")
-            .replace(/S.Pd./gi, "Sarjana Pendidikan")
-            .replace(/Pjok/gi, "P-J-O-K")
-            .replace(/Mtsn/gi, "M-T-S-N")
-            .replace(/T\.A\./gi, "Tahun Ajaran");
-
-        return formatted;
+        return text.toLowerCase().replace(/Althaf/gi, "Altaf").replace(/S.Pd./gi, "Sarjana Pendidikan");
     }
 
-    // 9. FUNGSI TALKBACK SUARA
     function speakText(text) {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
-            
-            const teksSuara = formatTeksSuara(text);
-            const utterance = new SpeechSynthesisUtterance(teksSuara);
-            
-            const isEnglish = /\b(class|dashboard|structure|section|member|timetable|all|rights|reserved)\b/i.test(text);
-            
-            utterance.lang = isEnglish ? 'en-US' : 'id-ID';
-            utterance.rate = 0.9;
-            utterance.pitch = 1;
-            
+            const utterance = new SpeechSynthesisUtterance(formatTeksSuara(text));
+            utterance.lang = 'id-ID';
             window.speechSynthesis.speak(utterance);
         }
     }
 
-    // 10. MODAL POP-UP
     const modal = document.getElementById('memberModal');
     const closeBtn = document.querySelector('.close-modal');
-    const modalName = document.getElementById('modalName');
-    const modalRole = document.getElementById('modalRole');
-    const modalDept = document.getElementById('modalDept');
 
     function openModal(name, role, dept) {
         if (!modal) return;
-        modalName.textContent = name;
-        modalRole.innerHTML = role ? `<strong>${role}</strong>` : 'Anggota Kelas';
-        modalDept.textContent = dept || 'Kelas 8A';
-
+        document.getElementById('modalName').textContent = name;
+        document.getElementById('modalRole').innerHTML = role ? `<strong>${role}</strong>` : 'Anggota Kelas';
+        document.getElementById('modalDept').textContent = dept || 'Kelas 8A';
         modal.classList.remove('hidden');
         setTimeout(() => modal.style.opacity = '1', 10);
-
-        const ucapan = `${name}, ${role || 'Anggota Kelas'}, ${dept}`;
-        speakText(ucapan);
+        speakText(`${name}, ${role || 'Anggota Kelas'}, ${dept}`);
     }
 
     function closeModal() {
@@ -349,136 +275,299 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
             const name = card.getAttribute('data-name');
-            if (name) {
-                const role = card.getAttribute('data-role');
-                const dept = card.getAttribute('data-dept') || 'Pengurus Inti Kelas 8A';
-                openModal(name, role, dept);
-            }
+            if (name) openModal(name, card.getAttribute('data-role'), card.getAttribute('data-dept'));
         });
     });
-
-    document.querySelectorAll('.member-list li').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const name = item.getAttribute('data-name') || item.textContent.replace(/^[0-9]+\.\s*/, '');
-            const role = item.getAttribute('data-role') || 'Pengurus Seksi';
-            openModal(name, role, `Pengurus ${role} Kelas 8A`);
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        const newsItem = e.target.closest('.news-item[data-name]');
-        if (newsItem) {
-            const name = newsItem.getAttribute('data-name');
-            const role = newsItem.getAttribute('data-role') || 'Anggota Kelas';
-            const gender = newsItem.getAttribute('data-gender') === 'L' ? 'Siswa Laki-Laki' : 'Siswa Perempuan';
-            openModal(name, role, `${gender} Kelas 8A`);
-        }
-    });
-
-    const headerTitle = document.querySelector('.logo-text');
-    if (headerTitle) {
-        headerTitle.addEventListener('click', () => {
-            openModal("Aetherienz A'28", "Kelas 8A", "MTsN 2 Kota Kediri");
-        });
-    }
 
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-    // 11. TOMBOL BACK TO TOP
-    const backToTopBtn = document.getElementById('backToTop');
-    if (backToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.style.display = 'block';
-            } else {
-                backToTopBtn.style.display = 'none';
-            }
-        });
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // 12. OTOMATIS TAB HARI INI
-    const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
-    const today = days[new Date().getDay()];
-
-    if (today !== 'minggu') {
-        const activePiketBtn = document.querySelector(`.tab-btn[data-day="${today}"]`);
-        const activeMapelBtn = document.querySelector(`.tab-btn[data-day="${today}-mapel"]`);
-        if (activePiketBtn) activePiketBtn.click();
-        if (activeMapelBtn) activeMapelBtn.click();
-    }
-
-    // 13. FITUR DARK MODE TOGGLE
-    const themeToggleBtn = document.getElementById('themeToggle');
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggleBtn.textContent = '☀️';
-        }
-    }
-
-    // 14. FITUR JAM DIGITAL REAL-TIME & KALENDER OTOMATIS
+    // JAM DIGITAL & KALENDER
     function updateClockAndCalendar() {
         const now = new Date();
-
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-
         const clockEl = document.getElementById('digitalClock');
         if (clockEl) {
-            clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+            clockEl.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
         }
-
         const namaHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        const namaBulan = [
-            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-        ];
-
-        const hari = namaHari[now.getDay()];
-        const tgl = now.getDate();
-        const bulan = namaBulan[now.getMonth()];
-        const tahun = now.getFullYear();
-
-        const dayEl = document.getElementById('currentDay');
-        const dateEl = document.getElementById('currentDate');
-
-        if (dayEl) dayEl.textContent = hari;
-        if (dateEl) dateEl.textContent = `${tgl} ${bulan} ${tahun}`;
+        const namaBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        if (document.getElementById('currentDay')) document.getElementById('currentDay').textContent = namaHari[now.getDay()];
+        if (document.getElementById('currentDate')) document.getElementById('currentDate').textContent = `${now.getDate()} ${namaBulan[now.getMonth()]} ${now.getFullYear()}`;
     }
-
     setInterval(updateClockAndCalendar, 1000);
     updateClockAndCalendar();
 
-    // 15. FITUR MINI AUDIO PLAYER
+    // AUDIO PLAYER
     const bgMusic = document.getElementById('bgMusic');
     const playMusicBtn = document.getElementById('playMusicBtn');
-    const musicStatus = document.getElementById('musicStatus');
-
     if (bgMusic && playMusicBtn) {
         playMusicBtn.addEventListener('click', () => {
             if (bgMusic.paused) {
                 bgMusic.play();
                 playMusicBtn.textContent = '❚❚';
-                playMusicBtn.classList.add('playing');
-                if (musicStatus) musicStatus.textContent = 'Memutar...';
             } else {
                 bgMusic.pause();
                 playMusicBtn.textContent = '▶';
-                playMusicBtn.classList.remove('playing');
-                if (musicStatus) musicStatus.textContent = 'Dijeda';
+            }
+        });
+    }
+
+    // ==========================================================================
+    // GAME TTS 15 SOAL (ALUR: LOBI -> PLAY -> BOARD & TIMER -> SUBMIT & KUNCI)
+    // ==========================================================================
+    const firebaseConfig = {
+        apiKey: "AIzaSyAlXUbJFmikfqYk3jcpZryQUIrrklfh440",
+        authDomain: "excellent-class-a-28.firebaseapp.com",
+        databaseURL: "https://excellent-class-a-28-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "excellent-class-a-28",
+        storageBucket: "excellent-class-a-28.firebasestorage.app",
+        messagingSenderId: "144398051170",
+        appId: "1:144398051170:web:3ba7d6cb0ae256c5402e3b"
+    };
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    const database = firebase.database();
+    const lbRef = database.ref('leaderboard_tts');
+
+    // MENDENGARKAN LEADERBOARD REAL-TIME & RENDER PODIUM QUIZIZZ
+    function listenLiveLeaderboard() {
+        const lbList = document.getElementById('leaderboardList');
+        const podiumContainer = document.getElementById('podiumContainer');
+        if (!lbList) return;
+
+        lbRef.orderByChild('detik').limitToFirst(20).on('value', (snapshot) => {
+            lbList.innerHTML = '';
+            
+            if (!snapshot.exists()) {
+                lbList.innerHTML = '<li class="lb-item"><span>Belum ada skor live...</span></li>';
+                if (podiumContainer) podiumContainer.classList.add('hidden');
+                return;
+            }
+
+            let rankList = [];
+            snapshot.forEach((childSnapshot) => {
+                rankList.push(childSnapshot.val());
+            });
+
+            // RENDER PODIUM TOP 3
+            if (podiumContainer) {
+                if (rankList.length >= 1) {
+                    podiumContainer.classList.remove('hidden');
+                    
+                    document.getElementById('podium1Name').textContent = rankList[0].nama ? rankList[0].nama.split(' ')[0] : "-";
+                    document.getElementById('podium1Time').textContent = `${rankList[0].detik}s`;
+
+                    if (rankList[1]) {
+                        document.getElementById('podium2Name').textContent = rankList[1].nama.split(' ')[0];
+                        document.getElementById('podium2Time').textContent = `${rankList[1].detik}s`;
+                    } else {
+                        document.getElementById('podium2Name').textContent = "-";
+                        document.getElementById('podium2Time').textContent = "-";
+                    }
+
+                    if (rankList[2]) {
+                        document.getElementById('podium3Name').textContent = rankList[2].nama.split(' ')[0];
+                        document.getElementById('podium3Time').textContent = `${rankList[2].detik}s`;
+                    } else {
+                        document.getElementById('podium3Name').textContent = "-";
+                        document.getElementById('podium3Time').textContent = "-";
+                    }
+                }
+            }
+
+            // RENDER LIST ITEM LEADERBOARD
+            let index = 1;
+            rankList.forEach((data) => {
+                const li = document.createElement('li');
+                li.className = 'lb-item';
+                
+                const m = Math.floor(data.detik / 60);
+                const s = data.detik % 60;
+                const timeText = m > 0 ? `${m}m ${s}s` : `${s} Detik`;
+
+                li.innerHTML = `
+                    <div class="lb-left">
+                        <span class="lb-rank">#${index}</span>
+                        <span class="lb-absen">Absen ${data.noAbsen}</span>
+                        <span>${data.nama}</span>
+                    </div>
+                    <div class="lb-right">
+                        <span class="text-accent">${timeText}</span>
+                        <span class="lb-bsk">${data.bsk || '15B / 0S / 0K'}</span>
+                    </div>
+                `;
+                lbList.appendChild(li);
+                index++;
+            });
+        });
+    }
+
+    listenLiveLeaderboard();
+
+    // VARIABEL SISTEM GAME
+    let currentPlayerAbsen = "";
+    let currentPlayerName = "";
+    let secondsElapsed = 0;
+    let timerInterval = null;
+
+    const ttsLayout = [
+        [{n:1,a:'P'}, {a:'E'}, {a:'M'}, {a:'B'}, {a:'I'}, {a:'A'}, {a:'S'}, {a:'A'}, {a:'N'}, 0, 0, 0],
+        [0, {n:2,a:'K'}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [{n:3,a:'D'}, {a:'L'}, {n:4,a:'A'}, {a:'N'}, {a:'T'}, {a:'I'}, {a:'T'}, {a:'H'}, {a:'E'}, {a:'S'}, {a:'I'}, {a:'S'}],
+        [{a:'I'}, {a:'O'}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [{a:'A'}, {a:'R'}, {n:5,a:'P'}, 0, {n:6,a:'D'}, {a:'E'}, {a:'M'}, {a:'A'}, {a:'K'}, 0, 0, 0],
+        [{a:'M'}, {a:'O'}, {a:'E'}, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [{a:'E'}, {a:'P'}, {a:'R'}, 0, {n:7,a:'I'}, 0, {n:8,a:'M'}, {a:'E'}, {a:'N'}, {a:'J'}, {a:'A'}, {a:'L'}, {a:'A'}],
+        [{a:'T'}, {a:'L'}, {a:'S'}, 0, {a:'D'}, 0, 0, 0, 0, 0, 0, 0],
+        [{a:'E'}, {a:'A'}, {a:'U'}, 0, {a:'G'}, 0, {n:9,a:'W'}, 0, {n:10,a:'M'}, {a:'O'}, {a:'B'}, {a:'I'}, {a:'L'}, {a:'I'}, {a:'T'}, {a:'A'}, {a:'S'}],
+        [{a:'R'}, {a:'S'}, {a:'A'}, 0, {a:'H'}, 0, {a:'A'}, 0, 0, 0, 0, 0],
+        [0, 0, {a:'S'}, 0, {a:'A'}, 0, {a:'L'}, 0, {n:11,a:'E'}, 0, {n:12,a:'T'}, {a:'A'}, {a:'S'}, {a:'A'}, {a:'M'}, {a:'U'}, {a:'H'}],
+        [0, 0, {a:'I'}, 0, {a:'M'}, 0, {a:'L'}, 0, {a:'N'}, 0, 0, 0],
+        [{n:13,a:'U'}, 0, 0, 0, {a:'B'}, 0, {a:'A'}, 0, {a:'T'}, 0, {n:14,a:'M'}, {a:'E'}, {a:'N'}, {a:'G'}, {a:'A'}, {a:'P'}, {a:'A'}],
+        [{a:'N'}, 0, 0, 0, {a:'I'}, 0, {a:'C'}, 0, {a:'A'}, 0, 0, 0],
+        [{a:'S'}, 0, {n:15,a:'R'}, {a:'I'}, {a:'M'}, {a:'A'}, 0, 0, 0, 0, 0, 0],
+        [{a:'U'}, 0, 0, 0, {a:'H'}, 0, 0, 0, 0, 0, 0, 0],
+        [{a:'R'}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+
+    function initTTSBoard() {
+        const ttsBoard = document.getElementById('ttsBoard');
+        if (!ttsBoard) return;
+        ttsBoard.innerHTML = '';
+        
+        ttsLayout.forEach((row) => {
+            row.forEach((cell) => {
+                const cellDiv = document.createElement('div');
+                cellDiv.className = 'tts-cell';
+
+                if (cell !== 0) {
+                    cellDiv.classList.add('active-cell');
+                    
+                    if (cell.n) {
+                        const numSpan = document.createElement('span');
+                        numSpan.className = 'cell-num';
+                        numSpan.textContent = cell.n;
+                        cellDiv.appendChild(numSpan);
+                    }
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.maxLength = 1;
+                    input.dataset.answer = cell.a;
+
+                    input.addEventListener('input', (e) => {
+                        if (e.target.value.length === 1) {
+                            const nextCell = cellDiv.nextElementSibling;
+                            if (nextCell) {
+                                const nextInput = nextCell.querySelector('input');
+                                if (nextInput) nextInput.focus();
+                            }
+                        }
+                    });
+
+                    cellDiv.appendChild(input);
+                }
+                ttsBoard.appendChild(cellDiv);
+            });
+        });
+    }
+
+    function startTtsTimer() {
+        clearInterval(timerInterval);
+        secondsElapsed = 0;
+        
+        timerInterval = setInterval(() => {
+            secondsElapsed++;
+            const minutes = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+            const seconds = String(secondsElapsed % 60).padStart(2, '0');
+            
+            const timerDisplay = document.getElementById('ttsTimerDisplay');
+            if (timerDisplay) {
+                timerDisplay.textContent = `${minutes}:${seconds}`;
+            }
+        }, 1000);
+    }
+
+    // TOMBOL PLAY
+    const startBtn = document.getElementById('startTtsGameBtn');
+    const selectName = document.getElementById('playerSelectName');
+    const ttsLobby = document.getElementById('ttsLobby');
+    const ttsPlayArea = document.getElementById('ttsPlayArea');
+    const activePlayerName = document.getElementById('activePlayerName');
+
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            const val = selectName ? selectName.value : "";
+            if (!val) {
+                alert("Harap pilih namamu dari daftar siswa terlebih dahulu!");
+                return;
+            }
+
+            const parts = val.split('|');
+            currentPlayerAbsen = parts[0];
+            currentPlayerName = parts[1];
+
+            if (activePlayerName) {
+                activePlayerName.textContent = `Absen ${currentPlayerAbsen} - ${currentPlayerName}`;
+            }
+
+            if (ttsLobby) ttsLobby.classList.add('hidden');
+            if (ttsPlayArea) ttsPlayArea.classList.remove('hidden');
+
+            initTTSBoard();
+            startTtsTimer();
+        });
+    }
+
+    // SUBMIT & KUNCI JAWABAN
+    const submitBtn = document.getElementById('submitTtsBtn');
+    const statusText = document.getElementById('ttsStatus');
+
+    if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+            const inputs = document.querySelectorAll('.tts-cell input');
+            
+            let hitungBenar = 0;
+            let hitungSalah = 0;
+            let hitungKosong = 0;
+
+            inputs.forEach(input => {
+                const val = input.value.toUpperCase().trim();
+                const ans = input.dataset.answer;
+
+                if (!val) {
+                    hitungKosong++;
+                } else if (val === ans) {
+                    hitungBenar++;
+                } else {
+                    hitungSalah++;
+                }
+            });
+
+            // Hentikan Timer & Kunci Input
+            clearInterval(timerInterval);
+            inputs.forEach(input => input.disabled = true);
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.5";
+
+            const bskText = `${hitungBenar}B / ${hitungSalah}S / ${hitungKosong}K`;
+
+            if (hitungSalah === 0 && hitungKosong === 0) {
+                statusText.style.color = "#22c55e";
+                statusText.textContent = `🎉 SELAMAT ${currentPlayerName}! Jawabanmu BENAR SEMUA (${secondsElapsed} Detik). Skor telah terkirim ke Live Leaderboard.`;
+
+                lbRef.push({
+                    noAbsen: currentPlayerAbsen,
+                    nama: currentPlayerName,
+                    detik: secondsElapsed,
+                    bsk: bskText,
+                    timestamp: Date.now()
+                });
+            } else {
+                statusText.style.color = "#ef4444";
+                statusText.textContent = `❌ Hasil Kamu: ${bskText}. Masih ada jawaban yang salah/kosong. Silakan refresh halaman jika ingin mengulang kembali.`;
             }
         });
     }
