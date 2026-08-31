@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8A Aetherienz A'28 - Class Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+
 
     <div class="area">
         <ul class="circles">
@@ -28,6 +26,7 @@
             <a href="#piket">Jadwal Piket</a>
             <a href="#jadwal">Jadwal Pelajaran</a>
             <a href="#siswa">Daftar Siswa</a>
+            <a href="#game-tts">Game TTS</a>
         </nav>
         <div class="right-header-group">
             <button id="themeToggle" class="theme-toggle-btn">🌙</button>
@@ -279,6 +278,122 @@
             <div class="glass-panel news-container" id="siswaContainer"></div>
         </section>
 
+        <!-- 6. GAME TEKA-TEKI SILANG (TTS) & LIVE LEADERBOARD -->
+        <section id="game-tts" class="app-section hidden">
+            <div class="section-header">
+                <h1 class="visual-title">GAME <span class="text-accent">TTS CLASS</span></h1>
+                <p class="section-subtitle">Uji pengetahuan materi pelajaran SMP/MTs Kelas 8!</p>
+            </div>
+
+            <div class="tts-wrapper">
+                <!-- PANEL GAME TTS -->
+                <div class="glass-panel tts-container">
+                    
+                    <!-- LOBBY INITIAL SCREEN -->
+                    <div id="ttsLobby" class="tts-lobby-card">
+                        <div class="lobby-icon">🧩</div>
+                        <h2>Teka-Teki Silang Kelas 8A</h2>
+                        <p>Pilih namamu dari daftar siswa di bawah ini untuk mulai bermain!</p>
+                        
+                        <div class="input-group-name">
+                            <select id="playerSelectName">
+                                <option value="">-- Pilih Namamu Dari Daftar Siswa --</option>
+                            </select>
+                        </div>
+                        
+                        <button id="startTtsGameBtn" class="action-btn play-big-btn">▶ PLAY / MULAI GAME</button>
+                    </div>
+
+                    <!-- GAME PLAY AREA -->
+                    <div id="ttsPlayArea" class="tts-play-area hidden">
+                        <!-- HEADER NAMA PLAYER & TIMER -->
+                        <div class="tts-game-info-bar">
+                            <div class="player-badge">👤 Pemain: <strong id="activePlayerName">-</strong></div>
+                            <div class="tts-timer-box">⏱️ Waktu: <span id="ttsTimerDisplay">00:00</span></div>
+                        </div>
+
+                        <!-- BOARD TTS -->
+                        <div class="tts-grid-board" id="ttsBoard"></div>
+
+                        <!-- DAFTAR SOAL -->
+                        <div class="tts-questions">
+                            <div class="clue-box">
+                                <h3>Mendatar:</h3>
+                                <ol>
+                                    <li><strong>(1)</strong> Pembelokan arah cahaya saat melewati dua medium berbeda (9 huruf)</li>
+                                    <li><strong>(4)</strong> Majas penegasan menggunakan kata-kata bertentangan (10 huruf)</li>
+                                    <li><strong>(6)</strong> Kerajaan Islam pertama di pulau Jawa (5 huruf)</li>
+                                    <li><strong>(8)</strong> Bentuk tulang daun pada tumbuhan dikotil (7 huruf)</li>
+                                    <li><strong>(10)</strong> Perpindahan status sosial seseorang dalam masyarakat (9 huruf)</li>
+                                    <li><strong>(12)</strong> Sikap toleransi dan menghargai dalam ajaran Islam (7 huruf)</li>
+                                    <li><strong>(14)</strong> Unsur berita yang menanyakan alasan/sebab terjadinya peristiwa (7 huruf)</li>
+                                    <li><strong>(15)</strong> Persamaan bunyi huruf akhir pada bait puisi atau pantun (4 huruf)</li>
+                                </ol>
+                            </div>
+                            <div class="clue-box">
+                                <h3>Menurun:</h3>
+                                <ol>
+                                    <li><strong>(2)</strong> Organel sel tempat berlangsungnya proses fotosintesis (9 huruf)</li>
+                                    <li><strong>(3)</strong> Garis lurus penghubung dua titik lingkaran lewat titik pusat (8 huruf)</li>
+                                    <li><strong>(5)</strong> Jenis teks yang berisi ajakan atau bujukan (8 huruf)</li>
+                                    <li><strong>(7)</strong> Hukum bacaan nun mati bertemu Mim, Nun, Wawu, Ya (15 huruf)</li>
+                                    <li><strong>(9)</strong> Garis khayal pemisah fauna Asiatis dan Peralihan (7 huruf)</li>
+                                    <li><strong>(11)</strong> Tembung basa Jawa sing duwe teges kiasan/silihan (5 huruf)</li>
+                                    <li><strong>(13)</strong> Zat tunggal yang tidak bisa diuraikan lagi secara kimia (5 huruf)</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- AKSI SUBMIT & AKHIR GAME -->
+                        <div class="tts-actions">
+                            <button id="submitTtsBtn" class="action-btn submit-btn">🔒 Submit & Kunci Jawaban</button>
+                            <p id="ttsStatus" class="tts-status-text"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- LIVE LEADERBOARD + PODIUM TOP 3 -->
+                <div class="glass-panel leaderboard-container">
+                    <h2 class="lb-title">🏆 LIVE LEADERBOARD</h2>
+                    <p class="lb-subtitle">Peringkat Skor Tercepat (Real-Time)</p>
+                    
+                    <!-- PANGGUNG PODIUM QUIZIZZ TOP 3 -->
+                    <div id="podiumContainer" class="podium-wrapper hidden">
+                        <!-- Rank 2 -->
+                        <div class="podium-step rank-2">
+                            <div class="crown">🥈</div>
+                            <div class="podium-avatar">2</div>
+                            <div class="podium-name" id="podium2Name">-</div>
+                            <div class="podium-time" id="podium2Time">-</div>
+                            <div class="podium-block">2</div>
+                        </div>
+                        <!-- Rank 1 -->
+                        <div class="podium-step rank-1">
+                            <div class="crown">👑 🥇</div>
+                            <div class="podium-avatar">1</div>
+                            <div class="podium-name" id="podium1Name">-</div>
+                            <div class="podium-time" id="podium1Time">-</div>
+                            <div class="podium-block">1</div>
+                        </div>
+                        <!-- Rank 3 -->
+                        <div class="podium-step rank-3">
+                            <div class="crown">🥉</div>
+                            <div class="podium-avatar">3</div>
+                            <div class="podium-name" id="podium3Name">-</div>
+                            <div class="podium-time" id="podium3Time">-</div>
+                            <div class="podium-block">3</div>
+                        </div>
+                    </div>
+
+                    <!-- DAFTAR LEADERBOARD -->
+                    <ol id="leaderboardList" class="lb-list">
+                        <!-- Diisi otomatis via Firebase -->
+                    </ol>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Modal Pop-up -->
@@ -295,11 +410,11 @@
         </div>
     </div>
 
-    <!-- AUDIO PLAYER MINIMALIS (POJOK KIRI BAWAH) -->
+    <!-- AUDIO PLAYER MINIMALIS -->
     <div class="mini-music-player">
         <audio id="bgMusic" loop>
-    <source src="lagu-kelas.mp3" type="audio/mpeg">
-</audio>
+            <source src="lagu-kelas.mp3" type="audio/mpeg">
+        </audio>
         <button id="playMusicBtn" class="play-btn" title="Putar Musik">▶</button>
         <div class="music-info">
             <span class="music-title">Song 8A</span>
@@ -314,5 +429,3 @@
     </footer>
 
     <script src="script.js"></script>
-</body>
-</html>
