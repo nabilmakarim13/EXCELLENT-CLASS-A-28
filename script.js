@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { nama: "Izzat, Althaf, Nabil, Daffa, Farhan", hari: "Senin" },
             { nama: "Ariq, Radit, Agis, Dzakiyya, Canka, Mahira", hari: "Selasa" },
             { nama: "Zavira, Kaureen, Haidar, Kafaby, Savira", hari: "Rabu" },
-            { nama: "Nizza, Hanaya, Luna, Naurah, Baha", hari: "Kamis" },
+            { nama: "Nazzala, Hanaya, Qaina, Naurah, Baha", hari: "Kamis" },
             { nama: "Irfan, Fadly, Azam, Faiz, Kafa, Arzan", hari: "Jumat" },
             { nama: "Adni, Asna, Aisha, Michayla, Tanaya", hari: "Sabtu" }
         ];
