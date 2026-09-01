@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // PENCARIAN DROPDOWN
+    // PENCARIAN DROPDOWN AUTOMATIC
     const searchInput = document.getElementById('memberSearch');
     const searchBox = document.querySelector('.search-box');
 
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // TALKBACK & MODAL
+    // TALKBACK SUARA & MODAL POPUP
     function formatTeksSuara(text) {
         if (!text) return "";
         return text.toLowerCase().replace(/Althaf/gi, "Altaf").replace(/S.Pd./gi, "Sarjana Pendidikan");
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateClockAndCalendar, 1000);
     updateClockAndCalendar();
 
-    // AUDIO PLAYER
+    // AUDIO PLAYER MINIMALIS
     const bgMusic = document.getElementById('bgMusic');
     const playMusicBtn = document.getElementById('playMusicBtn');
     if (bgMusic && playMusicBtn) {
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // GAME TTS 15 SOAL (ALUR: LOBI -> PLAY -> BOARD & TIMER -> SUBMIT & KUNCI)
+    // 3. SYSTEM GAME TTS (METODE KOORDINAT PRESISI - UNIK TANPA OVERLAP)
     // ==========================================================================
     const firebaseConfig = {
         apiKey: "AIzaSyAlXUbJFmikfqYk3jcpZryQUIrrklfh440",
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const database = firebase.database();
     const lbRef = database.ref('leaderboard_tts');
 
-    // MENDENGARKAN LEADERBOARD REAL-TIME & RENDER PODIUM QUIZIZZ
+    // LEADERBOARD REAL-TIME + PODIUM TOP 3
     function listenLiveLeaderboard() {
         const lbList = document.getElementById('leaderboardList');
         const podiumContainer = document.getElementById('podiumContainer');
@@ -351,7 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 rankList.push(childSnapshot.val());
             });
 
-            // RENDER PODIUM TOP 3
             if (podiumContainer) {
                 if (rankList.length >= 1) {
                     podiumContainer.classList.remove('hidden');
@@ -377,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // RENDER LIST ITEM LEADERBOARD
             let index = 1;
             rankList.forEach((data) => {
                 const li = document.createElement('li');
@@ -406,63 +404,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
     listenLiveLeaderboard();
 
-    // VARIABEL SISTEM GAME
+    // VARIABEL DAN KOORDINAT 15 SOAL TTS
     let currentPlayerAbsen = "";
     let currentPlayerName = "";
     let secondsElapsed = 0;
     let timerInterval = null;
 
-    const ttsLayout = [
-        [{n:1,a:'P'}, {a:'E'}, {a:'M'}, {a:'B'}, {a:'I'}, {a:'A'}, {a:'S'}, {a:'A'}, {a:'N'}, 0, 0, 0],
-        [0, {n:2,a:'K'}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [{n:3,a:'D'}, {a:'L'}, {n:4,a:'A'}, {a:'N'}, {a:'T'}, {a:'I'}, {a:'T'}, {a:'H'}, {a:'E'}, {a:'S'}, {a:'I'}, {a:'S'}],
-        [{a:'I'}, {a:'O'}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [{a:'A'}, {a:'R'}, {n:5,a:'P'}, 0, {n:6,a:'D'}, {a:'E'}, {a:'M'}, {a:'A'}, {a:'K'}, 0, 0, 0],
-        [{a:'M'}, {a:'O'}, {a:'E'}, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [{a:'E'}, {a:'P'}, {a:'R'}, 0, {n:7,a:'I'}, 0, {n:8,a:'M'}, {a:'E'}, {a:'N'}, {a:'J'}, {a:'A'}, {a:'L'}, {a:'A'}],
-        [{a:'T'}, {a:'L'}, {a:'S'}, 0, {a:'D'}, 0, 0, 0, 0, 0, 0, 0],
-        [{a:'E'}, {a:'A'}, {a:'U'}, 0, {a:'G'}, 0, {n:9,a:'W'}, 0, {n:10,a:'M'}, {a:'O'}, {a:'B'}, {a:'I'}, {a:'L'}, {a:'I'}, {a:'T'}, {a:'A'}, {a:'S'}],
-        [{a:'R'}, {a:'S'}, {a:'A'}, 0, {a:'H'}, 0, {a:'A'}, 0, 0, 0, 0, 0],
-        [0, 0, {a:'S'}, 0, {a:'A'}, 0, {a:'L'}, 0, {n:11,a:'E'}, 0, {n:12,a:'T'}, {a:'A'}, {a:'S'}, {a:'A'}, {a:'M'}, {a:'U'}, {a:'H'}],
-        [0, 0, {a:'I'}, 0, {a:'M'}, 0, {a:'L'}, 0, {a:'N'}, 0, 0, 0],
-        [{n:13,a:'U'}, 0, 0, 0, {a:'B'}, 0, {a:'A'}, 0, {a:'T'}, 0, {n:14,a:'M'}, {a:'E'}, {a:'N'}, {a:'G'}, {a:'A'}, {a:'P'}, {a:'A'}],
-        [{a:'N'}, 0, 0, 0, {a:'I'}, 0, {a:'C'}, 0, {a:'A'}, 0, 0, 0],
-        [{a:'S'}, 0, {n:15,a:'R'}, {a:'I'}, {a:'M'}, {a:'A'}, 0, 0, 0, 0, 0, 0],
-        [{a:'U'}, 0, 0, 0, {a:'H'}, 0, 0, 0, 0, 0, 0, 0],
-        [{a:'R'}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    const ttsQuestionsData = [
+        { id: 1, type: 'H', x: 0, y: 0, answer: 'PEMBIASAN' },
+        { id: 4, type: 'H', x: 2, y: 2, answer: 'ANTITHESIS' },
+        { id: 6, type: 'H', x: 4, y: 4, answer: 'DEMAK' },
+        { id: 8, type: 'H', x: 6, y: 6, answer: 'MENJALA' },
+        { id: 10, type: 'H', x: 8, y: 8, answer: 'MOBILITAS' },
+        { id: 12, type: 'H', x: 8, y: 10, answer: 'TASAMUH' },
+        { id: 14, type: 'H', x: 10, y: 12, answer: 'MENGAPA' },
+        { id: 15, type: 'H', x: 2, y: 14, answer: 'RIMA' },
+
+        { id: 2, type: 'V', x: 1, y: 0, answer: 'KLOROPLAS' },
+        { id: 3, type: 'V', x: 0, y: 2, answer: 'DIAMETER' },
+        { id: 5, type: 'V', x: 2, y: 4, answer: 'PERSUASI' },
+        { id: 7, type: 'V', x: 4, y: 6, answer: 'IDGHAMBIGHUNNAH' },
+        { id: 9, type: 'V', x: 6, y: 8, answer: 'WALLACE' },
+        { id: 11, type: 'V', x: 8, y: 10, answer: 'ENTAR' },
+        { id: 13, type: 'V', x: 0, y: 12, answer: 'UNSUR' }
     ];
+
+    let ttsBoardMap = {};
+
+    function generateTTSCoordinates() {
+        ttsBoardMap = {};
+        ttsQuestionsData.forEach(q => {
+            const letters = q.answer.split('');
+            letters.forEach((char, idx) => {
+                const posX = q.type === 'H' ? q.x + idx : q.x;
+                const posY = q.type === 'V' ? q.y + idx : q.y;
+                const key = `${posX}_${posY}`;
+
+                if (!ttsBoardMap[key]) {
+                    ttsBoardMap[key] = { letter: char, num: idx === 0 ? q.id : null };
+                } else if (idx === 0) {
+                    ttsBoardMap[key].num = q.id;
+                }
+            });
+        });
+    }
 
     function initTTSBoard() {
         const ttsBoard = document.getElementById('ttsBoard');
         if (!ttsBoard) return;
+
+        generateTTSCoordinates();
         ttsBoard.innerHTML = '';
-        
-        ttsLayout.forEach((row) => {
-            row.forEach((cell) => {
+
+        const maxX = 18;
+        const maxY = 16;
+
+        ttsBoard.style.gridTemplateColumns = `repeat(${maxX}, 28px)`;
+        ttsBoard.style.gridTemplateRows = `repeat(${maxY}, 28px)`;
+
+        for (let y = 0; y < maxY; y++) {
+            for (let x = 0; x < maxX; x++) {
+                const key = `${x}_${y}`;
+                const cellData = ttsBoardMap[key];
+
                 const cellDiv = document.createElement('div');
                 cellDiv.className = 'tts-cell';
 
-                if (cell !== 0) {
+                if (cellData) {
                     cellDiv.classList.add('active-cell');
-                    
-                    if (cell.n) {
+
+                    if (cellData.num) {
                         const numSpan = document.createElement('span');
                         numSpan.className = 'cell-num';
-                        numSpan.textContent = cell.n;
+                        numSpan.textContent = cellData.num;
                         cellDiv.appendChild(numSpan);
                     }
 
                     const input = document.createElement('input');
                     input.type = 'text';
                     input.maxLength = 1;
-                    input.dataset.answer = cell.a;
+                    input.dataset.answer = cellData.letter;
 
                     input.addEventListener('input', (e) => {
                         if (e.target.value.length === 1) {
-                            const nextCell = cellDiv.nextElementSibling;
-                            if (nextCell) {
-                                const nextInput = nextCell.querySelector('input');
-                                if (nextInput) nextInput.focus();
+                            const allInputs = Array.from(document.querySelectorAll('.tts-cell.active-cell input'));
+                            const currIndex = allInputs.indexOf(e.target);
+                            if (currIndex !== -1 && currIndex < allInputs.length - 1) {
+                                allInputs[currIndex + 1].focus();
                             }
                         }
                     });
@@ -470,8 +498,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     cellDiv.appendChild(input);
                 }
                 ttsBoard.appendChild(cellDiv);
-            });
-        });
+            }
+        }
     }
 
     function startTtsTimer() {
@@ -521,18 +549,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SUBMIT & KUNCI JAWABAN
+    // ==========================================================================
+    // SUBMIT & KUNCI JAWABAN (LANGSUNG AKUMULASI SKOR & KIRIM LEADERBOARD)
+    // ==========================================================================
     const submitBtn = document.getElementById('submitTtsBtn');
     const statusText = document.getElementById('ttsStatus');
 
     if (submitBtn) {
         submitBtn.addEventListener('click', () => {
-            const inputs = document.querySelectorAll('.tts-cell input');
+            const inputs = document.querySelectorAll('.tts-cell.active-cell input');
             
             let hitungBenar = 0;
             let hitungSalah = 0;
             let hitungKosong = 0;
 
+            // Hitung akumulasi poin BSK
             inputs.forEach(input => {
                 const val = input.value.toUpperCase().trim();
                 const ans = input.dataset.answer;
@@ -546,7 +577,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Hentikan Timer & Kunci Input
+            // 1. Hentikan Timer & Kunci Semua Input
             clearInterval(timerInterval);
             inputs.forEach(input => input.disabled = true);
             submitBtn.disabled = true;
@@ -554,21 +585,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const bskText = `${hitungBenar}B / ${hitungSalah}S / ${hitungKosong}K`;
 
-            if (hitungSalah === 0 && hitungKosong === 0) {
-                statusText.style.color = "#22c55e";
-                statusText.textContent = `🎉 SELAMAT ${currentPlayerName}! Jawabanmu BENAR SEMUA (${secondsElapsed} Detik). Skor telah terkirim ke Live Leaderboard.`;
+            // 2. Tampilkan Hasil Akumulasi Skor Tanpa Peringatan
+            statusText.style.color = hitungSalah === 0 && hitungKosong === 0 ? "#22c55e" : "#3b82f6";
+            statusText.textContent = `🎯 Jawaban Terkunci! Skor Kamu: ${bskText} (${secondsElapsed} Detik). Hasil otomatis masuk ke Leaderboard!`;
 
-                lbRef.push({
-                    noAbsen: currentPlayerAbsen,
-                    nama: currentPlayerName,
-                    detik: secondsElapsed,
-                    bsk: bskText,
-                    timestamp: Date.now()
-                });
-            } else {
-                statusText.style.color = "#ef4444";
-                statusText.textContent = `❌ Hasil Kamu: ${bskText}. Masih ada jawaban yang salah/kosong. Silakan refresh halaman jika ingin mengulang kembali.`;
-            }
+            // 3. LANGSUNG KIRIM HASIL KE FIREBASE LIVE LEADERBOARD
+            lbRef.push({
+                noAbsen: currentPlayerAbsen,
+                nama: currentPlayerName,
+                detik: secondsElapsed,
+                bsk: bskText,
+                timestamp: Date.now()
+            });
         });
     }
-});
