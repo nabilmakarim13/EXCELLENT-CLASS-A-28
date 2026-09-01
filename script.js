@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 3. SYSTEM GAME TTS (METODE KOORDINAT PRESISI - UNIK TANPA OVERLAP)
+    // 3. SYSTEM GAME TTS (METODE KOORDINAT PRESISI - TANPA PERINGATAN REJECT)
     // ==========================================================================
     const firebaseConfig = {
         apiKey: "AIzaSyAlXUbJFmikfqYk3jcpZryQUIrrklfh440",
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="lb-right">
                         <span class="text-accent">${timeText}</span>
-                        <span class="lb-bsk">${data.bsk || '15B / 0S / 0K'}</span>
+                        <span class="lb-bsk">${data.bsk || '0B / 0S / 0K'}</span>
                     </div>
                 `;
                 lbList.appendChild(li);
@@ -549,9 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==========================================================================
-    // SUBMIT & KUNCI JAWABAN (LANGSUNG AKUMULASI SKOR & KIRIM LEADERBOARD)
-    // ==========================================================================
+    // SUBMIT JAWABAN (LANGSUNG KUNCI & KIRIM SKOR TANPA PERINGATAN ERROR)
     const submitBtn = document.getElementById('submitTtsBtn');
     const statusText = document.getElementById('ttsStatus');
 
@@ -563,7 +561,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let hitungSalah = 0;
             let hitungKosong = 0;
 
-            // Hitung akumulasi poin BSK
             inputs.forEach(input => {
                 const val = input.value.toUpperCase().trim();
                 const ans = input.dataset.answer;
@@ -577,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // 1. Hentikan Timer & Kunci Semua Input
+            // Kunci Papan & Hentikan Timer
             clearInterval(timerInterval);
             inputs.forEach(input => input.disabled = true);
             submitBtn.disabled = true;
@@ -585,11 +582,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const bskText = `${hitungBenar}B / ${hitungSalah}S / ${hitungKosong}K`;
 
-            // 2. Tampilkan Hasil Akumulasi Skor Tanpa Peringatan
-            statusText.style.color = hitungSalah === 0 && hitungKosong === 0 ? "#22c55e" : "#3b82f6";
-            statusText.textContent = `🎯 Jawaban Terkunci! Skor Kamu: ${bskText} (${secondsElapsed} Detik). Hasil otomatis masuk ke Leaderboard!`;
+            // Tampilkan Status Hasil Akumulasi
+            statusText.style.color = "#2575fc";
+            statusText.textContent = `🔒 Jawaban Terkunci! Hasil Kamu: ${bskText} (${secondsElapsed} Detik). Skor telah terkirim ke Live Leaderboard!`;
 
-            // 3. LANGSUNG KIRIM HASIL KE FIREBASE LIVE LEADERBOARD
+            // Langsung Kirim Ke Firebase Leaderboard
             lbRef.push({
                 noAbsen: currentPlayerAbsen,
                 nama: currentPlayerName,
@@ -599,3 +596,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+});
