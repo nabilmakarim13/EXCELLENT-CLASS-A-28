@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { no: "32", name: "ZAVIRA SETYONINGSIH", gender: "P", role: "Seksi Kebersihan" }
     ];
 
-    // POPULATE DROPDOWN SELECT NAMA
+    // POPULATE DROPDOWN SELECT NAMA & TINGKAT KESULITAN
     const selectNameEl = document.getElementById('playerSelectName');
     if (selectNameEl) {
         daftarSiswa.forEach(s => {
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 3. SYSTEM GAME TTS (METODE KOORDINAT PRESISI - TANPA PERINGATAN REJECT)
+    // 3. SYSTEM GAME TTS (MODE LEVEL + PENILAIAN 15 SOAL + LEADERBOARD)
     // ==========================================================================
     const firebaseConfig = {
         apiKey: "AIzaSyAlXUbJFmikfqYk3jcpZryQUIrrklfh440",
@@ -330,6 +330,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const database = firebase.database();
     const lbRef = database.ref('leaderboard_tts');
+
+    // DYNAMIC LEVEL SELECTOR IN LOBBY
+    const ttsLobbyCard = document.getElementById('ttsLobby');
+    if (ttsLobbyCard && !document.getElementById('playerSelectLevel')) {
+        const levelGroup = document.createElement('div');
+        levelGroup.className = 'input-group-name';
+        levelGroup.style.marginTop = '10px';
+        levelGroup.innerHTML = `
+            <select id="playerSelectLevel">
+                <option value="Mudah">🟢 Tingkat: Mudah (Siswa SMP)</option>
+                <option value="Sedang" selected>🟡 Tingkat: Sedang (Standar Class 8A)</option>
+                <option value="Sulit">🔴 Tingkat: Sulit (Olimpiade/HOTs)</option>
+            </select>
+        `;
+        const playBtnEl = document.getElementById('startTtsGameBtn');
+        if (playBtnEl) ttsLobbyCard.insertBefore(levelGroup, playBtnEl);
+    }
 
     // LEADERBOARD REAL-TIME + PODIUM TOP 3
     function listenLiveLeaderboard() {
@@ -389,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="lb-left">
                         <span class="lb-rank">#${index}</span>
                         <span class="lb-absen">Absen ${data.noAbsen}</span>
-                        <span>${data.nama}</span>
+                        <span>${data.nama} <small style="opacity:0.7;">(${data.level || 'Sedang'})</small></span>
                     </div>
                     <div class="lb-right">
                         <span class="text-accent">${timeText}</span>
@@ -407,6 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // VARIABEL DAN KOORDINAT 15 SOAL TTS
     let currentPlayerAbsen = "";
     let currentPlayerName = "";
+    let currentLevel = "Sedang";
     let secondsElapsed = 0;
     let timerInterval = null;
 
@@ -483,15 +501,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const input = document.createElement('input');
                     input.type = 'text';
                     input.maxLength = 1;
-                    input.dataset.answer = cellData.letter;
+                    input.dataset.key = key;
 
-                    input.addEventListener('input', (e) => {
-                        if (e.target.value.length === 1) {
-                            const allInputs = Array.from(document.querySelectorAll('.tts-cell.active-cell input'));
-                            const currIndex = allInputs.indexOf(e.target);
-                            if (currIndex !== -1 && currIndex < allInputs.length - 1) {
-                                allInputs[currIndex + 1].focus();
-                            }
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Backspace' && input.value === '') {
+                            input.value = '';
                         }
                     });
 
@@ -537,8 +551,11 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPlayerAbsen = parts[0];
             currentPlayerName = parts[1];
 
+            const selectLevelEl = document.getElementById('playerSelectLevel');
+            if (selectLevelEl) currentLevel = selectLevelEl.value;
+
             if (activePlayerName) {
-                activePlayerName.textContent = `Absen ${currentPlayerAbsen} - ${currentPlayerName}`;
+                activePlayerName.textContent = `Absen ${currentPlayerAbsen} - ${currentPlayerName} (${currentLevel})`;
             }
 
             if (ttsLobby) ttsLobby.classList.add('hidden');
@@ -549,47 +566,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SUBMIT JAWABAN (LANGSUNG KUNCI & KIRIM SKOR TANPA PERINGATAN ERROR)
+    // SUBMIT JAWABAN (AKUMULASI DARI TOTAL 15 SOAL)
     const submitBtn = document.getElementById('submitTtsBtn');
     const statusText = document.getElementById('ttsStatus');
 
     if (submitBtn) {
         submitBtn.addEventListener('click', () => {
-            const inputs = document.querySelectorAll('.tts-cell.active-cell input');
-            
             let hitungBenar = 0;
             let hitungSalah = 0;
             let hitungKosong = 0;
 
-            inputs.forEach(input => {
-                const val = input.value.toUpperCase().trim();
-                const ans = input.dataset.answer;
+            // Evaluasi per nomor soal (1 Sampai 15 Soal)
+            ttsQuestionsData.forEach(q => {
+                const letters = q.answer.split('');
+                let isAnyEmpty = false;
+                let isAnyWrong = false;
 
-                if (!val) {
+                letters.forEach((char, idx) => {
+                    const posX = q.type === 'H' ? q.x + idx : q.x;
+                    const posY = q.type === 'V' ? q.y + idx : q.y;
+                    const key = `${posX}_${posY}`;
+
+                    const inputEl = document.querySelector(`.tts-cell input[data-key="${key}"]`);
+                    if (inputEl) {
+                        const val = inputEl.value.toUpperCase().trim();
+                        if (!val) {
+                            isAnyEmpty = true;
+                        } else if (val !== char) {
+                            isAnyWrong = true;
+                        }
+                    }
+                });
+
+                if (isAnyEmpty) {
                     hitungKosong++;
-                } else if (val === ans) {
-                    hitungBenar++;
-                } else {
+                } else if (isAnyWrong) {
                     hitungSalah++;
+                } else {
+                    hitungBenar++;
                 }
             });
 
             // Kunci Papan & Hentikan Timer
             clearInterval(timerInterval);
-            inputs.forEach(input => input.disabled = true);
+            document.querySelectorAll('.tts-cell.active-cell input').forEach(inp => inp.disabled = true);
             submitBtn.disabled = true;
             submitBtn.style.opacity = "0.5";
 
             const bskText = `${hitungBenar}B / ${hitungSalah}S / ${hitungKosong}K`;
 
-            // Tampilkan Status Hasil Akumulasi
             statusText.style.color = "#2575fc";
-            statusText.textContent = `🔒 Jawaban Terkunci! Hasil Kamu: ${bskText} (${secondsElapsed} Detik). Skor telah terkirim ke Live Leaderboard!`;
+            statusText.textContent = `🔒 Jawaban Terkunci! Hasil Kamu: ${bskText} dari 15 Soal (${secondsElapsed} Detik). Skor telah terkirim ke Live Leaderboard!`;
 
             // Langsung Kirim Ke Firebase Leaderboard
             lbRef.push({
                 noAbsen: currentPlayerAbsen,
                 nama: currentPlayerName,
+                level: currentLevel,
                 detik: secondsElapsed,
                 bsk: bskText,
                 timestamp: Date.now()
