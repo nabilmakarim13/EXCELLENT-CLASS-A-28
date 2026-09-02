@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { no: "32", name: "ZAVIRA SETYONINGSIH", gender: "P", role: "Seksi Kebersihan" }
     ];
 
-    // POPULATE DROPDOWN SELECT NAMA & TINGKAT KESULITAN
+    // POPULATE DROPDOWN SELECT NAMA
     const selectNameEl = document.getElementById('playerSelectName');
     if (selectNameEl) {
         daftarSiswa.forEach(s => {
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 3. SYSTEM GAME TTS (MODE LEVEL + PENILAIAN 15 SOAL + LEADERBOARD)
+    // 3. SYSTEM GAME TTS (AUTO JUMP, AUTO BACKSPACE, LEVEL, UPDATE SKOR)
     // ==========================================================================
     const firebaseConfig = {
         apiKey: "AIzaSyAlXUbJFmikfqYk3jcpZryQUIrrklfh440",
@@ -503,9 +503,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     input.maxLength = 1;
                     input.dataset.key = key;
 
+                    // 1. OTOMATIS LOMPAT KE KOTAK BERIKUTNYA PAS NGETIK
+                    input.addEventListener('input', (e) => {
+                        if (e.target.value.length === 1) {
+                            const allInputs = Array.from(document.querySelectorAll('.tts-cell.active-cell input'));
+                            const currIndex = allInputs.indexOf(e.target);
+                            if (currIndex !== -1 && currIndex < allInputs.length - 1) {
+                                allInputs[currIndex + 1].focus();
+                            }
+                        }
+                    });
+
+                    // 2. OTOMATIS MUNDUR KOTAK SEBELUMNYA PAS DIPENCET BACKSPACE
                     input.addEventListener('keydown', (e) => {
-                        if (e.key === 'Backspace' && input.value === '') {
-                            input.value = '';
+                        if (e.key === 'Backspace') {
+                            const allInputs = Array.from(document.querySelectorAll('.tts-cell.active-cell input'));
+                            const currIndex = allInputs.indexOf(e.target);
+
+                            if (input.value === '' && currIndex > 0) {
+                                allInputs[currIndex - 1].focus();
+                                allInputs[currIndex - 1].value = '';
+                                e.preventDefault();
+                            } else {
+                                input.value = '';
+                            }
                         }
                     });
 
@@ -566,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SUBMIT JAWABAN (AKUMULASI DARI TOTAL 15 SOAL)
+    // SUBMIT JAWABAN (UPDATE DATA UNIK PER ABSEN + EVALUASI 15 SOAL)
     const submitBtn = document.getElementById('submitTtsBtn');
     const statusText = document.getElementById('ttsStatus');
 
@@ -576,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let hitungSalah = 0;
             let hitungKosong = 0;
 
-            // Evaluasi per nomor soal (1 Sampai 15 Soal)
+            // Evaluasi per nomor soal (Total 15 Soal)
             ttsQuestionsData.forEach(q => {
                 const letters = q.answer.split('');
                 let isAnyEmpty = false;
@@ -616,10 +637,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const bskText = `${hitungBenar}B / ${hitungSalah}S / ${hitungKosong}K`;
 
             statusText.style.color = "#2575fc";
-            statusText.textContent = `🔒 Jawaban Terkunci! Hasil Kamu: ${bskText} dari 15 Soal (${secondsElapsed} Detik). Skor telah terkirim ke Live Leaderboard!`;
+            statusText.textContent = `🔒 Jawaban Terkunci! Hasil Kamu: ${bskText} dari 15 Soal (${secondsElapsed} Detik). Skor telah diperbarui di Live Leaderboard!`;
 
-            // Langsung Kirim Ke Firebase Leaderboard
-            lbRef.push({
+            // SKOR LAMA TERTIMPA/DIPERBARUI PER ABSEN
+            database.ref('leaderboard_tts/' + currentPlayerAbsen).set({
                 noAbsen: currentPlayerAbsen,
                 nama: currentPlayerName,
                 level: currentLevel,
