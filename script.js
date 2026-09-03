@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 3. GAME QUIZ MASTER 8A (IPA & Pengetahuan Umum Kelas 8)
+    // 3. GAME TTS CLASS (AUTO-JUMP, AUTO-BACKSPACE, PENILAIAN 15 SOAL, UPDATE SKOR)
     // ==========================================================================
     const firebaseConfig = {
         apiKey: "AIzaSyAlXUbJFmikfqYk3jcpZryQUIrrklfh440",
@@ -394,128 +394,138 @@ document.addEventListener('DOMContentLoaded', () => {
 
     listenLiveLeaderboard();
 
-    // BANK SOAL KELAS 8 (IPA & PENGETAHUAN UMUM)
-    const quizBank = {
-        "Mudah": [
-            { q: "1. Organel sel tumbuhan yang berfungsi sebagai tempat berlangsungnya fotosintesis adalah...", opts: ["Mitokondria", "Kloroplas", "Ribosom", "Lisosom"], ans: 1 },
-            { q: "2. Zat tunggal yang paling sederhana dan tidak dapat diuraikan lagi dinamakan...", opts: ["Unsur", "Senyawa", "Campuran", "Larutan"], ans: 0 },
-            { q: "3. Kerajaan Islam pertama yang berdiri di Pulau Jawa adalah...", opts: ["Demak", "Banten", "Pajang", "Mataram Islam"], ans: 0 },
-            { q: "4. Garis lurus penghubung dua titik lingkaran yang melewati titik pusat dinamakan...", opts: ["Jari-jari", "Busur", "Diameter", "Tali busur"], ans: 2 },
-            { q: "5. Teks yang berisi ajakan atau imbauan kepada pembaca disebut teks...", opts: ["Deskripsi", "Persuasi", "Narasi", "Laporan"], ans: 1 },
-            { q: "6. Gaya tarik-menarik antara dua benda bermassa di alam semesta disebut gaya...", opts: ["Gesek", "Magnet", "Gravitasi", "Pegas"], ans: 2 },
-            { q: "7. Perpindahan status sosial seseorang dalam masyarakat dinamakan...", opts: ["Interaksi sosial", "Mobilitas sosial", "Konflik sosial", "Integrasi sosial"], ans: 1 },
-            { q: "8. Persamaan bunyi akhir pada bait puisi atau pantun dikenal dengan istilah...", opts: ["Rima", "Irama", "Majas", "Bait"], ans: 0 },
-            { q: "9. Alat optik alami manusia yang menerima rangsangan cahaya adalah...", opts: ["Telinga", "Mata", "Kulit", "Hidung"], ans: 1 },
-            { q: "10. Penjelajah yang membagi wilayah persebaran fauna Indonesia menjadi dua bagian adalah...", opts: ["Weber", "Wallace", "Junghuhn", "Darwin"], ans: 1 }
-        ],
-        "Sedang": [
-            { q: "1. Pembelokan arah cahaya saat melewati dua medium berbeda kerapatan optiknya disebut...", opts: ["Pemantulan", "Pembiasan", "Penguraian", "Penyerapan"], ans: 1 },
-            { q: "2. Susunan tulang daun yang umumnya dimiliki oleh tumbuhan dikotil adalah...", opts: ["Sejajar", "Melengkung", "Menjala", "Lurus"], ans: 2 },
-            { q: "3. Tembung Jawa sing duwe teges kiasan utawa silihan dinamakake tembung...", opts: ["Saroja", "Entar", "Garba", "Camboran"], ans: 1 },
-            { q: "4. Hukum bacaan Nun mati/Tanwin bertemu Mim, Nun, Wawu, Ya adalah...", opts: ["Idgham Bilaghunnah", "Idgham Bighunnah", "Izhar Halqi", "Iqlab"], ans: 1 },
-            { q: "5. Majas penegasan menggunakan kata bertentangan untuk memperkuat makna disebut...", opts: ["Hiperbola", "Personifikasi", "Antitesis", "Metafora"], ans: 2 },
-            { q: "6. Pembuluh darah yang membawa darah kaya oksigen keluar dari jantung adalah...", opts: ["Vena", "Arteri (Nadi)", "Kapiler", "Aorta transversa"], ans: 1 },
-            { q: "7. Salah satu dampak positif dari mobilitas sosial vertikal naik adalah...", opts: ["Menimbulkan konflik", "Mendorong seseorang maju", "Mengurangi kecerdasan", "Menghambat integrasi"], ans: 1 },
-            { q: "8. Gelombang bunyi tidak dapat merambat di dalam medium...", opts: ["Air", "Udara", "Besi", "Ruang hampa"], ans: 3 },
-            { q: "9. Sikap toleransi dan menghargai antarumat beragama dalam ajaran Islam dinamakan...", opts: ["Tawadhu", "Tasamuh", "Ta'awun", "Qana'ah"], ans: 1 },
-            { q: "10. Unsur berita untuk menanyakan penyebab terjadinya peristiwa adalah...", opts: ["Siapa", "Kapan", "Mengapa", "Bagaimana"], ans: 2 }
-        ],
-        "Sulit": [
-            { q: "1. Pada penderita miopi (rabun jauh), bayangan benda yang jauh akan jatuh di...", opts: ["Tepat pada retina", "Belakang retina", "Depan retina", "Bintik buta"], ans: 2 },
-            { q: "2. Pengangkutan air dan mineral dari akar ke daun dipengaruhi kapilaritas berdasarkan...", opts: ["Kohesi dan adhesi", "Gravitasi dan tekanan", "Difusi dan osmosis", "Fagositosis"], ans: 0 },
-            { q: "3. Saluran mobilitas sosial yang dianggap paling efektif sebagai social elevator adalah...", opts: ["Organisasi politik", "Lembaga pendidikan", "Angkatan bersenjata", "Organisasi ekonomi"], ans: 1 },
-            { q: "4. Luas juring lingkaran jari-jari 14 cm dengan sudut pusat 90 derajat adalah...", opts: ["77 cm²", "154 cm²", "308 cm²", "616 cm²"], ans: 1 },
-            { q: "5. Bunyi pantul yang terdengar hampir bersamaan dengan bunyi asli sehingga mengaburkan bunyi adalah...", opts: ["Gaung / Kerdam", "Gema", "Nada", "Desah"], ans: 0 },
-            { q: "6. Garis Weber memisahkan wilayah persebaran fauna Indonesia bagian...", opts: ["Asiatis dan Peralihan", "Peralihan dan Australis", "Asiatis dan Australis", "Peralihan dan Neartik"], ans: 1 },
-            { q: "7. Tekanan hidrostatik penyelam di dalam air laut akan semakin besar jika...", opts: ["Massa jenis air kecil", "Posisi dekat permukaan", "Kedalaman bertambah", "Luas tubuh lebar"], ans: 2 },
-            { q: "8. Kalimat yang menggunakan konjungsi kausalitas (sebab-akibat) secara tepat adalah...", opts: ["Ia pergi walau hujan", "Banjir karena sampah", "Ibu memasak sementara ayah membaca", "Adik belajar supaya juara"], ans: 1 },
-            { q: "9. Peradangan pada umbai cacing akibat infeksi bakteri dinamakan...", opts: ["Gastritis", "Diare", "Apendisitis", "Konstipasi"], ans: 2 },
-            { q: "10. Faktor penghambat terjadinya mobilitas sosial pada masyarakat tradisional adalah...", opts: ["Pendidikan tinggi", "Pelapisan terbuka", "Sikap tradisional tertutup", "Ekonomi stabil"], ans: 2 }
-        ]
-    };
-
-    let activeQuestionsList = [];
-    let currentQuestionIndex = 0;
-    let scoreBenar = 0;
-    let scoreSalah = 0;
     let currentPlayerAbsen = "";
     let currentPlayerName = "";
     let currentLevel = "Sedang";
     let secondsElapsed = 0;
     let timerInterval = null;
 
+    const ttsQuestionsData = [
+        { id: 1, type: 'H', x: 0, y: 0, answer: 'PEMBIASAN' },
+        { id: 4, type: 'H', x: 2, y: 2, answer: 'ANTITHESIS' },
+        { id: 6, type: 'H', x: 4, y: 4, answer: 'DEMAK' },
+        { id: 8, type: 'H', x: 6, y: 6, answer: 'MENJALA' },
+        { id: 10, type: 'H', x: 8, y: 8, answer: 'MOBILITAS' },
+        { id: 12, type: 'H', x: 8, y: 10, answer: 'TASAMUH' },
+        { id: 14, type: 'H', x: 10, y: 12, answer: 'MENGAPA' },
+        { id: 15, type: 'H', x: 2, y: 14, answer: 'RIMA' },
+
+        { id: 2, type: 'V', x: 1, y: 0, answer: 'KLOROPLAS' },
+        { id: 3, type: 'V', x: 0, y: 2, answer: 'DIAMETER' },
+        { id: 5, type: 'V', x: 2, y: 4, answer: 'PERSUASI' },
+        { id: 7, type: 'V', x: 4, y: 6, answer: 'IDGHAMBIGHUNNAH' },
+        { id: 9, type: 'V', x: 6, y: 8, answer: 'WALLACE' },
+        { id: 11, type: 'V', x: 8, y: 10, answer: 'ENTAR' },
+        { id: 13, type: 'V', x: 0, y: 12, answer: 'UNSUR' }
+    ];
+
+    let ttsBoardMap = {};
+
+    function generateTTSCoordinates() {
+        ttsBoardMap = {};
+        ttsQuestionsData.forEach(q => {
+            const letters = q.answer.split('');
+            letters.forEach((char, idx) => {
+                const posX = q.type === 'H' ? q.x + idx : q.x;
+                const posY = q.type === 'V' ? q.y + idx : q.y;
+                const key = `${posX}_${posY}`;
+
+                if (!ttsBoardMap[key]) {
+                    ttsBoardMap[key] = { letter: char, num: idx === 0 ? q.id : null };
+                } else if (idx === 0) {
+                    ttsBoardMap[key].num = q.id;
+                }
+            });
+        });
+    }
+
+    function initTTSBoard() {
+        const ttsBoard = document.getElementById('ttsBoard');
+        if (!ttsBoard) return;
+
+        generateTTSCoordinates();
+        ttsBoard.innerHTML = '';
+
+        const maxX = 18;
+        const maxY = 16;
+
+        ttsBoard.style.gridTemplateColumns = `repeat(${maxX}, 28px)`;
+        ttsBoard.style.gridTemplateRows = `repeat(${maxY}, 28px)`;
+
+        for (let y = 0; y < maxY; y++) {
+            for (let x = 0; x < maxX; x++) {
+                const key = `${x}_${y}`;
+                const cellData = ttsBoardMap[key];
+
+                const cellDiv = document.createElement('div');
+                cellDiv.className = 'tts-cell';
+
+                if (cellData) {
+                    cellDiv.classList.add('active-cell');
+
+                    if (cellData.num) {
+                        const numSpan = document.createElement('span');
+                        numSpan.className = 'cell-num';
+                        numSpan.textContent = cellData.num;
+                        cellDiv.appendChild(numSpan);
+                    }
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.maxLength = 1;
+                    input.dataset.key = key;
+
+                    // 1. OTOMATIS LOMPAT KE KOTAK SEBELAHNYA PAS NGETIK
+                    input.addEventListener('input', (e) => {
+                        if (e.target.value.length === 1) {
+                            const allInputs = Array.from(document.querySelectorAll('.tts-cell.active-cell input'));
+                            const currIndex = allInputs.indexOf(e.target);
+                            if (currIndex !== -1 && currIndex < allInputs.length - 1) {
+                                allInputs[currIndex + 1].focus();
+                            }
+                        }
+                    });
+
+                    // 2. OTOMATIS MUNDUR PAS DIPENCET BACKSPACE
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Backspace') {
+                            const allInputs = Array.from(document.querySelectorAll('.tts-cell.active-cell input'));
+                            const currIndex = allInputs.indexOf(e.target);
+
+                            if (input.value === '' && currIndex > 0) {
+                                allInputs[currIndex - 1].focus();
+                                allInputs[currIndex - 1].value = '';
+                                e.preventDefault();
+                            } else {
+                                input.value = '';
+                            }
+                        }
+                    });
+
+                    cellDiv.appendChild(input);
+                }
+                ttsBoard.appendChild(cellDiv);
+            }
+        }
+    }
+
     function startTtsTimer() {
         clearInterval(timerInterval);
         secondsElapsed = 0;
+        
         timerInterval = setInterval(() => {
             secondsElapsed++;
             const minutes = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
             const seconds = String(secondsElapsed % 60).padStart(2, '0');
+            
             const timerDisplay = document.getElementById('ttsTimerDisplay');
-            if (timerDisplay) timerDisplay.textContent = `${minutes}:${seconds}`;
+            if (timerDisplay) {
+                timerDisplay.textContent = `${minutes}:${seconds}`;
+            }
         }, 1000);
     }
 
-    function renderQuestion() {
-        const qText = document.getElementById('quizQuestionText');
-        const optsBox = document.getElementById('quizOptionsContainer');
-        if (!qText || !optsBox) return;
-
-        if (currentQuestionIndex >= activeQuestionsList.length) {
-            clearInterval(timerInterval);
-            const statusText = document.getElementById('ttsStatus');
-            const bskText = `${scoreBenar}B / ${scoreSalah}S / 0K`;
-
-            qText.textContent = "🎉 Kuis Selesai!";
-            optsBox.innerHTML = `<p style="font-weight:bold; color:#2575fc; font-size:1.1rem;">Skor Akhir Kamu: ${bskText} (${secondsElapsed} Detik)</p>`;
-            
-            if (statusText) {
-                statusText.style.color = "#22c55e";
-                statusText.textContent = "✅ Hasil telah tersimpan dan masuk ke Live Leaderboard!";
-            }
-
-            database.ref('leaderboard_tts/' + currentPlayerAbsen).set({
-                noAbsen: currentPlayerAbsen,
-                nama: currentPlayerName,
-                level: currentLevel,
-                detik: secondsElapsed,
-                bsk: bskText,
-                timestamp: Date.now()
-            });
-            return;
-        }
-
-        const currQ = activeQuestionsList[currentQuestionIndex];
-        qText.textContent = currQ.q;
-        optsBox.innerHTML = '';
-
-        currQ.opts.forEach((opt, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'action-btn';
-            btn.style.width = '100%';
-            btn.style.textAlign = 'left';
-            btn.style.background = 'rgba(255, 255, 255, 0.9)';
-            btn.style.color = '#1e293b';
-            btn.style.border = '1px solid #cbd5e1';
-            btn.style.padding = '12px 16px';
-            btn.style.borderRadius = '12px';
-            btn.style.cursor = 'pointer';
-            btn.textContent = `${String.fromCharCode(65 + idx)}. ${opt}`;
-
-            btn.addEventListener('click', () => {
-                if (idx === currQ.ans) {
-                    scoreBenar++;
-                } else {
-                    scoreSalah++;
-                }
-                currentQuestionIndex++;
-                renderQuestion();
-            });
-
-            optsBox.appendChild(btn);
-        });
-    }
-
+    // TOMBOL PLAY
     const startBtn = document.getElementById('startTtsGameBtn');
     const selectName = document.getElementById('playerSelectName');
     const ttsLobby = document.getElementById('ttsLobby');
@@ -537,8 +547,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectLevelEl = document.getElementById('playerSelectLevel');
             if (selectLevelEl) currentLevel = selectLevelEl.value;
 
-            activeQuestionsList = quizBank[currentLevel] || quizBank["Sedang"];
-
             if (activePlayerName) {
                 activePlayerName.textContent = `Absen ${currentPlayerAbsen} - ${currentPlayerName} (${currentLevel})`;
             }
@@ -546,12 +554,72 @@ document.addEventListener('DOMContentLoaded', () => {
             if (ttsLobby) ttsLobby.classList.add('hidden');
             if (ttsPlayArea) ttsPlayArea.classList.remove('hidden');
 
-            currentQuestionIndex = 0;
-            scoreBenar = 0;
-            scoreSalah = 0;
-
-            renderQuestion();
+            initTTSBoard();
             startTtsTimer();
+        });
+    }
+
+    // SUBMIT JAWABAN (UPDATE DATA UNIK PER ABSEN + EVALUASI 15 SOAL)
+    const submitBtn = document.getElementById('submitTtsBtn');
+    const statusText = document.getElementById('ttsStatus');
+
+    if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+            let hitungBenar = 0;
+            let hitungSalah = 0;
+            let hitungKosong = 0;
+
+            // Evaluasi per nomor soal (Total 15 Soal)
+            ttsQuestionsData.forEach(q => {
+                const letters = q.answer.split('');
+                let isAnyEmpty = false;
+                let isAnyWrong = false;
+
+                letters.forEach((char, idx) => {
+                    const posX = q.type === 'H' ? q.x + idx : q.x;
+                    const posY = q.type === 'V' ? q.y + idx : q.y;
+                    const key = `${posX}_${posY}`;
+
+                    const inputEl = document.querySelector(`.tts-cell input[data-key="${key}"]`);
+                    if (inputEl) {
+                        const val = inputEl.value.toUpperCase().trim();
+                        if (!val) {
+                            isAnyEmpty = true;
+                        } else if (val !== char) {
+                            isAnyWrong = true;
+                        }
+                    }
+                });
+
+                if (isAnyEmpty) {
+                    hitungKosong++;
+                } else if (isAnyWrong) {
+                    hitungSalah++;
+                } else {
+                    hitungBenar++;
+                }
+            });
+
+            // Kunci Papan & Hentikan Timer
+            clearInterval(timerInterval);
+            document.querySelectorAll('.tts-cell.active-cell input').forEach(inp => inp.disabled = true);
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.5";
+
+            const bskText = `${hitungBenar}B / ${hitungSalah}S / ${hitungKosong}K`;
+
+            statusText.style.color = "#2575fc";
+            statusText.textContent = `🔒 Jawaban Terkunci! Hasil Kamu: ${bskText} dari 15 Soal (${secondsElapsed} Detik). Skor telah diperbarui di Live Leaderboard!`;
+
+            // SKOR LAMA TERTIMPA PER ABSEN
+            database.ref('leaderboard_tts/' + currentPlayerAbsen).set({
+                noAbsen: currentPlayerAbsen,
+                nama: currentPlayerName,
+                level: currentLevel,
+                detik: secondsElapsed,
+                bsk: bskText,
+                timestamp: Date.now()
+            });
         });
     }
 });
