@@ -29,7 +29,7 @@
                 <a href="#home" class="active">Beranda</a>
                 <a href="#siswa">Siswa</a>
                 <a href="#piket">Piket & Mapel</a>
-                <a href="#game-tts">Quiz Master</a>
+                <a href="#game-tts">Game TTS</a>
             </div>
         </div>
     </nav>
@@ -87,22 +87,22 @@
             </div>
         </section>
 
-        <!-- 4. GAME QUIZ MASTER 8A & LIVE LEADERBOARD -->
+        <!-- 4. GAME TTS CLASS & LIVE LEADERBOARD -->
         <section id="game-tts" class="app-section hidden">
             <div class="section-header">
-                <h1 class="visual-title">GAME <span class="text-accent">QUIZ MASTER 8A</span></h1>
-                <p class="section-subtitle">Uji pengetahuan materi IPA & Pengetahuan Umum SMP/MTs Kelas 8!</p>
+                <h1 class="visual-title">GAME <span class="text-accent">TTS CLASS</span></h1>
+                <p class="section-subtitle">Uji pengetahuan materi pelajaran SMP/MTs Kelas 8!</p>
             </div>
 
             <div class="tts-wrapper">
-                <!-- PANEL GAME QUIZ -->
+                <!-- PANEL GAME TTS -->
                 <div class="glass-panel tts-container">
                     
                     <!-- LOBBY INITIAL SCREEN -->
                     <div id="ttsLobby" class="tts-lobby-card">
-                        <div class="lobby-icon">⚡</div>
-                        <h2>Quiz Master Kelas 8A</h2>
-                        <p>Pilih namamu dan tingkat kesulitan untuk mulai menjawab kuis!</p>
+                        <div class="lobby-icon">🧩</div>
+                        <h2>Teka-Teki Silang Kelas 8A</h2>
+                        <p>Pilih namamu dan tingkat kesulitan dari daftar siswa di bawah ini untuk mulai bermain!</p>
                         
                         <div class="input-group-name">
                             <select id="playerSelectName">
@@ -118,7 +118,7 @@
                             </select>
                         </div>
                         
-                        <button id="startTtsGameBtn" class="action-btn play-big-btn">▶ PLAY / MULAI QUIZ</button>
+                        <button id="startTtsGameBtn" class="action-btn play-big-btn">▶ PLAY / MULAI GAME</button>
                     </div>
 
                     <!-- GAME PLAY AREA -->
@@ -129,14 +129,41 @@
                             <div class="tts-timer-box">⏱️ Waktu: <span id="ttsTimerDisplay">00:00</span></div>
                         </div>
 
-                        <!-- CONTAINER KUIS -->
-                        <div class="quiz-box-card" style="width: 100%; text-align: left; padding: 15px;">
-                            <h3 id="quizQuestionText" style="font-size: 1.1rem; margin-bottom: 15px; color: var(--text-main);">Pertanyaan...</h3>
-                            <div id="quizOptionsContainer" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                        <!-- BOARD GRID TTS -->
+                        <div id="ttsBoard" class="tts-board-grid"></div>
+
+                        <!-- CLUES SOAL TTS -->
+                        <div class="tts-clues-container">
+                            <div class="clue-column">
+                                <h3>Mendatar:</h3>
+                                <ol class="clue-list">
+                                    <li><strong>1. (1)</strong> Pembelokan arah cahaya saat melewati dua medium berbeda (9 huruf)</li>
+                                    <li><strong>2. (4)</strong> Majas penegasan menggunakan kata-kata bertentangan (10 huruf)</li>
+                                    <li><strong>3. (6)</strong> Kerajaan Islam pertama di pulau Jawa (5 huruf)</li>
+                                    <li><strong>4. (8)</strong> Bentuk tulang daun pada tumbuhan dikotil (7 huruf)</li>
+                                    <li><strong>5. (10)</strong> Perpindahan status sosial seseorang dalam masyarakat (9 huruf)</li>
+                                    <li><strong>6. (12)</strong> Sikap toleransi dan menghargai dalam ajaran Islam (7 huruf)</li>
+                                    <li><strong>7. (14)</strong> Unsur berita yang menanyakan alasan/sebab terjadinya peristiwa (7 huruf)</li>
+                                    <li><strong>8. (15)</strong> Persamaan bunyi huruf akhir pada bait puisi atau pantun (4 huruf)</li>
+                                </ol>
+                            </div>
+                            <div class="clue-column">
+                                <h3>Menurun:</h3>
+                                <ol class="clue-list">
+                                    <li><strong>1. (2)</strong> Organel sel tempat berlangsungnya proses fotosintesis (9 huruf)</li>
+                                    <li><strong>2. (3)</strong> Garis lurus penghubung dua titik lingkaran lewat titik pusat (8 huruf)</li>
+                                    <li><strong>3. (5)</strong> Jenis teks yang berisi ajakan atau bujukan (8 huruf)</li>
+                                    <li><strong>4. (7)</strong> Hukum bacaan nun mati bertemu Mim, Nun, Wawu, Ya (15 huruf)</li>
+                                    <li><strong>5. (9)</strong> Garis khayal pemisah fauna Asiatis dan Peralihan (7 huruf)</li>
+                                    <li><strong>6. (11)</strong> Tembung basa Jawa sing duwe teges kiasan/silihan (5 huruf)</li>
+                                    <li><strong>7. (13)</strong> Zat tunggal yang tidak bisa diuraikan lagi secara kimia (5 huruf)</li>
+                                </ol>
+                            </div>
                         </div>
 
-                        <!-- AKSI SUBMIT & AKHIR GAME -->
-                        <div class="tts-actions" style="margin-top: 15px;">
+                        <!-- SUBMIT -->
+                        <div class="tts-actions">
+                            <button id="submitTtsBtn" class="action-btn submit-btn">🔒 Submit & Kunci Jawaban</button>
                             <p id="ttsStatus" class="tts-status-text"></p>
                         </div>
                     </div>
