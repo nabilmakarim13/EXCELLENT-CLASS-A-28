@@ -502,7 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 16. FITUR QUOTE OF THE DAY (BERUBAH OTOMATIS TIAP HARI)
     const quotes = [
-        { text: "Banyak hal yang bisa menjatuhkanmu, tapi satu-satunya hal yang benar-benar dapat menjatuhkanmu adalah sikapmu sendiri.", author: "R.A. Kartini (Pahlawan Nasional Indonesia)" },
+      { text: "Banyak hal yang bisa menjatuhkanmu, tapi satu-satunya hal yang benar-benar dapat menjatuhkanmu adalah sikapmu sendiri.", author: "R.A. Kartini (Pahlawan Nasional Indonesia)" },
 { text: "Kesalahan terbesar yang bisa kamu lakukan dalam hidup adalah terus-menerus takut bahwa kamu akan melakukan kesalahan.", author: "Elbert Hubbard (Penulis dan Filsuf asal AS)" },
 { text: "Kamu tidak perlu menjadi hebat untuk memulai, tetapi kamu harus memulai untuk menjadi hebat.", author: "Zig Ziglar (Penulis dan Motivator Dunia)" },
 { text: "Jangan biarkan suara pendapat orang lain menenggelamkan suara hatimu sendiri.", author: "Steve Jobs (Pendiri Apple Inc.)" },
@@ -529,31 +529,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     loadDailyQuote();
 
-    // 17. FITUR KOTAK SARAN & PESAN RAHASIA
+    // 17. FITUR KOTAK SARAN & PESAN RAHASIA (LIVE FIREBASE)
+    const firebaseConfig = {
+        apiKey: "AIzaSyAlXUbJFMikfqYk3jcpZryQUIrrklfh440",
+        authDomain: "excellent-class-a-28.firebaseapp.com",
+        databaseURL: "https://excellent-class-a-28-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "excellent-class-a-28",
+        storageBucket: "excellent-class-a-28.firebasestorage.app",
+        messagingSenderId: "144398051170",
+        appId: "1:144398051170:web:3ba7d6cb0ae256c5402e3b"
+    };
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.database();
+
     const messageForm = document.getElementById('secretMessageForm');
     const messagesList = document.getElementById('messagesList');
 
-    function renderMessages() {
-        if (!messagesList) return;
-
-        const savedMessages = JSON.parse(localStorage.getItem('aetherienz_messages')) || [
-            {
-                sender: "Anonim",
-                target: "Untuk Kelas 8A",
-                text: "Semangat belajar untuk teman-teman Aetherienz di semester ini!",
-                date: "Baru saja"
+    if (messagesList) {
+        db.ref('messages').on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (!data) {
+                messagesList.innerHTML = `<p style="opacity:0.7; font-size:0.9rem; text-align:center;">Belum ada pesan rahasia...</p>`;
+                return;
             }
-        ];
 
-        messagesList.innerHTML = savedMessages.map(m => `
-            <div class="msg-item">
-                <div class="msg-header">
-                    <span><strong>Dari:</strong> ${m.sender}</span>
-                    <span class="msg-target">🎯 ${m.target}</span>
+            const messageArray = Object.values(data).reverse();
+
+            messagesList.innerHTML = messageArray.map(m => `
+                <div class="msg-item">
+                    <div class="msg-header">
+                        <span><strong>Dari:</strong> ${m.sender}</span>
+                        <span class="msg-target">🎯 ${m.target}</span>
+                    </div>
+                    <div class="msg-text">${m.text}</div>
                 </div>
-                <div class="msg-text">${m.text}</div>
-            </div>
-        `).join('');
+            `).join('');
+        });
     }
 
     if (messageForm) {
@@ -566,19 +580,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!target || !text) return;
 
-            const newMessage = { sender, target, text };
-
-            const savedMessages = JSON.parse(localStorage.getItem('aetherienz_messages')) || [];
-            savedMessages.unshift(newMessage);
-            localStorage.setItem('aetherienz_messages', JSON.stringify(savedMessages));
-
-            messageForm.reset();
-            renderMessages();
-
-            alert('Pesan/Saran kamu berhasil terkirim!');
+            db.ref('messages').push({
+                sender: sender,
+                target: target,
+                text: text,
+                timestamp: Date.now()
+            }, (error) => {
+                if (error) {
+                    alert('Gagal mengirim pesan!');
+                } else {
+                    messageForm.reset();
+                    alert('Pesan berhasil terkirim dan langsung live!');
+                }
+            });
         });
-
-        renderMessages();
     }
 
-}); // AKHIR DOMContentLoaded
+});
