@@ -502,13 +502,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 16. FITUR QUOTE OF THE DAY (BERUBAH OTOMATIS TIAP HARI)
     const quotes = [
-        { text: "Sukses tidak datang dari apa yang kamu lakukan sesekali, tapi dari apa yang kamu lakukan secara konsisten.", author: "Aetherienz 8A" },
-        { text: "Jangan takut salah, karena dari kesalahan kita belajar menjadi lebih bijak.", author: "Ibu Tazqiyatul Fithriya, S.Pd." },
-        { text: "Kebersamaan dalam kelas 8A adalah kekuatan terbesar kita untuk berkembang bersama.", author: "A'28" },
-        { text: "Pendidikan adalah senjata paling mematikan untuk mengubah dunia.", author: "Nelson Mandela" },
-        { text: "Disiplin adalah jembatan antara cita-cita dan pencapaian.", author: "Jim Rohn" },
-        { text: "Hari ini harus lebih baik dari hari kemarin, dan esok harus lebih baik dari hari ini.", author: "Motivasi Islami" },
-        { text: "Setiap usaha yang kamu lakukan hari ini adalah investasi untuk masa depanmu.", author: "Aetherienz" }
+        { text: "Banyak hal yang bisa menjatuhkanmu, tapi satu-satunya hal yang benar-benar dapat menjatuhkanmu adalah sikapmu sendiri.", author: "R.A. Kartini (Pahlawan Nasional Indonesia)" },
+{ text: "Kesalahan terbesar yang bisa kamu lakukan dalam hidup adalah terus-menerus takut bahwa kamu akan melakukan kesalahan.", author: "Elbert Hubbard (Penulis dan Filsuf asal AS)" },
+{ text: "Kamu tidak perlu menjadi hebat untuk memulai, tetapi kamu harus memulai untuk menjadi hebat.", author: "Zig Ziglar (Penulis dan Motivator Dunia)" },
+{ text: "Jangan biarkan suara pendapat orang lain menenggelamkan suara hatimu sendiri.", author: "Steve Jobs (Pendiri Apple Inc.)" },
+{ text: "Rasa sakit karena disiplin jauh lebih ringan daripada rasa sakit karena penyesalan.", author: "Jim Rohn (Pengusaha dan Penulis)" },
+{ text: "Tuhan tidak mengubah nasib suatu kaum sebelum mereka mengubah keadaan diri mereka sendiri.", author: "QS. Ar-Ra'd: 11 (Kitab Suci Al-Qur'an)" },
+{ text: "Masa depanmu dibentuk oleh apa yang kamu lakukan hari ini, bukan besok.", author: "Robert Kiyosaki (Penulis 'Rich Dad Poor Dad')" }
     ];
 
     function loadDailyQuote() {
