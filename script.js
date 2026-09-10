@@ -412,20 +412,45 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeMapelBtn) activeMapelBtn.click();
     }
 
-    // 13. FITUR DARK MODE TOGGLE
+  // 13. FITUR DARK MODE TOGGLE (OTOMATIS & MANUAL)
     const themeToggleBtn = document.getElementById('themeToggle');
     if (themeToggleBtn) {
+        const savedTheme = localStorage.getItem('theme');
+        
+        // Cek jam saat ini (Malam = Jam 18:00 ke atas atau sebelum Jam 06:00)
+        const currentHour = new Date().getHours();
+        const isNightTime = currentHour >= 18 || currentHour < 6;
+        
+        // Cek pengaturan mode dari HP/Komputer pengguna
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Tentukan apakah harus mode gelap
+        let shouldBeDark = false;
+
+        if (savedTheme) {
+            // Jika pengguna pernah klik tombol toggle manual, pakai pilihan tersebut
+            shouldBeDark = savedTheme === 'dark';
+        } else {
+            // Jika belum pernah ubah manual, otomatis gelap kalau malam ATAU HP pengguna mode gelap
+            shouldBeDark = isNightTime || prefersDarkScheme;
+        }
+
+        // Terapkan mode
+        if (shouldBeDark) {
+            document.body.classList.add('dark-mode');
+            themeToggleBtn.textContent = '☀️';
+        } else {
+            document.body.classList.remove('dark-mode');
+            themeToggleBtn.textContent = '🌙';
+        }
+
+        // Event listener saat tombol diklik manual oleh pengguna
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
             themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
-
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggleBtn.textContent = '☀️';
-        }
     }
 
     // 14. FITUR JAM DIGITAL REAL-TIME & KALENDER OTOMATIS
@@ -483,3 +508,87 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// 16. FITUR QUOTE OF THE DAY (BERUBAH OTOMATIS TIAP HARI)
+    const quotes = [
+        { text: "Sukses tidak datang dari apa yang kamu lakukan sesekali, tapi dari apa yang kamu lakukan secara konsisten.", author: "Aetherienz 8A" },
+        { text: "Jangan takut salah, karena dari kesalahan kita belajar menjadi lebih bijak.", author: "Ibu Tazqiyatul Fithriya, S.Pd." },
+        { text: "Kebersamaan dalam kelas 8A adalah kekuatan terbesar kita untuk berkembang bersama.", author: "A'28" },
+        { text: "Pendidikan adalah senjata paling mematikan untuk mengubah dunia.", author: "Nelson Mandela" },
+        { text: "Disiplin adalah jembatan antara cita-cita dan pencapaian.", author: "Jim Rohn" },
+        { text: "Hari ini harus lebih baik dari hari kemarin, dan esok harus lebih baik dari hari ini.", author: "Motivasi Islami" },
+        { text: "Setiap usaha yang kamu lakukan hari ini adalah investasi untuk masa depanmu.", author: "Aetherienz" }
+    ];
+
+    function loadDailyQuote() {
+        const quoteTextEl = document.getElementById('quoteText');
+        const quoteAuthorEl = document.getElementById('quoteAuthor');
+
+        if (quoteTextEl && quoteAuthorEl) {
+            // Mengambil indeks berdasarkan hari dalam setahun agar berputar otomatis setiap hari
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+
+            const selectedQuote = quotes[dayOfYear % quotes.length];
+            quoteTextEl.textContent = selectedQuote.text;
+            quoteAuthorEl.textContent = `- ${selectedQuote.author}`;
+        }
+    }
+    loadDailyQuote();
+
+    // 17. FITUR KOTAK SARAN & PESAN RAHASIA
+    const messageForm = document.getElementById('secretMessageForm');
+    const messagesList = document.getElementById('messagesList');
+
+    // Fungsi render daftar pesan dari LocalStorage
+    function renderMessages() {
+        if (!messagesList) return;
+        
+        const savedMessages = JSON.parse(localStorage.getItem('aetherienz_messages')) || [
+            {
+                sender: "Anonim",
+                target: "Untuk Kelas 8A",
+                text: "Semangat belajar untuk teman-teman Aetherienz di semester ini!",
+                date: "Baru saja"
+            }
+        ];
+
+        messagesList.innerHTML = savedMessages.map(m => `
+            <div class="msg-item">
+                <div class="msg-header">
+                    <span><strong>Dari:</strong> ${m.sender}</span>
+                    <span class="msg-target">🎯 ${m.target}</span>
+                </div>
+                <div class="msg-text">${m.text}</div>
+            </div>
+        `).join('');
+    }
+
+    if (messageForm) {
+        messageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const sender = document.getElementById('senderName').value.trim() || 'Anonim (Rahasia)';
+            const target = document.getElementById('targetName').value.trim();
+            const text = document.getElementById('messageContent').value.trim();
+
+            if (!target || !text) return;
+
+            const newMessage = { sender, target, text };
+
+            // Simpan ke localStorage
+            const savedMessages = JSON.parse(localStorage.getItem('aetherienz_messages')) || [];
+            savedMessages.unshift(newMessage); // Tambah di paling atas
+            localStorage.setItem('aetherienz_messages', JSON.stringify(savedMessages));
+
+            // Reset form dan refresh list
+            messageForm.reset();
+            renderMessages();
+
+            alert('Pesan/Saran kamu berhasil terkirim!');
+        });
+
+        renderMessages();
+    }
