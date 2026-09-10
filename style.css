@@ -774,3 +774,118 @@ body.dark-mode .theme-toggle-btn {
     background: rgba(255, 255, 255, 0.1);
     color: #fde047;
 }
+/* STYLE QUOTE OF THE DAY */
+.quote-card {
+    background: var(--card-bg, #ffffff);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.quote-icon {
+    font-size: 3rem;
+    line-height: 1;
+    opacity: 0.3;
+    display: block;
+}
+#quoteText {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin: 10px 0;
+}
+.quote-author {
+    font-weight: bold;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* STYLE KOTAK SARAN & PESAN RAHASIA */
+.secret-box-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+@media (min-width: 768px) {
+    .secret-box-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.secret-form {
+    background: var(--card-bg, #ffffff);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+}
+.btn-send {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6b11ff, #2575fc);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.btn-send:hover {
+    transform: translateY(-2px);
+}
+.messages-display {
+    background: var(--card-bg, #ffffff);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-height: 400px;
+    overflow-y: auto;
+}
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+.msg-item {
+    background: rgba(0, 0, 0, 0.03);
+    padding: 12px;
+    border-radius: 10px;
+    border-left: 4px solid #6b11ff;
+}
+.dark-mode .msg-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+    opacity: 0.8;
+}
+.msg-target {
+    font-weight: bold;
+    color: #6b11ff;
+}
+.msg-text {
+    font-size: 0.95rem;
+    word-break: break-word;
+}
