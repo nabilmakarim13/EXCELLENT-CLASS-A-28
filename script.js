@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', function() {
             const day = this.getAttribute('data-day');
             const parent = this.closest('.timetable-container');
-            
+
             parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             parent.querySelectorAll('.day-content').forEach(c => {
                 c.classList.add('hidden');
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. FORMATTER TEKS SUARA (TALKBACK)
     function formatTeksSuara(text) {
         if (!text) return "";
-        
+
         let formatted = text.toLowerCase().replace(/(?:^|\s|-)\S/g, function(a) { 
             return a.toUpperCase(); 
         });
@@ -305,16 +305,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function speakText(text) {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
-            
+
             const teksSuara = formatTeksSuara(text);
             const utterance = new SpeechSynthesisUtterance(teksSuara);
-            
+
             const isEnglish = /\b(class|dashboard|structure|section|member|timetable|all|rights|reserved)\b/i.test(text);
-            
+
             utterance.lang = isEnglish ? 'en-US' : 'id-ID';
             utterance.rate = 0.9;
             utterance.pitch = 1;
-            
+
             window.speechSynthesis.speak(utterance);
         }
     }
@@ -412,30 +412,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeMapelBtn) activeMapelBtn.click();
     }
 
-  // 13. FITUR DARK MODE TOGGLE (OTOMATIS & MANUAL)
+    // 13. FITUR DARK MODE TOGGLE (OTOMATIS & MANUAL)
     const themeToggleBtn = document.getElementById('themeToggle');
     if (themeToggleBtn) {
         const savedTheme = localStorage.getItem('theme');
-        
-        // Cek jam saat ini (Malam = Jam 18:00 ke atas atau sebelum Jam 06:00)
+
         const currentHour = new Date().getHours();
         const isNightTime = currentHour >= 18 || currentHour < 6;
-        
-        // Cek pengaturan mode dari HP/Komputer pengguna
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Tentukan apakah harus mode gelap
         let shouldBeDark = false;
 
         if (savedTheme) {
-            // Jika pengguna pernah klik tombol toggle manual, pakai pilihan tersebut
             shouldBeDark = savedTheme === 'dark';
         } else {
-            // Jika belum pernah ubah manual, otomatis gelap kalau malam ATAU HP pengguna mode gelap
             shouldBeDark = isNightTime || prefersDarkScheme;
         }
 
-        // Terapkan mode
         if (shouldBeDark) {
             document.body.classList.add('dark-mode');
             themeToggleBtn.textContent = '☀️';
@@ -444,7 +437,6 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggleBtn.textContent = '🌙';
         }
 
-        // Event listener saat tombol diklik manual oleh pengguna
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -507,8 +499,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
-// 16. FITUR QUOTE OF THE DAY (BERUBAH OTOMATIS TIAP HARI)
+
+    // 16. FITUR QUOTE OF THE DAY (BERUBAH OTOMATIS TIAP HARI)
     const quotes = [
         { text: "Sukses tidak datang dari apa yang kamu lakukan sesekali, tapi dari apa yang kamu lakukan secara konsisten.", author: "Aetherienz 8A" },
         { text: "Jangan takut salah, karena dari kesalahan kita belajar menjadi lebih bijak.", author: "Ibu Tazqiyatul Fithriya, S.Pd." },
@@ -524,7 +516,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const quoteAuthorEl = document.getElementById('quoteAuthor');
 
         if (quoteTextEl && quoteAuthorEl) {
-            // Mengambil indeks berdasarkan hari dalam setahun agar berputar otomatis setiap hari
             const now = new Date();
             const start = new Date(now.getFullYear(), 0, 0);
             const diff = now - start;
@@ -542,10 +533,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageForm = document.getElementById('secretMessageForm');
     const messagesList = document.getElementById('messagesList');
 
-    // Fungsi render daftar pesan dari LocalStorage
     function renderMessages() {
         if (!messagesList) return;
-        
+
         const savedMessages = JSON.parse(localStorage.getItem('aetherienz_messages')) || [
             {
                 sender: "Anonim",
@@ -578,12 +568,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const newMessage = { sender, target, text };
 
-            // Simpan ke localStorage
             const savedMessages = JSON.parse(localStorage.getItem('aetherienz_messages')) || [];
-            savedMessages.unshift(newMessage); // Tambah di paling atas
+            savedMessages.unshift(newMessage);
             localStorage.setItem('aetherienz_messages', JSON.stringify(savedMessages));
 
-            // Reset form dan refresh list
             messageForm.reset();
             renderMessages();
 
@@ -592,3 +580,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderMessages();
     }
+
+}); // AKHIR DOMContentLoaded
