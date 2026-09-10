@@ -28,6 +28,8 @@
             <a href="#piket">Jadwal Piket</a>
             <a href="#jadwal">Jadwal Pelajaran</a>
             <a href="#siswa">Daftar Siswa</a>
+            <a href="#quote-section">Motivasi</a>
+            <a href="#pesan-section">Pesan Rahasia</a>
         </nav>
         <div class="right-header-group">
             <button id="themeToggle" class="theme-toggle-btn">🌙</button>
@@ -279,6 +281,53 @@
             <div class="glass-panel news-container" id="siswaContainer"></div>
         </section>
 
+        <!-- 6. SECTION QUOTE OF THE DAY -->
+        <section id="quote-section" class="app-section hidden">
+            <div class="section-header">
+                <h1 class="visual-title">MOTIVASI <span class="text-accent">HARIAN</span></h1>
+                <p class="section-subtitle">Pesan Bijak Hari Ini untuk Aetherienz</p>
+            </div>
+            <div class="quote-card">
+                <span class="quote-icon">“</span>
+                <p id="quoteText">Loading kata-kata motivasi...</p>
+                <span id="quoteAuthor" class="quote-author">- Anonim</span>
+            </div>
+        </section>
+
+        <!-- 7. SECTION KOTAK SARAN & PESAN RAHASIA -->
+        <section id="pesan-section" class="app-section hidden">
+            <div class="section-header">
+                <h1 class="visual-title">PESAN <span class="text-accent">RAHASIA</span></h1>
+                <p class="section-subtitle">Sampaikan Ide, Masukan, atau Pesan Kesan untuk Teman Seangkatan</p>
+            </div>
+            <div class="secret-box-container">
+                <!-- Form Pengiriman -->
+                <form id="secretMessageForm" class="secret-form">
+                    <div class="form-group">
+                        <label for="senderName">Nama Pengirim (Opsional):</label>
+                        <input type="text" id="senderName" placeholder="Kosongkan jika ingin Anonim / Rahasia">
+                    </div>
+                    <div class="form-group">
+                        <label for="targetName">Tujuan Pesan:</label>
+                        <input type="text" id="targetName" placeholder="Misal: Untuk Kelas 8A / Untuk Agis / Untuk Wali Kelas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageContent">Isi Pesan / Saran:</label>
+                        <textarea id="messageContent" rows="4" placeholder="Tuliskan pesan, kesan, masukan, atau ide kamu di sini..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-send">🚀 Kirim Pesan</button>
+                </form>
+
+                <!-- Daftar Pesan Terkirim -->
+                <div class="messages-display">
+                    <h3>💌 Pesan & Saran Terbaru</h3>
+                    <div id="messagesList" class="messages-list">
+                        <!-- Pesan otomatis muncul di sini via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Modal Pop-up -->
@@ -294,52 +343,6 @@
             </div>
         </div>
     </div>
-    <!-- SECTION QUOTE OF THE DAY -->
-<section id="quote-section" class="app-section">
-    <div class="section-header">
-        <h1>MOTIVASI <span>HARIAN</span></h1>
-        <p>Pesan Bijak Hari Ini untuk Aetherienz</p>
-    </div>
-    <div class="quote-card">
-        <span class="quote-icon">“</span>
-        <p id="quoteText">Loading kata-kata motivasi...</p>
-        <span id="quoteAuthor" class="quote-author">- Anonim</span>
-    </div>
-</section>
-
-<!-- SECTION KOTAK SARAN & PESAN RAHASIA -->
-<section id="pesan-section" class="app-section">
-    <div class="section-header">
-        <h1>PESAN <span>RAHASIA</span></h1>
-        <p>Sampaikan Ide, Masukan, atau Pesan Kesan untuk Teman Seangkatan</p>
-    </div>
-    <div class="secret-box-container">
-        <!-- Form Pengiriman -->
-        <form id="secretMessageForm" class="secret-form">
-            <div class="form-group">
-                <label for="senderName">Nama Pengirim (Opsional):</label>
-                <input type="text" id="senderName" placeholder="Kosongkan jika ingin Anonim / Rahasia">
-            </div>
-            <div class="form-group">
-                <label for="targetName">Tujuan Pesan:</label>
-                <input type="text" id="targetName" placeholder="Misal: Untuk Kelas 8A / Untuk Agis / Untuk Wali Kelas" required>
-            </div>
-            <div class="form-group">
-                <label for="messageContent">Isi Pesan / Saran:</label>
-                <textarea id="messageContent" rows="4" placeholder="Tuliskan pesan, kesan, masukan, atau ide kamu di sini..." required></textarea>
-            </div>
-            <button type="submit" class="btn-send">🚀 Kirim Pesan</button>
-        </form>
-
-        <!-- Daftar Pesan Terkirim (Tampil di Web) -->
-        <div class="messages-display">
-            <h3>💌 Pesan & Saran Terbaru</h3>
-            <div id="messagesList" class="messages-list">
-                <!-- Pesan otomatis muncul di sini via JavaScript -->
-            </div>
-        </div>
-    </div>
-</section>
 
     <!-- AUDIO PLAYER MINIMALIS (POJOK KIRI BAWAH) -->
     <div class="mini-music-player">
