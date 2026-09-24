@@ -287,10 +287,17 @@
                 <h1 class="visual-title">MOTIVASI <span class="text-accent">HARIAN</span></h1>
                 <p class="section-subtitle">Pesan Bijak Hari Ini untuk Aetherienz</p>
             </div>
-            <div class="quote-card">
+            <div class="quote-card" style="text-align: center;">
                 <span class="quote-icon">“</span>
                 <p id="quoteText">Loading kata-kata motivasi...</p>
                 <span id="quoteAuthor" class="quote-author">- Anonim</span>
+                
+                <!-- TOMBOL REFRESH KATA-KATA -->
+                <div style="margin-top: 20px;">
+                    <button type="button" onclick="loadDailyQuote()" style="padding: 8px 16px; border: none; border-radius: 20px; background: #6C5CE7; color: white; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 500; transition: transform 0.2s, opacity 0.2s;">
+                        🔄 Refresh Kata-Kata
+                    </button>
+                </div>
             </div>
         </section>
 
