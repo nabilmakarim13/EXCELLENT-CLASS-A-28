@@ -500,33 +500,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 16. FITUR QUOTE OF THE DAY (BERUBAH OTOMATIS TIAP HARI)
+    // 16. FITUR QUOTE OF THE DAY (REFRESH ACAK DENGAN BUTTON)
     const quotes = [
-      { text: "Banyak hal yang bisa menjatuhkanmu, tapi satu-satunya hal yang benar-benar dapat menjatuhkanmu adalah sikapmu sendiri.", author: "R.A. Kartini (Pahlawan Nasional Indonesia)" },
-{ text: "Kesalahan terbesar yang bisa kamu lakukan dalam hidup adalah terus-menerus takut bahwa kamu akan melakukan kesalahan.", author: "Elbert Hubbard (Penulis dan Filsuf asal AS)" },
-{ text: "Kamu tidak perlu menjadi hebat untuk memulai, tetapi kamu harus memulai untuk menjadi hebat.", author: "Zig Ziglar (Penulis dan Motivator Dunia)" },
-{ text: "Jangan biarkan suara pendapat orang lain menenggelamkan suara hatimu sendiri.", author: "Steve Jobs (Pendiri Apple Inc.)" },
-{ text: "Rasa sakit karena disiplin jauh lebih ringan daripada rasa sakit karena penyesalan.", author: "Jim Rohn (Pengusaha dan Penulis)" },
-{ text: "Tuhan tidak mengubah nasib suatu kaum sebelum mereka mengubah keadaan diri mereka sendiri.", author: "QS. Ar-Ra'd: 11 (Kitab Suci Al-Qur'an)" },
-{ text: "Masa depanmu dibentuk oleh apa yang kamu lakukan hari ini, bukan besok.", author: "Robert Kiyosaki (Penulis 'Rich Dad Poor Dad')" }
+        { text: "Banyak hal yang bisa menjatuhkanmu, tapi satu-satunya hal yang benar-benar dapat menjatuhkanmu adalah sikapmu sendiri.", author: "R.A. Kartini (Pahlawan Nasional Indonesia)" },
+        { text: "Kesalahan terbesar yang bisa kamu lakukan dalam hidup adalah terus-menerus takut bahwa kamu akan melakukan kesalahan.", author: "Elbert Hubbard (Penulis dan Filsuf asal AS)" },
+        { text: "Kamu tidak perlu menjadi hebat untuk memulai, tetapi kamu harus memulai untuk menjadi hebat.", author: "Zig Ziglar (Penulis dan Motivator Dunia)" },
+        { text: "Jangan biarkan suara pendapat orang lain menenggelamkan suara hatimu sendiri.", author: "Steve Jobs (Pendiri Apple Inc.)" },
+        { text: "Rasa sakit karena disiplin jauh lebih ringan daripada rasa sakit karena penyesalan.", author: "Jim Rohn (Pengusaha dan Penulis)" },
+        { text: "Tuhan tidak mengubah nasib suatu kaum sebelum mereka mengubah keadaan diri mereka sendiri.", author: "QS. Ar-Ra'd: 11 (Kitab Suci Al-Qur'an)" },
+        { text: "Masa depanmu dibentuk oleh apa yang kamu lakukan hari ini, bukan besok.", author: "Robert Kiyosaki (Penulis 'Rich Dad Poor Dad')" }
     ];
 
-    function loadDailyQuote() {
+    window.loadDailyQuote = function() {
         const quoteTextEl = document.getElementById('quoteText');
         const quoteAuthorEl = document.getElementById('quoteAuthor');
 
         if (quoteTextEl && quoteAuthorEl) {
-            const now = new Date();
-            const start = new Date(now.getFullYear(), 0, 0);
-            const diff = now - start;
-            const oneDay = 1000 * 60 * 60 * 24;
-            const dayOfYear = Math.floor(diff / oneDay);
-
-            const selectedQuote = quotes[dayOfYear % quotes.length];
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const selectedQuote = quotes[randomIndex];
             quoteTextEl.textContent = selectedQuote.text;
             quoteAuthorEl.textContent = `- ${selectedQuote.author}`;
         }
-    }
+    };
+    
+    // Tampilkan kutipan awal saat halaman pertama kali dibuka
     loadDailyQuote();
 
     // 17. FITUR KOTAK SARAN & PESAN RAHASIA (LIVE FIREBASE)
