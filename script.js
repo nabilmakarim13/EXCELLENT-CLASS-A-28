@@ -500,17 +500,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 16. FITUR QUOTE OF THE DAY (REFRESH ACAK DENGAN BUTTON)
+   // 16. FITUR QUOTE OF THE DAY (REFRESH ACAK DENGAN BUTTON)
     const quotes = [
-        { text: "Banyak hal yang bisa menjatuhkanmu, tapi satu-satunya hal yang benar-benar dapat menjatuhkanmu adalah sikapmu sendiri.", author: "R.A. Kartini (Pahlawan Nasional Indonesia)" },
-        { text: "Kesalahan terbesar yang bisa kamu lakukan dalam hidup adalah terus-menerus takut bahwa kamu akan melakukan kesalahan.", author: "Elbert Hubbard (Penulis dan Filsuf asal AS)" },
-        { text: "Kamu tidak perlu menjadi hebat untuk memulai, tetapi kamu harus memulai untuk menjadi hebat.", author: "Zig Ziglar (Penulis dan Motivator Dunia)" },
-        { text: "Jangan biarkan suara pendapat orang lain menenggelamkan suara hatimu sendiri.", author: "Steve Jobs (Pendiri Apple Inc.)" },
-        { text: "Rasa sakit karena disiplin jauh lebih ringan daripada rasa sakit karena penyesalan.", author: "Jim Rohn (Pengusaha dan Penulis)" },
-        { text: "Tuhan tidak mengubah nasib suatu kaum sebelum mereka mengubah keadaan diri mereka sendiri.", author: "QS. Ar-Ra'd: 11 (Kitab Suci Al-Qur'an)" },
-        { text: "Masa depanmu dibentuk oleh apa yang kamu lakukan hari ini, bukan besok.", author: "Robert Kiyosaki (Penulis 'Rich Dad Poor Dad')" }
+        { text: "Semua orang punya porsinya masing-masing. Jangan sampai waktu kamu habis cuma buat membandingkan hidupmu sama orang lain.", author: "Jerome Polin (Content Creator & Edukator)" },
+        { text: "Gapapa jatuh atau gagal sekarang, yang penting kamu selalu punya alasan dan keberanian buat bangkit lagi.", author: "Windah Basudara (Streamer & Content Creator)" },
+        { text: "Bermimpi itu gratis, tapi buat mewujudkannya butuh perjuangan yang nggak murah. Usaha terus!", author: "Atta Halilintar (Youtuber & Pengusaha)" },
+        { text: "Gak perlu sempurna untuk mulai melangkah. Yang penting konsisten dan berani coba hal baru tiap hari.", author: "Raditya Dika (Penulis, Sutradara & Komedian)" },
+        { text: "Jangan cuma fokus ke hasil akhir orang lain tanpa mau tahu seberapa berdarah-darahnya proses yang mereka lewati.", author: "Maudy Ayunda (Aktris, Penyanyi & Edukator)" },
+        { text: "Tanggapan orang lain ke kamu itu di luar kendalimu. Yang bisa kamu kontrol cuma respon dan kualitas dirimu sendiri.", author: "Cinta Laura Kiehl (Aktris & Aktivis Sosial)" },
+        { text: "Capek itu wajar, istirahat aja dulu. Tapi ingat, jangan pernah kepikiran buat nyerah sama mimpi-mimpimu.", author: "Jess No Limit (Gamer & Content Creator)" },
+        { text: "Insecurity itu wajar, tapi jangan sampe bikin kamu lupa sama kelebihan dan potensi luar biasa yang kamu punya.", author: "Tasya Farasya (Beauty Influencer)" },
+        { text: "Percaya sama prosesmu sendiri. Nggak usah buru-buru, yang penting kamu terus bergerak ke depan.", author: "Fadil Jaidi (Content Creator)" },
+        { text: "Jadilah dirimu sendiri yang versi terbaik, bukan cuma sekadar tiruan dari tren yang lagi viral.", author: "Rachel Vennya (Influencer & Pengusaha)" },
+        { text: "Kamu tidak perlu menjadi hebat untuk memulai, tetapi kamu harus memulai untuk menjadi hebat.", author: "Zig Ziglar (Penulis & Motivator)" },
+        { text: "Rasa sakit karena disiplin jauh lebih ringan daripada rasa sakit karena penyesalan.", author: "Jim Rohn (Pengusaha & Penulis)" },
+        { text: "Masa depanmu dibentuk oleh apa yang kamu lakukan hari ini, bukan besok.", author: "Robert Kiyosaki (Penulis 'Rich Dad Poor Dad')" },
+        { text: "Pendidikan dan ilmu pengetahuan adalah senjata paling ampuh yang bisa kamu pakai buat mengubah dunia.", author: "Nelson Mandela (Mantan Presiden Afrika Selatan)" },
+        { text: "Jangan pernah berhenti belajar, karena hidup tidak pernah berhenti memberikan kita pelajaran.", author: "BJ Habibie (Presiden ke-3 Indonesia & Ilmuwan)" },
+        { text: "Gantungkan cita-citamu setinggi langit! Kalaupun kamu jatuh, kamu bakal jatuh di antara bintang-bintang.", author: "Ir. Soekarno (Proklamator & Presiden Pertama RI)" },
+        { text: "Cara terbaik buat menebak masa depan adalah dengan mulai menciptakannya sendiri dari sekarang.", author: "Peter Drucker (Bapak Manajemen Modern)" },
+        { text: "Hal paling keren dari belajar adalah nggak akan ada satu orang pun yang bisa mengambil ilmu itu darimu.", author: "B.B. King (Musisi)" },
+        { text: "Jangan tunggu kesempatan itu datang, tapi ciptakan sendiri peluangmu.", author: "George Bernard Shaw (Penulis & Kritikus)" },
+        { text: "Kamu lebih berani dari yang kamu duga, lebih kuat dari yang terlihat, dan lebih pintar dari yang kamu pikirkan.", author: "A.A. Milne (Penulis)" },
+        { text: "Tetaplah merasa kurang ilmu agar kamu terus belajar, dan tetaplah rendah hati dalam setiap langkahmu.", author: "Steve Jobs (Pendiri Apple Inc.)" },
+        { text: "Perjalanan ribuan mil yang jauh selalu dimulai dengan satu langkah kecil pertama.", author: "Lao Tzu (Filsuf Kuno)" },
+        { text: "Setiap pemenang yang kamu lihat hari ini dulunya adalah seorang pemula yang pantang menyerah.", author: "Helen Hayes (Aktris)" },
+        { text: "Jangan bandingkan prosesmu sama orang lain. Bunga aja nggak mekar di waktu yang bersamaan.", author: "Anonim (Kata Motivasi)" },
+        { text: "Kedisiplinan dan konsistensi adalah jembatan paling kokoh antara impian dan pencapaian nyata.", author: "Jim Rohn (Pengusaha & Penulis)" },
+        { text: "Investasi paling berguna dan bakal terus menguntungkan adalah investasi pada pengembangan dirimu sendiri.", author: "Warren Buffett (Investor & Pengusaha)" },
+        { text: "Masa depan itu milik mereka yang percaya sama keindahan dan kekuatan dari mimpi-mimpinya.", author: "Eleanor Roosevelt (Tokoh Kemanusiaan)" },
+        { text: "Fokus aja sama kemajuan kecil setiap hari, nggak perlu pusing ngejar kesempurnaan.", author: "Anonim (Kata Motivasi)" },
+        { text: "Tantangan hidup itu yang bikin seru, dan keberanianmu melewatinya yang bikin hidup jadi bermakna.", author: "Joshua J. Marine (Penulis)" },
+        { text: "Kerja keras bakal selalu mengalahkan bakat pas bakat itu berhenti buat berusaha keras.", author: "Tim Notke (Pelatih Olahraga)" }
     ];
-
     window.loadDailyQuote = function() {
         const quoteTextEl = document.getElementById('quoteText');
         const quoteAuthorEl = document.getElementById('quoteAuthor');
